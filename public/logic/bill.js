@@ -63,7 +63,7 @@ $(document).ready(function () {
                 fields: {
                     id: { editable: false},
                     provider: { validation: { required: true, size: 13 }, type: 'string' },
-                    type: { validation: { required: true, size: 13 }, type: 'string' },
+                    document: { validation: { required: true, size: 13 }, type: 'string' },
                     date: { validation: { required: true, }, type: 'date' },
                     reference: { validation: { required: true, }, type: 'string' },
                     user: { type: 'string', defaultValue: user, editable: false, visible: false },
@@ -115,7 +115,7 @@ $(document).ready(function () {
                     { field: "id", title: "Código", filterable: { search: true, multi:true } },
                     { field: "provider",values: providers,editor: userNameComboBoxEditor , title: "Proveedor", filterable: {multi:true, search: true } },
                     { field: "date", title: "Fecha", filterable: { search: true, search: true }, format: "{0:dd/MM/yyyy}" },
-                    { field: "type", values: types, title: "Tipo documento", filterable: { multi: true, search: true, search: true } },
+                    { field: "document", values: types, title: "Tipo documento", filterable: { multi: true, search: true, search: true } },
                     { field: "reference", title: "Referencia", filterable: { multi: true, search: true } },
                     { field: "user", values: users, title: "Creado por", filterable: {multi:true, search: true }  },
 

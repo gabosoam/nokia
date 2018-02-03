@@ -38,7 +38,7 @@
                                             <%= user.name%>
                                         </strong>
                                     </span>
-                                  
+
                                 </span>
                             </a>
                             <ul class="dropdown-menu animated fadeInRight m-t-xs">
@@ -64,51 +64,61 @@
 
 
                     <li class="">
-                            <a href="/">
-                                <i class="fa fa-home"></i>
-                                <span class="nav-label">Inicio</span>
-                            </a>
-                        </li>
-                        <li class="active">
-                            <a href="/bill">
-                                    <i class="fa fa-arrow-right"></i>
-                                    <span class="nav-label">Ingresos</span>
-                                </a>
-                        </li>
-                        <li>
-                            <a href="/vouchers">
-                                <i class="fa fa-arrow-left"></i>
-                                <span class="nav-label">Egresos</span>
-                            </a>
-                        </li>
-                    
-                        <li>
-                            <a href="/model">
-                                <i class="fa fa-cube"></i>
-                                <span class="nav-label">Productos</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/client">
-                                <i class="fa fa-address-book"></i>
-                                <span class="nav-label">Clientes</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/provider">
-                                <i class="fa fa-truck"></i>
-                                <span class="nav-label">Proveedores</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-cog"></i> <span class="nav-label">Configuración</span><span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level collapse">
-                                <li><a href="/location">Almacenes</a></li>
-                                <li><a href="/category">Tipos</a></li>
-                                <li><a href="/brand">Marcas</a></li>
-                               
-                            </ul>
-                        </li>
+                        <a href="/">
+                            <i class="fa fa-home"></i>
+                            <span class="nav-label">Inicio</span>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="/bill">
+                            <i class="fa fa-arrow-right"></i>
+                            <span class="nav-label">Ingresos</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/vouchers">
+                            <i class="fa fa-arrow-left"></i>
+                            <span class="nav-label">Egresos</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/model">
+                            <i class="fa fa-cube"></i>
+                            <span class="nav-label">Productos</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/client">
+                            <i class="fa fa-address-book"></i>
+                            <span class="nav-label">Clientes</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/provider">
+                            <i class="fa fa-truck"></i>
+                            <span class="nav-label">Proveedores</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-cog"></i>
+                            <span class="nav-label">Configuración</span>
+                            <span class="fa arrow"></span>
+                        </a>
+                        <ul class="nav nav-second-level collapse">
+                            <li>
+                                <a href="/location">Almacenes</a>
+                            </li>
+                            <li>
+                                <a href="/category">Tipos</a>
+                            </li>
+                            <li>
+                                <a href="/brand">Marcas</a>
+                            </li>
+
+                        </ul>
+                    </li>
 
 
 
@@ -152,6 +162,7 @@
 
                 <div class="row">
                     <div class="col-md-12">
+
                         <div class="ibox float-e-margins">
                             <div class="ibox-title">
                                 <h5>Inicio</h5>
@@ -164,6 +175,12 @@
 
                                 </div>
                             </div>
+
+
+
+
+
+
                             <div class="ibox-content">
 
                                 <div class="row">
@@ -174,100 +191,15 @@
                                     </div> -->
 
                                     <div class="col-md-12">
-                                        <div id="busqueda" class="row">
 
-                                            <br>
-
-                                            <!-- <div class="col-md-12">
-                                                <table class="table">
-                                                    <tr>
-                                                        <td>
-                                                            <strong>Proveedor: </strong>
-                                                            <%=data.name%>
-                                                        </td>
-                                                        <td>
-                                                            <strong>Fecha: </strong>
-                                                            <%=data.date%>
-                                                        </td>
-
-                                                        <td>
-                                                            <strong>Referencia:</strong>
-                                                            <%=data.reference%>
-                                                        </td>
-                                                        <td>
-                                                            <strong>Creado por:</strong>
-                                                            <%=data.user%>
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                                <hr>
-                                            </div> -->
+                                        <button class="btn btn-default " type="button" data-toggle="modal" data-target="#modalNuevo">
+                                            <i class="fa fa-plus"></i>&nbsp;&nbsp;Agregar producto</button>
+                                        <button class="btn btn-default " type="button">
+                                            <i class="fa fa-file"></i>&nbsp;&nbsp;Generar reporte</button>
+                                        <button class="btn btn-default " type="button">
+                                            <i class="fa fa-tags"></i>&nbsp;&nbsp;Imprimir etiquetas</button>
 
 
-                                            <div class="col-md-12">
-
-                                                <div class="row">
-
-                                                    <form id="formsave" disabled>
-                                                        <input type="hidden" name="bill" value="<%= bill %>">
-                                                        <input type="hidden" required name="code" id="modelProduct" value="">
-                                                        <div class="col-md-4">
-                                                            <div class="form-group">
-                                                                <label for="pwd">Número de serie:</label>
-                                                                <input type="text" class="form-control" validationMessage="Ingresa el número de serie" name="barcode" required id="barcode"
-                                                                    placeholder="Número de serie" style="width: 100%">
-                                                              
-                                                                <span id="manchego"></span>
-                                                            </div>
-
-                                                        </div>
-
-
-
-                                                        <div class="col-md-2">
-                                                            <div class="form-group">
-                                                                <label for="pwd">FDR</label>
-                                                                <input type="text" class="form-control" validationMessage="Ficha de reparación" name="frd" required id="frd"
-                                                                    placeholder="Ficha de reparación" style="width: 100%">
-                                                                
-                                                                <span id="manchego"></span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-2">
-                                                            <div class="form-group">
-                                                                <label for="pwd">CSO</label>
-                                                                <input type="text" class="form-control" validationMessage="CSO" name="cso" required id="cso"
-                                                                    placeholder="CSO" style="width: 100%">
-                                                                
-                                                                <span id="manchego"></span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-2">
-                                                            <div class="form-group">
-                                                                <label for="pwd">WBS</label>
-                                                                <input type="text" class="form-control disabled" validationMessage="WBS" name="wbs" required id="wbs"
-                                                                    placeholder="WBS" style="width: 100%">
-                                                              
-                                                                <span id="manchego"></span>
-                                                            </div>
-                                                        </div>
-                                                    </form>
-                                                   
-
-                                                  
-
-
-
-                                                </div>
-                                                <button class="btn btn-success">Guardar</button>
-                                            </div>
-
-                                        </div>
-
-                                        <div class="row">
-
-
-                                        </div>
                                         <br>
                                         <button id="btnPrin" data-toggle="modal" data-target="#myModal2" class="btn btn-primary">Generar reporte</button>
                                         <hr>
@@ -598,6 +530,74 @@
         </div>
     </div>
 
+    <div class="modal inmodal fade" id="modalNuevo" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title">Agregar producto</h4>
+                </div>
+                <div class="modal-body">
+
+
+                    <form role="form" id="form">
+                        <div class="form-group">
+                            <label>Número de serie</label>
+                            <input pattern="[A-Za-z0-9]" id="barcode" maxlength="20" autofocus required type="text" name="barcode" placeholder="Ingresar número de serie" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>FDR</label>
+                            <input type="text"  id="fdr" name="fdr" placeholder="Ingresar ficha de reparación" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label>CSO</label>
+                            <input type="text" name="cso" placeholder="Ingresar CSO" class="form-control">
+                        </div>
+
+
+
+                        <div class="form-group">
+                            <label>WBS</label>
+                            <input type="text" name="wbs" placeholder="Ingresar WBS" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Seleccionar ubicación</label>
+                            <select required class="form-control m-b" name="location">
+                                <option value="" disabled selected>Seleccionar una opción</option>
+                                <option>option 1</option>
+                                <option>option 2</option>
+                                <option>option 3</option>
+                                <option>option 4</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Comentario</label>
+                            <textarea class="form-control" name="comentary" id="" cols="30" rows="5"></textarea>
+
+                        </div>
+
+                        <button type="submit">Subir</button>
+
+                    </form>
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" onclick="guardarProducto()">Guardar</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
 
 
     <!-- Mainly scripts -->
@@ -609,12 +609,53 @@
     <!-- Custom and plugin javascript -->
     <script src="../inspinia/js/inspinia.js"></script>
     <script src="../inspinia/js/plugins/pace/pace.min.js"></script>
+
+    <script src="../inspinia/js/plugins/validate/jquery.validate.min.js"></script>
+    <script src="../inspinia/js/plugins/validate/spanish.js"></script>
+
     <script src="../kendo/js/kendo.all.min.js"></script>
     <script src="../kendo/js/jszip.min.js"></script>
     <script src="../kendo/js/kendo.messages.es-MX.min.js"></script>
     <script src="../js/w3.js"></script>
     <script src="../js/jquery.PrintArea.js"></script>
     <script src="../js/datatables.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+
+            $("#form").validate({
+                rules: {
+                    barcode: {
+                        required: true,
+                        remote: "/product/searchbarcode/" + $("#barcode").val()
+                    },
+
+                    fdr:{
+                        required: true,
+                        pattern: /[A-Za-z0-9\w]{4,20}/,
+                    }
+
+                    
+                }
+            });
+        });
+
+        // $("form".validate({
+        //     rules: {
+        //         barcode: {
+        //             required: true,
+        //             remote: "/product/searchbarcode/" + $("#barcode").val()
+        //         }
+        //     }
+        // }))
+        function guardarProducto() {
+            if ($("#form").valid()) {
+                var data = $("#form").serialize();
+                alert(JSON.stringify(data))
+            }
+        }
+
+    </script>
 
 
     <script>

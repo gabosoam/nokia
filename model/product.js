@@ -4,12 +4,28 @@ var connection = require('../config/connection.js');
 module.exports = {
 
     read: function (callback) {
-        connection.query('SELECT  * FROM v_product where billstate=1;', function (error, results, fields) {
+        connection.query('SELECT  * FROM  v_historico;', function (error, results, fields) {
             if (error) {
 
                 callback('error en la consulta: ' + error, null);
             } else {
                 callback(null, results);
+
+            }
+        });
+    },
+
+    searchBarcode: function (barcode,callback) {
+        connection.query('SELECT  id FROM product WHERE barcode=?;',barcode, function (error, results, fields) {
+            if (error) {
+                callback(error, null);
+            } else {
+            
+                if (results.length==0) {
+                    callback(false);
+                } else {
+                    callback(true);
+                }
 
             }
         });

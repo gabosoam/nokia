@@ -9,6 +9,15 @@ var states = [{
   "value": 2,
   "text": "RESERVADO"
 }];
+
+var types = [ {
+  "value": 1,
+  "text": "INGRESO"
+},
+{
+  "value": 2,
+  "text": "SALIDA"
+}];
 function etiqueta() {
 
   var gridDataArray = $('#grid').data('kendoGrid')._data;
@@ -49,10 +58,7 @@ $(document).ready(function () {
     },
 
 
-    group: [{ field: "description", dir: "asc" }, {
-      field: "state", aggregates: [{ field: "state", aggregate: "count" }
-      ]
-    }],
+    group: [{ field: "description", dir: "asc" }],
     aggregate: [
       { field: "code", aggregate: "count" },
       { field: "category", aggregate: "count" },
@@ -130,18 +136,24 @@ $(document).ready(function () {
     columnMenu: true,
     filterable: true,
     resizable: true,
-    groupable: false,
+    groupable: true,
 
     pageable: { refresh: true },
     columns: [
       { field: "code", title: "Código", filterable: { multi: true, search: true } },
-      { field: "barcode", title: "No. de serie", filterable: { multi: true, search: true } },
-      { field: "description", title: "Producto", filterable: { multi: true, search: true, search: true }},
+      { field: "barcode", title: "Serie", filterable: { multi: true, search: true } },
+      { field: "description", title: "Producto",  filterable: { multi: true, search: true, search: true }},
+      { field: "category", title: "Tipo", filterable: { multi: true, search: true } },
+      { field: "brand",columnMenu: false, title: "Marca", filterable: { multi: true, search: true } },
+      { field: "date", title: "Fecha", format: "{0:dd/MM/yyyy}", filterable: { multi: true, search: true, search: true }},
+      
+      { field: "type", values: types, title: "Transacción", filterable: { multi: true, search: true } },
+      { field: "name", title: "Proveedor", filterable: { multi: true, search: true } },
+      { field: "company", title: "Empresa", filterable: { multi: true, search: true } },
       { field: "fdr", title: "FDR", filterable: { multi: true, search: true } },
       { field: "wbs", title: "WBS", filterable: { multi: true, search: true } },
-      { field: "cso", title: "CSO", filterable: { multi: true, search: true } },
-      { field: "category", title: "Tipo", filterable: { multi: true, search: true } },
-      { field: "brand", title: "Marca", filterable: { multi: true, search: true } }
+      { field: "cso", title: "CSO", filterable: { multi: true, search: true } }
+      
     ],
     dataBound: function (e) {
       if (this.dataSource.group().length > 0) {

@@ -24,10 +24,18 @@ router.get('/price', isLoggedInAdmin, function (req, res, next) {
 router.get('/read', function (req, res, next) {
   product.read(function (error, data) {
     if (error) {
-      res.send(error);
+      res.sendStatus(404);
     } else {
-      res.send(data);
+      res.send(true);
     }
+  });
+})
+
+router.get('/searchBarcode/', function (req, res, next) {
+
+
+  product.searchBarcode(req.query.barcode,function (data) {
+    res.send(data);
   });
 })
 
