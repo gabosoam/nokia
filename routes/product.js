@@ -5,14 +5,7 @@ var event = require('../model/event');
 
 /* GET home page. */
 router.get('/', isLoggedIn, function (req, res, next) {
-  if (sess.usuarioDatos.rol == 1) {
-
-
-    res.render('index', { user: sess.usuarioDatos });
-  } else {
-
-    res.render('product', { user: sess.usuarioDatos });
-  }
+  res.render('producto', { user: sess.usuarioDatos });
 });
 
 router.get('/price', isLoggedInAdmin, function (req, res, next) {
@@ -26,7 +19,7 @@ router.get('/read', function (req, res, next) {
     if (error) {
       res.sendStatus(404);
     } else {
-      res.send(true);
+      res.send(data);
     }
   });
 })
@@ -109,7 +102,7 @@ router.post('/create', isLoggedIn, function (req, res, next) {
 
 router.post('/update', isLoggedIn, function(req, res,next) {
   var data = req.body;
-  product.updateFromBill(data,function(err, result) {
+  product.update(data,function(err, result) {
     if (err) {
       res.sendStatus(500);
     } else {

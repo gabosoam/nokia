@@ -15,6 +15,18 @@ module.exports = {
         });
     },
 
+    readmodel: function (callback) {
+        connection.query('SELECT  * FROM v_model;', function (error, results, fields) {
+            if (error) {
+                console.log(error);
+                callback('error en la consulta: ' + error, null);
+            } else {
+                console.log(results);
+                callback(null, results);
+            }
+        });
+    },
+
     readOne: function (code, callback) {
         connection.query('SELECT  * FROM model where code=?', code, function (error, results, fields) {
             if (error) {

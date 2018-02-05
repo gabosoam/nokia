@@ -19,7 +19,7 @@
 
 </head>
 
-<body class="">
+<body class="skin-2">
 
     <div id="wrapper">
 
@@ -41,21 +41,7 @@
 
                                 </span>
                             </a>
-                            <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                                <li>
-                                    <a href="profile.html">Profile</a>
-                                </li>
-                                <li>
-                                    <a href="contacts.html">Contacts</a>
-                                </li>
-                                <li>
-                                    <a href="mailbox.html">Mailbox</a>
-                                </li>
-                                <li class="divider"></li>
-                                <li>
-                                    <a href="login.html">Logout</a>
-                                </li>
-                            </ul>
+
                         </div>
                         <div class="logo-element">
                             IN+
@@ -63,11 +49,38 @@
                     </li>
 
 
+
                     <li class="">
                         <a href="/">
                             <i class="fa fa-home"></i>
                             <span class="nav-label">Inicio</span>
                         </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-cube"></i>
+                            <span class="nav-label">Productos</span>
+                            <span class="fa arrow"></span>
+                        </a>
+                        <ul class="nav nav-second-level collapse">
+
+                            <li>
+                                <a href="/category">Tipos</a>
+                            </li>
+                            <li>
+                                <a href="/brand">Marcas</a>
+                            </li>
+
+                            <li>
+                                <a href="/model">Códigos</a>
+                            </li>
+
+                            <li>
+                                <a href="/product">Números de serie</a>
+                            </li>
+
+
+                        </ul>
                     </li>
                     <li class="active">
                         <a href="/bill">
@@ -82,12 +95,7 @@
                         </a>
                     </li>
 
-                    <li>
-                        <a href="/model">
-                            <i class="fa fa-cube"></i>
-                            <span class="nav-label">Productos</span>
-                        </a>
-                    </li>
+
                     <li>
                         <a href="/client">
                             <i class="fa fa-address-book"></i>
@@ -100,27 +108,20 @@
                             <span class="nav-label">Proveedores</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="#">
-                            <i class="fa fa-cog"></i>
-                            <span class="nav-label">Configuración</span>
-                            <span class="fa arrow"></span>
-                        </a>
-                        <ul class="nav nav-second-level collapse">
-                            <li>
-                                <a href="/location">Almacenes</a>
-                            </li>
-                            <li>
-                                <a href="/category">Tipos</a>
-                            </li>
-                            <li>
-                                <a href="/brand">Marcas</a>
-                            </li>
 
-                        </ul>
+                    <li>
+                        <a href="/location">
+                            <i class="fa fa-map-marker"></i>
+                            <span class="nav-label">Ubicaciones</span>
+                        </a>
                     </li>
 
-
+                    <li>
+                        <a href="/logout">
+                            <i class="fa fa-sign-out"></i>
+                            <span class="nav-label">Cerrar sesión</span>
+                        </a>
+                    </li>
 
 
 
@@ -130,32 +131,7 @@
         </nav>
 
         <div id="page-wrapper" class="gray-bg">
-            <div class="row border-bottom">
-                <nav class="navbar navbar-static-top  " role="navigation" style="margin-bottom: 0">
-                    <div class="navbar-header">
-                        <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#">
-                            <i class="fa fa-bars"></i>
-                        </a>
-                        <form role="search" class="navbar-form-custom" action="search_results.html">
-                            <div class="form-group">
 
-                            </div>
-                        </form>
-                    </div>
-                    <ul class="nav navbar-top-links navbar-right">
-                        <li>
-                            <span class="m-r-sm text-muted welcome-message">Bienvenido al sistema de inventario </span>
-                        </li>
-
-                        <li>
-                            <a href="/logout">
-                                <i class="fa fa-sign-out"></i> Log out
-                            </a>
-                        </li>
-                    </ul>
-
-                </nav>
-            </div>
 
 
             <div class="wrapper wrapper-content">
@@ -165,7 +141,7 @@
 
                         <div class="ibox float-e-margins">
                             <div class="ibox-title">
-                                <h5>Inicio</h5>
+                                <h5>Ingreso: </h5>
                                 <div class="ibox-tools">
                                     <a class="collapse-link">
                                         <i class="fa fa-chevron-up"></i>
@@ -546,11 +522,12 @@
                     <form role="form" id="form">
                         <div class="form-group">
                             <label>Número de serie</label>
-                            <input pattern="[A-Za-z0-9]" id="barcode" maxlength="20" autofocus required type="text" name="barcode" placeholder="Ingresar número de serie" class="form-control">
+                            <input pattern="[A-Za-z0-9]" id="barcode" maxlength="20" autofocus required type="text" name="barcode" placeholder="Ingresar número de serie"
+                                class="form-control">
                         </div>
                         <div class="form-group">
                             <label>FDR</label>
-                            <input type="text"  id="fdr" name="fdr" placeholder="Ingresar ficha de reparación" class="form-control">
+                            <input type="text" id="fdr" name="fdr" placeholder="Ingresar ficha de reparación" class="form-control">
                         </div>
 
                         <div class="form-group">
@@ -630,12 +607,12 @@
                         remote: "/product/searchbarcode/" + $("#barcode").val()
                     },
 
-                    fdr:{
+                    fdr: {
                         required: true,
                         pattern: /[A-Za-z0-9\w]{4,20}/,
                     }
 
-                    
+
                 }
             });
         });

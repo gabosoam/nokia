@@ -29,7 +29,7 @@
                     <li class="nav-header">
                         <div class="dropdown profile-element">
                             <span>
-                                <img alt="image" class="img-circle" src="/inspinia/img/user.png" style="max-width: 50px" />
+                                <img alt="image" class="img-circle" src="../inspinia/img/user.png" style="max-width: 50px" />
                             </span>
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                 <span class="clear">
@@ -38,10 +38,9 @@
                                             <%= user.name%>
                                         </strong>
                                     </span>
-
                                 </span>
                             </a>
-
+                      
                         </div>
                         <div class="logo-element">
                             IN+
@@ -61,10 +60,10 @@
                         </a>
                         <ul class="nav nav-second-level collapse">
 
-                            <li class="">
+                            <li>
                                 <a href="/category">Tipos</a>
                             </li>
-                            <li class="active">
+                            <li>
                                 <a href="/brand">Marcas</a>
                             </li>
 
@@ -72,7 +71,7 @@
                                 <a href="/model">Códigos</a>
                             </li>
 
-                            <li>
+                            <li class="active">
                                 <a href="/product">Números de serie</a>
                             </li>
 
@@ -119,6 +118,7 @@
                             <span class="nav-label">Cerrar sesión</span>
                         </a>
                     </li>
+
                 </ul>
 
             </div>
@@ -134,7 +134,8 @@
                     <div class="col-md-12">
                         <div class="ibox float-e-margins">
                             <div class="ibox-title">
-                                <h5>Marcas</h5>
+                                <h5>
+                                    <span class="fa fa-cube"></span> Números de serie</h5>
                                 <div class="ibox-tools">
                                     <a class="collapse-link">
                                         <i class="fa fa-chevron-up"></i>
@@ -173,23 +174,28 @@
         </div>
 
     </div>
+    <% if (user) { %>
+        <script>
+            var user = '<%= user.id %>'
+        </script>
+        <% } %>
 
 
+            <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+            <!-- Mainly scripts -->
+            <script src="../inspinia/js/jquery-3.1.1.min.js"></script>
+            <script src="../inspinia/js/bootstrap.min.js"></script>
+            <script src="../inspinia/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+            <script src="../inspinia/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
-    <!-- Mainly scripts -->
-    <script src="../inspinia/js/jquery-3.1.1.min.js"></script>
-    <script src="../inspinia/js/bootstrap.min.js"></script>
-    <script src="../inspinia/js/plugins/metisMenu/jquery.metisMenu.js"></script>
-    <script src="../inspinia/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+            <!-- Custom and plugin javascript -->
+            <script src="../inspinia/js/inspinia.js"></script>
+            <script src="../inspinia/js/plugins/pace/pace.min.js"></script>
+            <script src="../kendo/js/kendo.all.min.js"></script>
+            <script src="../kendo/js/jszip.min.js"></script>
+            <script src="../kendo/js/kendo.messages.es-MX.min.js"></script>
 
-    <!-- Custom and plugin javascript -->
-    <script src="../inspinia/js/inspinia.js"></script>
-    <script src="../inspinia/js/plugins/pace/pace.min.js"></script>
-    <script src="../kendo/js/kendo.all.min.js"></script>
-    <script src="../kendo/js/jszip.min.js"></script>
-    <script src="../kendo/js/kendo.messages.es-MX.min.js"></script>
-
-    <script src="../logic/brand.js"></script>
+            <script src="../logic/producto.js"></script>
 
 
 

@@ -1,11 +1,3 @@
-var roles = [{
-    "value": 1,
-    "text": "Usuario"
-}, {
-    "value": 2,
-    "text": "Administrador"
-}];
-
 
 
 kendo.culture("es-ES");

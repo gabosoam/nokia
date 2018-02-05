@@ -17,6 +17,15 @@ router.get('/read', function (req, res, next) {
   })
 });
 
+router.get('/readmodel', function (req, res, next) {
+  model.readmodel(function (error, datos) {
+    if (error) {
+    } else {
+      res.send(datos);
+    }
+  })
+});
+
 
   router.get('/:code', function (req, res, next) {
     var code = req.params.code.replace("%26", "#").replace("&","#");

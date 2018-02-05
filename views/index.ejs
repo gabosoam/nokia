@@ -19,7 +19,7 @@
 
 </head>
 
-<body class="">
+<body class="skin-2">
 
     <div id="wrapper">
 
@@ -27,7 +27,7 @@
             <div class="sidebar-collapse">
                 <ul class="nav metismenu" id="side-menu">
                     <li class="nav-header">
-                        <div class="dropdown profile-element">
+                        <div class="dropdown profile">
                             <span>
                                 <img alt="image" class="img-circle" src="../inspinia/img/user.png" style="max-width: 50px" />
                             </span>
@@ -38,15 +38,10 @@
                                             <%= user.name%>
                                         </strong>
                                     </span>
-                                   
+
                                 </span>
                             </a>
-                            <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                                <li>
-                                    <a data-toggle="modal" data-target="#myModal">Cambiar contraseña</a>
-                                </li>
 
-                            </ul>
                         </div>
                         <div class="logo-element">
                             IN+
@@ -59,10 +54,36 @@
                         </a>
                     </li>
                     <li>
-                        <a href="/bill">
-                                <i class="fa fa-arrow-right"></i>
-                                <span class="nav-label">Ingresos</span>
+                            <a href="#">
+                                <i class="fa fa-cube"></i>
+                                <span class="nav-label">Productos</span>
+                                <span class="fa arrow"></span>
                             </a>
+                            <ul class="nav nav-second-level collapse">
+                             
+                                <li>
+                                    <a href="/category">Tipos</a>
+                                </li>
+                                <li>
+                                    <a href="/brand">Marcas</a>
+                                </li>
+    
+                                <li>
+                                    <a href="/model">Códigos</a>
+                                </li>
+
+                                <li>
+                                        <a href="/product">Números de serie</a>
+                                    </li>
+    
+    
+                            </ul>
+                        </li>
+                    <li>
+                        <a href="/bill">
+                            <i class="fa fa-arrow-right"></i>
+                            <span class="nav-label">Ingresos</span>
+                        </a>
                     </li>
                     <li>
                         <a href="/vouchers">
@@ -70,13 +91,8 @@
                             <span class="nav-label">Egresos</span>
                         </a>
                     </li>
-                
-                    <li>
-                        <a href="/model">
-                            <i class="fa fa-cube"></i>
-                            <span class="nav-label">Productos</span>
-                        </a>
-                    </li>
+
+
                     <li>
                         <a href="/client">
                             <i class="fa fa-address-book"></i>
@@ -89,15 +105,19 @@
                             <span class="nav-label">Proveedores</span>
                         </a>
                     </li>
+
                     <li>
-                        <a href="#"><i class="fa fa-cog"></i> <span class="nav-label">Configuración</span><span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level collapse">
-                            <li><a href="/location">Almacenes</a></li>
-                            <li><a href="/category">Tipos</a></li>
-                            <li><a href="/brand">Marcas</a></li>
-                         
- 
-                        </ul>
+                            <a href="/location">
+                                <i class="fa fa-map-marker"></i>
+                                <span class="nav-label">Ubicaciones</span>
+                            </a>
+                        </li>
+                  
+                    <li>
+                        <a href="/logout">
+                            <i class="fa fa-sign-out"></i>
+                            <span class="nav-label">Cerrar sesión</span>
+                        </a>
                     </li>
 
 
@@ -107,32 +127,7 @@
         </nav>
 
         <div id="page-wrapper" class="gray-bg">
-            <div class="row border-bottom">
-                <nav class="navbar navbar-static-top  " role="navigation" style="margin-bottom: 0">
-                    <div class="navbar-header">
-                        <a class="navbar-minimalize minimalize-styl-2 btn btn-success " href="#">
-                            <i class="fa fa-bars"></i>
-                        </a>
-                        <form role="search" class="navbar-form-custom" action="search_results.html">
-                            <div class="form-group">
 
-                            </div>
-                        </form>
-                    </div>
-                    <ul class="nav navbar-top-links navbar-right">
-                        <li>
-                            <span class="m-r-sm text-muted welcome-message">Bienvenido al sistema de inventario</span>
-                        </li>
-
-                        <li>
-                            <a href="/logout">
-                                <i class="fa fa-sign-out"></i> Log out
-                            </a>
-                        </li>
-                    </ul>
-
-                </nav>
-            </div>
 
 
             <div class="wrapper wrapper-content">
@@ -154,8 +149,15 @@
                             </div>
                             <div class="ibox-content">
                                 <!-- <button class="btn btn-success" onclick="etiqueta()">Etiquetas</button> -->
+                                <div class="row">
 
-                                <div id="grid"></div>
+                                    <div class="col-md-12">
+                                        <div id="grid"></div>
+                                    </div>
+                                </div>
+
+
+
 
                             </div>
                         </div>
@@ -205,15 +207,18 @@
                                         <td style="font-size: 10px">
                                             <label>Producto:</label> {{description}}
                                         </td>
-                                        <td style="font-size: 10px">{{code}} <br> {{barcode}} </td>
+                                        <td style="font-size: 10px">{{code}}
+                                            <br> {{barcode}} </td>
 
                                         <td style="font-size: 10px">
-                                            <label>Ubicación:</label><br> {{location}}
+                                            <label>Ubicación:</label>
+                                            <br> {{location}}
                                         </td>
 
                                         <td style="font-size: 10px">
                                             <center>
-                                                <label>Cantidad:</label><br> 1
+                                                <label>Cantidad:</label>
+                                                <br> 1
                                             </center>
                                         </td>
 
@@ -262,7 +267,9 @@
     <script src="js/plugins/validate/jquery.validate.min.js"></script>
     <script src="../js/w3.js"></script>
 
-    <script src="../logic/report.js"></script>
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+
+    <script src="../logic/producto.js"></script>
     <script src="../js/jquery.PrintArea.js"></script>
     <script src="../js/pdf/jspdf.min.js"></script>
     <script src="../js/pdf/html2canvas.min.js"></script>
@@ -290,7 +297,8 @@
         border: 2px solid black;
         padding: 10px;
         text-align: center;
-        width: 5.25cm margin: 5px 5px 5px 5px;
+        width: 5.25cm;
+        margin: 5px 5px 5px 5px
     }
 
     #rcorners1 {

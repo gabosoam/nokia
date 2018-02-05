@@ -48,7 +48,7 @@ $(document).ready(function () {
         columns: [
             { field: "name", title: "Categoría", filterable: {  search: true, multi:true } },
             { command: ["edit", "destroy"], title: "Acciones"}],
-        editable: "inline"
+        editable: "popup"
     });
 });
 function redirect(category) {

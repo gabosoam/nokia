@@ -251,14 +251,7 @@ $(document).ready(function () {
         }
     });
 
-    dataSourceUnit = new kendo.data.DataSource({
-        transport: {
-            read: {
-                url: "/unit/read",
-                dataType: "json"
-            }
-        }
-    });
+  
 
 
     $("#nameProduct").kendoComboBox({
@@ -328,15 +321,7 @@ $(document).ready(function () {
 
 
 
-    $("#unit").kendoDropDownList({
-        dataSource: dataSourceUnit,
-        editable: false,
-        dataTextField: "smallDescription",
-        dataValueField: "id",
-        title: "Seleccionar almacén",
-        minLength: 1
-
-    });
+  
     $('#formSaveModel')[0].reset();
 
     function userNameAutoCompleteEditor(container, options) {
@@ -446,11 +431,11 @@ $(document).ready(function () {
                 { field: "barcode", aggregates: ["count"], title: "No. de serie", filterable: { search: true }, width: '20%' },
                 { field: "code", title: "Código", filterable: { search: true }, width: '15%' },
                 { field: "description", title: "Producto", filterable: { search: true } },
-                { field: "idlocation", title: "Almacén", values: data },
-                { field: "observation", title: "Observación" },
+                { field: "location", title: "Almacén", values: data },
+                { field: "comment", title: "Observación" },
                 { field: "bill", title: "Factura", width: '1px' },
                 { command: ["edit", "destroy"], title: "Acciones" }],
-            editable: "inline"
+            editable: "popup"
         })
     });
 

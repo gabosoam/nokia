@@ -22,7 +22,10 @@ var variant = require('./routes/variant');
 var voucher = require('./routes/voucher');
 var price = require('./routes/price');
 var bill = require('./routes/bill');
+var history = require('./routes/history');
+
 var child_process = require('child_process');
+
 
 var CronJob = require('cron').CronJob;
 var job = new CronJob('59 59 20 * * 1-5', function() {
@@ -85,6 +88,7 @@ app.use('/variant', variant);
 app.use('/voucher', voucher);
 app.use('/price', price);
 app.use('/bill', bill);
+app.use('/history', history);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

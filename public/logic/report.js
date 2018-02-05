@@ -18,6 +18,8 @@ var types = [ {
   "value": 2,
   "text": "SALIDA"
 }];
+
+
 function etiqueta() {
 
   var gridDataArray = $('#grid').data('kendoGrid')._data;
@@ -50,6 +52,7 @@ $(document).ready(function () {
         id: "id",
         fields: {
           code: { type: "string" },
+          type: { type: "string" },
           date: { type: 'date', editable: false },
           voucherdate: { type: 'date', editable: false },
           state: { type: 'state', editable: false }

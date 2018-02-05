@@ -32,50 +32,24 @@
                              </span>
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold"><%= user.name%></strong>
-                             </span>  </span> </a>
-                         
+                             </span> </span> </a>
+                          
                         </div>
                         <div class="logo-element">
                             IN+
                         </div>
                     </li>
-                    <li class="">
+                    <li class="active">
                             <a href="/">
                                 <i class="fa fa-home"></i>
                                 <span class="nav-label">Inicio</span>
                             </a>
                         </li>
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-cube"></i>
-                                <span class="nav-label">Productos</span>
-                                <span class="fa arrow"></span>
-                            </a>
-                            <ul class="nav nav-second-level collapse">
-    
-                                <li>
-                                    <a href="/category">Tipos</a>
-                                </li>
-                                <li>
-                                    <a href="/brand">Marcas</a>
-                                </li>
-    
-                                <li>
-                                    <a href="/model">Códigos</a>
-                                </li>
-    
-                                <li>
-                                    <a href="/product">Números de serie</a>
-                                </li>
-    
-    
-                            </ul>
-                        </li>
                         <li class="">
                             <a href="/bill">
-                                <i class="fa fa-arrow-right"></i>
-                                <span class="nav-label">Ingresos</span>
-                            </a>
+                                    <i class="fa fa-arrow-right"></i>
+                                    <span class="nav-label">Ingresos</span>
+                                </a>
                         </li>
                         <li>
                             <a href="/vouchers">
@@ -83,41 +57,49 @@
                                 <span class="nav-label">Egresos</span>
                             </a>
                         </li>
-    
-    
+                    
+                        <li class="">
+                            <a href="/model">
+                                <i class="fa fa-cube"></i>
+                                <span class="nav-label">Productos</span>
+                            </a>
+                        </li>
                         <li>
                             <a href="/client">
                                 <i class="fa fa-address-book"></i>
                                 <span class="nav-label">Clientes</span>
                             </a>
                         </li>
-                        <li class="active">
+                        <li>
                             <a href="/provider">
                                 <i class="fa fa-truck"></i>
                                 <span class="nav-label">Proveedores</span>
                             </a>
                         </li>
-    
                         <li>
-                            <a href="/location">
-                                <i class="fa fa-map-marker"></i>
-                                <span class="nav-label">Ubicaciones</span>
-                            </a>
+                            <a href="#"><i class="fa fa-cog"></i> <span class="nav-label">Configuración</span><span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level collapse">
+                                <li><a href="/location">Ubicaciones</a></li>
+                                <li><a href="/category">Tipos</a></li>
+                                <li><a href="/brand">Marcas</a></li>
+                                    
+                            </ul>
                         </li>
-    
+
                         <li>
-                            <a href="/logout">
-                                <i class="fa fa-sign-out"></i>
-                                <span class="nav-label">Cerrar sesión</span>
-                            </a>
-                        </li>
+                                <a href="/logout">
+                                    <i class="fa fa-sign-out"></i>
+                                    <span class="nav-label">Cerrar sesión</span>
+                                </a>
+                            </li>
+
                 </ul>
 
             </div>
         </nav>
 
         <div id="page-wrapper" class="gray-bg">
-    
+           
 
 
             <div class="wrapper wrapper-content">
@@ -126,7 +108,7 @@
                     <div class="col-md-12">
                         <div class="ibox float-e-margins">
                             <div class="ibox-title">
-                                <h5><span class="fa fa-truck"></span> Proveedores</h5>
+                                <h5><span class="fa fa-cube"></span> Historial</h5>
                                 <div class="ibox-tools">
                                     <a class="collapse-link">
                                                                 <i class="fa fa-chevron-up"></i>
@@ -137,6 +119,10 @@
                                 </div>
                             </div>
                             <div class="ibox-content">
+                                <p> <strong>Código: </strong> <%= product.code %></p>
+                                <p> <strong>Producto: </strong> <%= product.description %></p>
+                                <p> <strong>Número de serie: </strong> <%= product.barcode %></p>
+                                <hr>
 
                                 <div id="grid"></div>
 
@@ -165,9 +151,10 @@
         </div>
 
     </div>
-    <% if (user) { %>
+    <% if (product) { %>
         <script>
-            var user = '<%= user.id %>'
+            var productId = '<%= product.id %>'
+         
         </script>
         <% } %>
 
@@ -186,7 +173,7 @@
             <script src="../kendo/js/jszip.min.js"></script>
             <script src="../kendo/js/kendo.messages.es-MX.min.js"></script>
 
-            <script src="../logic/provider.js"></script>
+            <script src="../logic/history.js"></script>
 
 
 
