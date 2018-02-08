@@ -57,11 +57,17 @@ $(document).ready(function () {
         batch: true,
         pageSize: 1000,
         serverFiltering: false,
+        requestEnd: function (e) {
+            if (e.type != "read") {
+                // refresh the grid
+                e.sender.read();
+            }
+        },
         schema: {
             model: {
                 id: "id",
                 fields: {
-                    id: { editable: false},
+                    id: { editable: false },
                     provider: { validation: { required: true, size: 13 }, type: 'string' },
                     document: { validation: { required: true, size: 13 }, type: 'string' },
                     date: { validation: { required: true, }, type: 'date' },
@@ -78,10 +84,10 @@ $(document).ready(function () {
 
     var socket = io.connect();
     socket.emit('getProvider', function (providers) {
-     
+
 
         $.get("/user/read2", function (users) {
-          
+
 
             $("#grid").kendoGrid({
                 dataSource: dataSource,
@@ -112,12 +118,12 @@ $(document).ready(function () {
                         });
                 },
                 columns: [
-                    { field: "id", title: "Código", filterable: { search: true, multi:true } },
-                    { field: "provider",values: providers,editor: userNameComboBoxEditor , title: "Proveedor", filterable: {multi:true, search: true } },
+                    { field: "id", title: "Código", filterable: { search: true, multi: true } },
+                    { field: "provider", values: providers, editor: userNameComboBoxEditor, title: "Proveedor", filterable: { multi: true, search: true } },
                     { field: "date", title: "Fecha", filterable: { search: true, search: true }, format: "{0:dd/MM/yyyy}" },
                     { field: "document", values: types, title: "Tipo documento", filterable: { multi: true, search: true, search: true } },
                     { field: "reference", title: "Referencia", filterable: { multi: true, search: true } },
-                    { field: "user", values: users, title: "Creado por", filterable: {multi:true, search: true }  },
+                    { field: "user", values: users, title: "Creado por", filterable: { multi: true, search: true } },
 
                     { command: ["edit", "destroy", { text: "Ver detalles", click: showDetails, iconClass: 'icon icon-chart-column' }], title: "Acciones" }],
                 editable: "popup"

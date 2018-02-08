@@ -50,12 +50,6 @@ $(document).ready(function () {
         batch: true,
         pageSize: 10,
         serverFiltering: false,
-        requestEnd: function (e) {
-            if (e.type != "read") {
-                // refresh the grid
-                e.sender.read();
-            }
-        },
         schema: {
             model: {
                 id: "id",
@@ -83,16 +77,14 @@ $(document).ready(function () {
             resizable: true,
             
             pageable: { refresh: true, pageSizes: true, },
-            toolbar: ['create','excel'],
-            
-         
+     
             columns: [
               { field: "description", title: "Producto",filterable: { search: true, multi:true } },
                 { field: "brand", title: "Marca", filterable: {search: true, multi: true } },
                 { field: "category", editable: false, title: "Tipo", filterable: {search: true, multi: true } },
                 { field: "code", values: codes, editor: comboCodigos, title: "Código", filterable: {search: true,multi:true } },
                 { field: "barcode", title: "Número de serie", filterable: {search: true,multi:true } },
-                { command: ["edit", "destroy"], title: "Acciones" }],
+                { command: [{ text: "Historial", click: showDetails, iconClass: 'icon icon-chart-column' }], title: "Acciones" }],
             editable: "popup"
         });
       });

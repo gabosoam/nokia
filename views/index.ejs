@@ -54,31 +54,31 @@
                         </a>
                     </li>
                     <li>
-                            <a href="#">
-                                <i class="fa fa-cube"></i>
-                                <span class="nav-label">Productos</span>
-                                <span class="fa arrow"></span>
-                            </a>
-                            <ul class="nav nav-second-level collapse">
-                             
-                                <li>
-                                    <a href="/category">Tipos</a>
-                                </li>
-                                <li>
-                                    <a href="/brand">Marcas</a>
-                                </li>
-    
-                                <li>
-                                    <a href="/model">Códigos</a>
-                                </li>
+                        <a href="#">
+                            <i class="fa fa-cube"></i>
+                            <span class="nav-label">Productos</span>
+                            <span class="fa arrow"></span>
+                        </a>
+                        <ul class="nav nav-second-level collapse">
 
-                                <li>
-                                        <a href="/product">Números de serie</a>
-                                    </li>
-    
-    
-                            </ul>
-                        </li>
+                            <li>
+                                <a href="/category">Tipos</a>
+                            </li>
+                            <li>
+                                <a href="/brand">Marcas</a>
+                            </li>
+
+                            <li>
+                                <a href="/model">Códigos</a>
+                            </li>
+
+                            <li>
+                                <a href="/product">Números de serie</a>
+                            </li>
+
+
+                        </ul>
+                    </li>
                     <li>
                         <a href="/bill">
                             <i class="fa fa-arrow-right"></i>
@@ -88,7 +88,7 @@
                     <li>
                         <a href="/vouchers">
                             <i class="fa fa-arrow-left"></i>
-                            <span class="nav-label">Egresos</span>
+                            <span class="nav-label">Salidas</span>
                         </a>
                     </li>
 
@@ -107,12 +107,12 @@
                     </li>
 
                     <li>
-                            <a href="/location">
-                                <i class="fa fa-map-marker"></i>
-                                <span class="nav-label">Ubicaciones</span>
-                            </a>
-                        </li>
-                  
+                        <a href="/location">
+                            <i class="fa fa-map-marker"></i>
+                            <span class="nav-label">Ubicaciones</span>
+                        </a>
+                    </li>
+
                     <li>
                         <a href="/logout">
                             <i class="fa fa-sign-out"></i>
@@ -137,7 +137,8 @@
                         <div class="ibox float-e-margins">
                             <div class="ibox-title">
                                 <h5>
-                                    <span class="fa fa-home"></span> Inicio</h5>
+                                    <img src="../images/nokia.png" width="100px" alt="">
+                                </h5>
                                 <div class="ibox-tools">
                                     <a class="collapse-link">
                                         <i class="fa fa-chevron-up"></i>
@@ -151,9 +152,60 @@
                                 <!-- <button class="btn btn-success" onclick="etiqueta()">Etiquetas</button> -->
                                 <div class="row">
 
+                                    <div class="col-md-3">
+
+                                        <div class="form-group">
+                                            <label for="codigo">Código:</label>
+                                            <input placeholder="Código del producto" type="codigo" class="form-control" id="codigo">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="serie">Número de serie:</label>
+                                            <input placeholder="Número de serie" type="text" class="form-control" id="serie">
+                                        </div>
+
+
+
+                                    </div>
+                                    <div class="col-md-3">
+
+                                        <div class="form-group">
+                                            <label for="fdr">FDR:</label>
+                                            <input placeholder="Ficha de reparación" type="codigo" class="form-control" id="fdr">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="cso">CSO:</label>
+                                            <input placeholder="CSO" type="text" class="form-control" id="cso">
+                                        </div>
+
+
+                                    </div>
+
+                                    <div class="col-md-3">
+
+
+                                        <div class="form-group">
+                                            <label for="categorias">Tipo:</label>
+                                            <br>
+                                            <input for="categorias" id="categorias">
+
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="categorias">Acción</label>
+                                            <br>
+                                            <button onclick="buscar()" class="btn btn-success">Buscar</button>
+
+                                        </div>
+
+
+
+                                    </div>
+
                                     <div class="col-md-12">
                                         <div id="grid"></div>
                                     </div>
+
+                                    <hr>
                                 </div>
 
 
@@ -269,7 +321,8 @@
 
     <script type="text/javascript" src="/socket.io/socket.io.js"></script>
 
-    <script src="../logic/producto.js"></script>
+    <script src="../logic/index.js"></script>
+    <script src="../logic/product.1.js"></script>
     <script src="../js/jquery.PrintArea.js"></script>
     <script src="../js/pdf/jspdf.min.js"></script>
     <script src="../js/pdf/html2canvas.min.js"></script>
@@ -281,6 +334,36 @@
         function print(elem) {
             $('#Etiquetas').printArea();
 
+        }
+    </script>
+
+    <script>
+        function buscar() {
+
+            var codigo = $('#codigo').val();
+            var serie = $('#serie').val();
+            var fdr = $('#fdr').val();
+            var cso = $('#cso').val();
+            var tipo = $('#categorias').val();
+
+            var data = {
+                codigo: codigo,
+                serie: serie,
+                fdr: fdr,
+                cso: cso,
+                tipo: tipo
+            }
+
+            data.push({nada: 'nada'})
+
+            alert(data)
+
+            
+
+
+            $.post("/buscar",data, function (data) {
+                alert(data);
+            });
         }
     </script>
 

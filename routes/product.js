@@ -75,6 +75,14 @@ router.post('/updateprice',isLoggedInAdmin, function (req, res, next) {
 
 })
 
+router.post('/create2', function(req, res, next) {
+
+  product.create2(req.body, function (error, result) {
+    res.send(true);  
+  })
+  
+})
+
 router.post('/create', isLoggedIn, function (req, res, next) {
   var datos = req.body;
 
@@ -103,6 +111,23 @@ router.post('/create', isLoggedIn, function (req, res, next) {
 router.post('/update', isLoggedIn, function(req, res,next) {
   var data = req.body;
   product.update(data,function(err, result) {
+    if (err) {
+      res.sendStatus(500);
+    } else {
+      if (result.affectedRows>0) {
+        res.send(true);
+      }else{
+        res.sendStatus(500);
+      }
+    }
+  })
+
+  
+})
+
+router.post('/update2', isLoggedIn, function(req, res,next) {
+  var data = req.body;
+  product.update2(data,function(err, result) {
     if (err) {
       res.sendStatus(500);
     } else {
@@ -147,6 +172,31 @@ router.post('/delete', isLoggedIn, function (req, res, next) {
   var datos = req.body;
 
   product.delete(datos, function (error, data) {
+    if (error) {
+      res.sendStatus(500);
+    } else {
+
+      var changes = {
+        table: 'PRODUCT',
+        values: JSON.stringify(datos),
+        user: req.session.usuarioDatos.name,
+        ip: req.ip,
+        type: 'DELETE'
+      };
+
+      event.create(changes, function (result) {
+        console.log(result);
+      });
+      res.send(true);
+    }
+  })
+
+})
+
+router.post('/delete2', isLoggedIn, function (req, res, next) {
+  var datos = req.body;
+
+  product.delete2(datos, function (error, data) {
     if (error) {
       res.sendStatus(500);
     } else {

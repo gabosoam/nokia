@@ -8,6 +8,7 @@ $("#save").on("click", function () {
     }
 });
 
+
 dataSourceCombo = new kendo.data.DataSource({
     transport: {
         read: {
@@ -23,28 +24,6 @@ function comboCodigos(container, options) {
         .kendoComboBox({
             dataSource: dataSourceCombo,
             dataTextField: "code",
-            dataValueField: "id",
-            filter: "contains",
-            minLength: 1
-        });
-}
-
-
-dataSourceCategorias = new kendo.data.DataSource({
-    transport: {
-        read: {
-            url: "/category/read",
-            dataType: "json"
-        }
-    }
-});
-
-function comboCategorias(container, options) {
-    $('<input required data-bind="value:' + options.field + '"/>')
-        .appendTo(container)
-        .kendoComboBox({
-            dataSource: dataSourceCategorias,
-            dataTextField: "name",
             dataValueField: "id",
             filter: "contains",
             minLength: 1
@@ -340,16 +319,6 @@ $(document).ready(function () {
 
     });
 
-    $("#categorias").kendoDropDownList({
-        dataSource: dataSourceCategorias,
-        editable: false,
-        dataTextField: "name",
-        dataValueField: "id",
-        title: "Seleccionar tipo",
-        minLength: 1
-
-    });
-
     $("#brand").kendoDropDownList({
         dataSource: dataSourceBrand,
         editable: false,
@@ -438,7 +407,7 @@ $(document).ready(function () {
                     category: { validation: { required: true }, type: 'string', editable: false },
                     description: { validation: { required: true, }, type: 'string', editable: false },
                     bill: { type: 'string', defaultValue: bill, editable: false, visible: false },
-                    location: { type: 'number' },
+                
                     code: { editable: true }
                 }
             }
@@ -455,12 +424,14 @@ $(document).ready(function () {
             $("#grid2").kendoGrid({
                 dataSource: dataSource,
             
-                resizable: true,
-                scrollable: true,
-                columnMenu: true,
+                dataSource: dataSource,
+                height: 475,
                 filterable: true,
-                resizable: true,
                 groupable: true,
+                resizable: true,
+
+                pageable: { refresh: true, pageSizes: true, },
+                toolbar: ['create', 'excel'],
                 toolbar: ['create', 'excel'],
 
                 pageable: { refresh: true, pageSizes: true, },
@@ -486,16 +457,16 @@ $(document).ready(function () {
                         });
                 },
                 columns: [
-                    { field: "description", title: "Producto", filterable: { search: true } },
-                    { field: "category", title: "Tipo"},
-                    { field: "brand", title: "Marca" },
-                    { field: "code", title: "Código", filterable: { search: true }, values: codes, editor: comboCodigos},
-                    { field: "barcode", aggregates: ["count"], title: "No. de serie", filterable: { search: true, multi: true } },
-                    { field: "location", title: "Almacén", values: data, filterable: { search: true, multi: true } },
-                    { field: "fdr", title: "FDR", filterable: { search: true, multi: true } },
-                    { field: "cso", title: "CSO", filterable: { search: true, multi: true } },
-                    { field: "wbs", title: "WBS", filterable: { search: true, multi: true } },
-                    { field: "comment", title: "Comentario", filterable: { search: true, multi: false } },
+                    { field: "description", title: "Producto", filterable: { search: true, multi:true } },
+                    { field: "category", title: "Tipo",filterable: { search: true, multi:true }},
+                    { field: "brand", title: "Marca",filterable: { search: true, multi:true } },
+                    { field: "code", title: "Código", filterable: { search: true, multi:true }, values: codes, editor: comboCodigos},
+                    { field: "barcode", aggregates: ["count"], title: "No. de serie", filterable: { search: true, multi:true } },
+               
+                    { field: "fdr", title: "FDR" },
+                    { field: "cso", title: "CSO" },
+                    { field: "wbs", title: "WBS" },
+                    { field: "comment", title: "Área" },
                     { field: "bill", title: "Factura", hidden:true },
                     { command: ["edit", "destroy"], title: "Acciones" }],
                 editable: "popup"

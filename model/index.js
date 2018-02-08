@@ -9,9 +9,21 @@ module.exports = {
         console.log(error);
         callback('error en la consulta: ' + error, null);
       } else {
-        console.log()
+     
         callback(null, results[0]);
       }
     });
   },
+
+
+
+  buscar: function(data, callback) {
+   
+
+   connection.query({
+     sql: 'SELECT * FROM v_historico WHERE serie=? AND codigo=? AND fdr=? AND cso=? AND wbs=?'
+   })
+
+
+  }
 }

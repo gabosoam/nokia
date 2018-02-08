@@ -37,7 +37,7 @@ module.exports = {
     update: function (datos, callback) {
         connection.query('UPDATE client SET name=?,company=? WHERE (id=?) LIMIT 1', [datos.name.toUpperCase(), datos.company.toUpperCase(), datos.id], function (error, results, fields) {//
             if (error) {
-                console.log(error)
+              
                 callback(error, null);
             } else {
                 callback(null, results);
@@ -59,7 +59,7 @@ module.exports = {
     create: function (datos, callback) {
         connection.query('INSERT INTO client(name, company) VALUES(?,?)', [datos.name.toUpperCase(), datos.company.toUpperCase()], function (error, results, fields) {//
             if (error) {
-                console.log(error)
+             
                 callback(error, null);
             } else {
                 callback(null, results);

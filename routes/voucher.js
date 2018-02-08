@@ -1,18 +1,23 @@
 var express = require('express');
 var router = express.Router();
 var voucher = require('../model/voucher');
+var bill = require('../model/bill');
 var event = require('../model/event');
 
 
-router.get('/:voucher', isLoggedIn, function (req, res, next) {
-  var vouchersend = req.params.voucher;
 
-  voucher.readOne(vouchersend, function (error, data) {
 
-    res.render('voucherDetail', { user: sess.usuarioDatos, bill: vouchersend, data: data[0] });
+router.get('/:bill', isLoggedIn, function (req, res, next) {
+ 
+  var billsend = req.params.bill;
+
+  bill.readOne(billsend, function (error, data) {
+
+    res.render('product2', { user: sess.usuarioDatos, bill: billsend, data: data[0] });
   })
 
 });
+
 
 
 router.get('/', function (req, res, next) {

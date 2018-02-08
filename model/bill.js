@@ -34,6 +34,7 @@ module.exports = {
 
                 callback('error en la consulta: ' + error, null);
             } else {
+                console.log(results)
                 callback(null, results);
             }
         });

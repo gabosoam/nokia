@@ -150,7 +150,6 @@ $(document).ready(function () {
       { field: "brand",columnMenu: false, title: "Marca", filterable: { multi: true, search: true } },
       { field: "date", title: "Fecha", format: "{0:dd/MM/yyyy}", filterable: { multi: true, search: true, search: true }},
       
-      { field: "type", values: types, title: "Transacción", filterable: { multi: true, search: true } },
       { field: "name", title: "Proveedor", filterable: { multi: true, search: true } },
       { field: "company", title: "Empresa", filterable: { multi: true, search: true } },
       { field: "fdr", title: "FDR", filterable: { multi: true, search: true } },

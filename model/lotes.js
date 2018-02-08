@@ -61,7 +61,7 @@ module.exports = {
                                                     console.log(err);
                                                     callback(err)
                                                 } else {
-                                                    console.log(results);
+                                               
                                                     callback('GUARDADO');
                                                 }
                                             })

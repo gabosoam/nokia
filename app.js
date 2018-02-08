@@ -31,7 +31,7 @@ var CronJob = require('cron').CronJob;
 var job = new CronJob('59 59 20 * * 1-5', function() {
 child_process.exec('cmd /c start C:\INVENTARIO/inventario/bat/bat.bat', function(error,data){
 if (error) {
-  console.log(error)
+
 } else {
   
 }
@@ -92,7 +92,9 @@ app.use('/history', history);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
+  
   var err = new Error('Not Found');
+  console.log(err)
   err.status = 404;
   next(err);
 });
@@ -102,7 +104,7 @@ app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
-
+  console.log(err)
   // render the error page
   res.status(err.status || 500);
   res.render('error');

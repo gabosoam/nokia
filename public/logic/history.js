@@ -56,10 +56,11 @@ $(document).ready(function () {
           sortable: true,
           
           pageable: { refresh: true, pageSizes: true, },
-          toolbar: ['create','excel'],
+          toolbar: ['excel'],
           excel: {
             fileName: "Kendo UI Grid Export.xlsx",
-            filterable: true
+            filterable: true,
+            allPages: true
         },
           
        
@@ -69,6 +70,7 @@ $(document).ready(function () {
             { field: "fdr", title: "FDR", filterable: {search: true,multi:true }, hidden: false,sortable: false },
             { field: "cso", title: "CSO", filterable: {search: true,multi:true }, hidden: false,sortable: false },
             { field: "wbs", title: "WBS", filterable: {search: true,multi:true }, hidden: false,sortable: false },
+            { field: "location", title: "Ubicación", filterable: {search: true,multi:true }, hidden: false,sortable: false },
             { field: "name", title: "Proveedor", filterable: {search: true,multi:true }, hidden: false,sortable: false },
             { field: "company", title: "Empresa", filterable: {search: true,multi:true }, hidden: false,sortable: false },
             { field: "client", title: "Cliente", filterable: {search: true,multi:true }, hidden: false,sortable: false },

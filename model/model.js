@@ -9,7 +9,7 @@ module.exports = {
                 console.log(error);
                 callback('error en la consulta: ' + error, null);
             } else {
-                console.log(results);
+            
                 callback(null, results);
             }
         });
@@ -21,7 +21,7 @@ module.exports = {
                 console.log(error);
                 callback('error en la consulta: ' + error, null);
             } else {
-                console.log(results);
+           
                 callback(null, results);
             }
         });
@@ -59,7 +59,7 @@ module.exports = {
     },
 
     update: function (datos, callback) {
-        console.log(datos.unit);
+      
         connection.query('UPDATE model SET code=?, description=?,  brand=?, category=? WHERE (id=?) LIMIT 1', [datos.code.toUpperCase(), datos.description.toUpperCase(),datos.brand, datos.category, datos.id], function (error, results, fields) {
             if (error) {
                 console.log(error);

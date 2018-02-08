@@ -184,7 +184,7 @@ module.exports = {
     createserialauto: function (datos, callback) {
 
         for (var i = 0; i < datos.cant; i++) {
-            console.log(i+' '+datos.cant)
+        
 
             connection.query('CALL barcode();', function (error, results, fields) {
                 if (error) {

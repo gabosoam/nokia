@@ -19,6 +19,12 @@ $(document).ready(function () {
         batch: true,
         pageSize: 10,
         serverFiltering: false,
+        requestEnd: function (e) {
+            if (e.type != "read") {
+                // refresh the grid
+                e.sender.read();
+            }
+        },
         schema: {
             model: {
                 id: "id",

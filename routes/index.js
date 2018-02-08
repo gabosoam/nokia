@@ -1,3 +1,4 @@
+
 var express = require('express');
 var router = express.Router();
 var product = require('../model/product');
@@ -15,6 +16,13 @@ router.get('/', isLoggedIn, function (req, res, next) {
 	res.render('index', { user: sess.usuarioDatos });
 });
 
+router.post('/buscar', isLoggedIn, function (req, res, next) {
+	
+
+	res.send(terminos);
+});
+
+
 router.get('/events', isLoggedInAdmin, function (req, res, next) {
 
 	mysqlDump({
@@ -23,16 +31,16 @@ router.get('/events', isLoggedInAdmin, function (req, res, next) {
 		password: '12345',
 		database: 'inventory',
 		port: 3307,
-		dest:'../inventory.sql', // destination file
-		dropTable : true
-	},function(err){
+		dest: '../inventory.sql', // destination file
+		dropTable: true
+	}, function (err) {
 		console.log(err);
 	})
 	res.render('event', { user: sess.adminDatos });
 });
 
 router.get('/event', isLoggedInAdmin, function (req, res, next) {
-	event.read(function(err, result) {
+	event.read(function (err, result) {
 		if (err) {
 			res.send(err);
 		} else {
@@ -42,7 +50,7 @@ router.get('/event', isLoggedInAdmin, function (req, res, next) {
 });
 
 router.get('/error', isLoggedInAdmin, function (req, res, next) {
-	event.readError(function(err, result) {
+	event.readError(function (err, result) {
 		if (err) {
 			res.send(err);
 		} else {
@@ -81,13 +89,13 @@ router.get('/lotes', isLoggedIn, function (req, res, next) {
 
 
 
-router.post('/lotes/codes',isLoggedIn, function(req,res,next) {
+router.post('/lotes/codes', isLoggedIn, function (req, res, next) {
 	var code = req.body;
-	lotes.searchModel(code, function(data) {
+	lotes.searchModel(code, function (data) {
 		console.log(data);
-		res.send(data);	
+		res.send(data);
 	})
-	
+
 })
 
 router.post('/lotes/model', isLoggedIn, function (req, res, next) {
@@ -104,7 +112,7 @@ router.post('/lotes/model', isLoggedIn, function (req, res, next) {
 router.post('/lotes/barcode', isLoggedIn, function (req, res, next) {
 	var data = req.body;
 	lotes.insertBarcode(data, function (message) {
-	
+
 		res.send(message);
 	})
 

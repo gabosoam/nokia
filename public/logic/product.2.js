@@ -5,7 +5,7 @@ $(document).ready(function () {
     $( "#busqueda" ).hide();
     $( "#actions" ).hide();
    
-    
+  
 
  
 
