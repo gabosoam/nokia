@@ -1,4 +1,5 @@
 
+
 var express = require('express');
 var router = express.Router();
 var product = require('../model/product');
@@ -16,10 +17,20 @@ router.get('/', isLoggedIn, function (req, res, next) {
 	res.render('index', { user: sess.usuarioDatos });
 });
 
-router.post('/buscar', isLoggedIn, function (req, res, next) {
+router.post('/buscar', function (req, res, next) {
+
+	var sql = req.body.sql;
+
+	index.buscar(sql, function (error, data) {
+		if (error) {
+			res.send(error)
+		} else {
+			res.send(data);
+		}
+	})
 	
 
-	res.send(terminos);
+	
 });
 
 

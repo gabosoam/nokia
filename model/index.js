@@ -17,13 +17,15 @@ module.exports = {
 
 
 
-  buscar: function(data, callback) {
-   
-
-   connection.query({
-     sql: 'SELECT * FROM v_historico WHERE serie=? AND codigo=? AND fdr=? AND cso=? AND wbs=?'
-   })
-
-
-  }
+  buscar: function (sql,callback) {
+    connection.query(sql, function (error, results, fields) {
+      if (error) {
+        console.log(error);
+        callback('error en la consulta: ' + error, null);
+      } else {
+     
+        callback(null, results);
+      }
+    });
+  },
 }

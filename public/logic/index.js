@@ -25,12 +25,16 @@ $(document).ready(function () {
             });
     }
 
+    function buscador(sql) {
+        alert(sql)
+    }
 
 
 
 
 
     var socket = io.connect();
+
     socket.emit('getDates', function (category, brand) {
     dataSource = new kendo.data.DataSource({
         transport:{

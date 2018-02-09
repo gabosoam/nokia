@@ -40,6 +40,8 @@ dataSourceCategorias = new kendo.data.DataSource({
 });
 
 function comboCategorias(container, options) {
+
+   
     $('<input required data-bind="value:' + options.field + '"/>')
         .appendTo(container)
         .kendoComboBox({

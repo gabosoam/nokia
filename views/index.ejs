@@ -186,23 +186,36 @@
                                         <div class="form-group">
                                             <label for="categorias">Tipo:</label>
                                             <br>
-                                            <input for="categorias" id="categorias">
+
+                                            <select class="form-control" id="Cat">
+                                                <option  value="">Todas las categorías</option>
+                                                <option w3-repeat="cat" value="{{id}}">{{name}}</option>
+                                            </select>
 
                                         </div>
-
                                         <div class="form-group">
-                                            <label for="categorias">Acción</label>
-                                            <br>
-                                            <button onclick="buscar()" class="btn btn-success">Buscar</button>
-
+                                            <label for="cso">WBS:</label>
+                                            <input placeholder="WBS" type="text" class="form-control" id="wbs">
                                         </div>
+
 
 
 
                                     </div>
 
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="mibuton">Acción</label>
+                                            <br>
+                                            <button id="mibuton" onclick="buscar()" class="btn btn-success">Buscar</button>
+
+                                        </div>
+
+                                    </div>
+
                                     <div class="col-md-12">
-                                        <div id="grid"></div>
+                                        <div id="grid2"></div>
+                                        <div id="grid4"></div>
                                     </div>
 
                                     <hr>
@@ -338,31 +351,108 @@
     </script>
 
     <script>
+        $.get("/category/read", function (data2) {
+
+
+            w3.displayObject("Cat", {cat: data2});
+
+        });
+
+
+
         function buscar() {
 
-            var codigo = $('#codigo').val();
-            var serie = $('#serie').val();
-            var fdr = $('#fdr').val();
-            var cso = $('#cso').val();
-            var tipo = $('#categorias').val();
+            var code = { text: 'code', value: $('#codigo').val() };
+            var barcode = { text: 'barcode', value: $('#serie').val() };
+            var fdr = { text: 'fdr', value: $('#fdr').val() };
+            var cso = { text: 'cso', value: $('#cso').val() };
+            var tipo = { text: 'categoryid', value: $('#Cat').val() };
+            var wbs = { text: 'wbs', value: $('#wbs').val() };
 
-            var data = {
-                codigo: codigo,
-                serie: serie,
-                fdr: fdr,
-                cso: cso,
-                tipo: tipo
+
+
+
+
+            var data = []
+
+            if (codigo.value.trim() != '') { data.push(code) }
+            if (barcode.value.trim() != '') { data.push(barcode) }
+            if (fdr.value.trim() != '') { data.push(fdr) }
+            if (cso.value.trim() != '') { data.push(cso) }
+            if (tipo.value.trim() != '') { data.push(tipo) }
+            if (wbs.value.trim() != '') { data.push(wbs) }
+
+            sql = "SELECT * FROM v_historico WHERE"
+
+
+
+            for (let i = 0; i < data.length; i++) {
+                if (i == 0) {
+                    sql = sql + " " + data[i].text + " LIKE '%" + data[i].value + "%' ";
+                } else {
+                    sql = sql + " AND " + data[i].text + " LIKE '%" + data[i].value + "%'";
+                }
+
             }
 
-            data.push({nada: 'nada'})
-
-            alert(data)
-
-            
 
 
-            $.post("/buscar",data, function (data) {
-                alert(data);
+
+            if ($("#grid2").data("kendoGrid")) {
+                $("#grid2").data("kendoGrid").destroy();
+            }
+            $.post("/buscar", { sql: sql }, function (data) {
+                dataSource = new kendo.data.DataSource({
+                    data: data
+                },
+                );
+
+                $.get("/model/readmodel", function (codes) {
+                    $("#grid2").kendoGrid({
+                        dataSource: dataSource,
+                        height: 475,
+                        filterable: true,
+                        columnMenu: true,
+                        groupable: true,
+                        resizable: true,
+
+                        // <td style="text-align: center">{{type2}}</td>
+                        //         <td style="text-align: center">{{date}}</td>
+                        //         <td style="text-align: center">{{fdr}}</td>
+                        //         <td style="text-align: center">{{cso}}</td>
+                        //         <td style="text-align: center">{{wbs}}</td>
+                        //         <td style="text-align: center">{{location}}</td>
+                        //         <td style="text-align: center">{{name}}</td>
+                        //         <td style="text-align: center">{{company}}</td>
+                        //         <td style="text-align: center">{{client}}</td>
+                        //         <td style="text-align: center">{{clientcompany}}</td>
+                        //         <td style="text-align: center">{{comment}}</td>
+
+                        pageable: { refresh: true, pageSizes: true, },
+
+                        columns: [
+                            { field: "type2", title: "Transacción", filterable: { search: true, multi: true } },
+                       
+                            { field: "description", title: "Nombre", filterable: { search: true, multi: true } },
+                            { field: "code", title: "Código", filterable: { search: true, multi: true } },
+                            { field: "barcode", title: "Número de serie", filterable: { search: true, multi: true } },
+                            { field: "category", editable: false, title: "Tipo", filterable: { search: true, multi: true } },
+                            { field: "fdr", title: "FDR", filterable: { search: true, multi: true } },
+                            { field: "cso", title: "WBS", filterable: { search: true, multi: true } },
+                            { field: "wbs", title: "WBS", filterable: { search: true, multi: true } },
+                            
+                            { command: [{ text: "Historial", click: showDetails, iconClass: 'icon icon-chart-column' }], title: "Acciones" }],
+                        editable: "popup"
+                    });
+                });
+
+
+
+                function showDetails(e) {
+                    e.preventDefault();
+                    var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+                    location.href = "/history/" + dataItem.product;
+                }
             });
         }
     </script>
