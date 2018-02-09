@@ -46,6 +46,7 @@ module.exports = {
         });
     },
 
+  
 
     create: function (datos, callback) {
         connection.query('INSERT INTO variant(code, description, model,stockmin,unit) VALUES(?,?,?,?,?)', [datos.code, datos.description, datos.model, datos.price, datos.stockmin, datos.unit], function (error, results, fields) {
