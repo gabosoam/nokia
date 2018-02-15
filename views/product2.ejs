@@ -160,9 +160,11 @@
 
 
                             <div class="ibox-content">
+                                <button type="button" class="btn btn-default" onclick="openLotes()">
+                                    <span class="fa fa-print"></span> Ingreso por lotes</button>
 
-                                    <button type="button" class="btn btn-default" onclick="print()">
-                                            <span class="fa fa-print"></span> Imprimir</button>
+                                <button type="button" class="btn btn-default" onclick="print()">
+                                    <span class="fa fa-print"></span> Imprimir</button>
 
                                 <div class="row">
 
@@ -173,10 +175,10 @@
 
                                     <div class="col-md-12">
 
-                                 
 
 
-                                       
+
+
                                         <div id="grid2" tabindex="0"></div>
 
 
@@ -221,164 +223,171 @@
                     <button onclick="print()" class="btn btn-primary">Imprimir</button>
                     <div id="print" style="min-width: 210mm; font-family: 'Arial Narrow'">
 
-                            <table style="width: 100%">
-                                <tr>
-                                    <td></td>
-                                    <td>
-                                        <center>
-                                            <img class="" src="../images/nokia.png" width="280px" />
-    
-    
-    
-    
-                                        </center>
-                                    </td>
-                                    <td style="text-align: right">
-                                        <h5>SALIDA-<%=data.id%>
-                                            
-                                        </h5>
-                                    </td>
-                                </tr>
-                            </table>
-    
-    
-                            <hr>
-                            <center>
-                                <strong style="font-size: 18px">Reporte de Salida</strong>
-                            </center>
-                            <table style="width: 100%; font-size: 12px">
-                                <tr>
-                                    <td>
-    
-                                        <address>
+                        <table style="width: 100%">
+                            <tr>
+                                <td></td>
+                                <td>
+                                    <center>
+                                        <img class="" src="../images/nokia.png" width="280px" />
+
+
+
+
+                                    </center>
+                                </td>
+                                <td style="text-align: right">
+                                    <h5>SALIDA-
+                                        <%=data.id%>
+
+                                    </h5>
+                                </td>
+                            </tr>
+                        </table>
+
+
+                        <hr>
+                        <center>
+                            <strong style="font-size: 18px">Reporte de Salida</strong>
+                        </center>
+                        <table style="width: 100%; font-size: 12px">
+                            <tr>
+                                <td>
+
+                                    <address>
+                                        <br>
+                                        <p>
+                                            <strong>Cliente: </strong>
+                                            <%=data.client%>
+                                        </p>
+                                        <p>
+                                            <strong>Empresa: </strong>
+                                            <%=data.clientcompany%>
+                                        </p>
+
+                                        <br>
+
+
+                                    </address>
+                                </td>
+                                <td style="text-align: right">
+
+                                    <address>
+                                        <strong>Fecha:</strong>
+                                        <%=data.date%>
+
                                             <br>
-                                            <p><strong>Cliente: </strong><%=data.client%></p>
-                                            <p><strong>Empresa: </strong><%=data.clientcompany%></p>
-                                        
-                                            <br>
-                               
-                                             
-                                        </address>
-                                    </td>
-                                    <td style="text-align: right">
-    
-                                        <address>
-                                            <strong>Fecha:</strong>
-                                            <%=data.date%>
-                                            
-                                                <br>
-                                                <strong>Referencia:</strong>
-                                                <%=data.reference%>
-                                                
-    
-                                        </address>
-                                    </td>
+                                            <strong>Referencia:</strong>
+                                            <%=data.reference%>
+
+
+                                    </address>
+                                </td>
+                            </tr>
+
+                        </table>
+                        <hr>
+                        <table id="Vouchers" class="table ">
+                            <thead style="font-size:13px;">
+                                <tr>
+                                    <th style="text-align: center">Nombre</th>
+                                    <th style="text-align: center">Código</th>
+                                    <th style="text-align: center">No. de Serie</th>
+                                    <th style="text-align: center">Tipo</th>
+                                    <th style="text-align: center">Marca</th>
+                                    <th style="text-align: center">FDR</th>
+                                    <th style="text-align: center">CSO</th>
+                                    <th style="text-align: center">WBS</th>
+
+                                    <!-- <th style="text-align: center">Comentario</th> -->
                                 </tr>
-    
-                            </table>
-                            <hr>
-                            <table id="Vouchers" class="table ">
-                                <thead style="font-size:13px;">
-                                    <tr>
-                                        <th style="text-align: center">Nombre</th>
-                                        <th style="text-align: center">Código</th>
-                                        <th style="text-align: center">No. de Serie</th>
-                                        <th style="text-align: center">Tipo</th>
-                                        <th style="text-align: center">Marca</th>
-                                        <th style="text-align: center">FDR</th>
-                                        <th style="text-align: center">CSO</th>
-                                        <th style="text-align: center">WBS</th>
-                            
-                                        <th style="text-align: center">Comentario</th>
-                                    </tr>
-                                </thead>
-                                <tbody style="font-size:11px;">
-                                    <tr w3-repeat="voucherss">
-                                        <td style="text-align: center">{{description}}</td>
-                                        <td style="text-align: center">{{code2}}</td>
-                                        <td style="text-align: center">{{barcode}}</td>
-                                        <td style="text-align: center">{{category}}</td>
-                                        <td style="text-align: center">{{brand}}</td>
-                                        <td style="text-align: center">{{fdr}}</td>
-                                        <td style="text-align: center">{{cso}}</td>
-                                        <td style="text-align: center">{{wbs}}</td>
-                                    
-                                        <td style="text-align: center">
-                                            {{comment}}
-                                        </td>
-                                    </tr>
-    
-    
-                                </tbody>
-                            </table>
-                            <hr>
-    
-                            <!-- <div class="well m-t">
+                            </thead>
+                            <tbody style="font-size:11px;">
+                                <tr w3-repeat="voucherss">
+                                    <td style="text-align: center">{{description}}</td>
+                                    <td style="text-align: center">{{code2}}</td>
+                                    <td style="text-align: center">{{barcode}}</td>
+                                    <td style="text-align: center">{{category}}</td>
+                                    <td style="text-align: center">{{brand}}</td>
+                                    <td style="text-align: center">{{fdr}}</td>
+                                    <td style="text-align: center">{{cso}}</td>
+                                    <td style="text-align: center">{{wbs}}</td>
+
+                                   <!--  <td style="text-align: center">
+                                        {{comment}}
+                                    </td> -->
+                                </tr>
+
+
+                            </tbody>
+                        </table>
+                        <hr>
+
+                        <!-- <div class="well m-t">
                                 <strong>Comentario</strong>
                                 <input class="form-control" type="text">
                             </div> -->
-    
-    
-    
-                            <table style="width: 100%; border: 1; font-size: 12px ">
-                                <tr>
-                                    <td>
-                                        <center>
-                                            <p>
-                                                ENTREGADO POR
-                                                <br>
-                                                <br>
-                                                <br>
-                                                <br>
-                                                <br> _______________________________
-                                                <br>
-                                                <br>
-                                                <input type="text" style="border: 0; width: 100%; text-align: center; text-transform: uppercase">
-                                            </p>
-                                        </center>
-    
-    
-                                    </td>
-    
-                                    <td>
-                                        <center>
-                                            <p>
-                                                REPRESENTANTE NOKIA
-                                                <br>
-                                                <br>
-                                                <br>
-                                                <br>
-                                                <br> _______________________________
-                                                <br>
-                                                <br>
-                                                <%=data.user%>
-                                               
-                                            </p>
-                                        </center>
-    
-    
-                                    </td>
-    
-                                    <td>
-                                        <center>
-                                            <p>
-                                                RECIBIDO POR
-                                                <br>
-                                                <br>
-                                                <br>
-                                                <br>
-                                                <br> _______________________________
-                                                <br>
-                                                <br>
-                                                <input type="text" style="border: 0; width: 100%; text-align: center; text-transform: uppercase">
-                                            </p>
-                                        </center>
-    
-    
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
+
+
+
+                        <table style="width: 100%; border: 1; font-size: 12px ">
+                            <tr>
+                                <td>
+                                    <center>
+                                        <p>
+                                            ENTREGADO POR
+                                            <br>
+                                            <br>
+                                            <br>
+                                            <br>
+                                            <br> _______________________________
+                                            <br>
+                                            <br>
+                                            <input type="text" style="border: 0; width: 100%; text-align: center; text-transform: uppercase">
+                                        </p>
+                                    </center>
+
+
+                                </td>
+
+                              <!--   <td>
+                                    <center>
+                                        <p>
+                                            REPRESENTANTE NOKIA
+                                            <br>
+                                            <br>
+                                            <br>
+                                            <br>
+                                            <br> _______________________________
+                                            <br>
+                                            <br>
+                                            <%=data.user%>
+
+                                        </p>
+                                    </center>
+
+
+                                </td> -->
+
+                                <td>
+                                    <center>
+                                        <p>
+                                            RECIBIDO POR
+                                            <br>
+                                            <br>
+                                            <br>
+                                            <br>
+                                            <br> _______________________________
+                                            <br>
+                                            <br>
+                                            <input type="text" style="border: 0; width: 100%; text-align: center; text-transform: uppercase">
+                                        </p>
+                                    </center>
+
+
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -643,7 +652,7 @@
 
     <script>
         $.get("/bill/read/<%=bill%>", function (data2) {
-           
+
 
             w3.displayObject("Vouchers", { voucherss: data2 });
 
@@ -663,15 +672,15 @@
     <% if (bill) { %>
         <script>
             var bill = '<%= bill %>';
-         
+
             var userSession = '<%=user.id%>';
-          
-         
+
+
         </script>
         <% } %>
 
-        <script src="../logic/product.12.js"></script>
-                        <script src="../logic/lotes.js"></script>
+            <script src="../logic/product.12.js"></script>
+            <script src="../logic/lotes.js"></script>
 
 
 

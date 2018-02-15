@@ -42,14 +42,14 @@ function processData(csv) {
     while (allTextLines.length) {
         lines.push(allTextLines.shift().split(','));
     }
-    for (var i = 1; i < lines.length - 1; i++) {
+   /*  for (var i = 1; i < lines.length - 1; i++) {
         category.push(lines[i][3]);
         brand.push(lines[i][4]);
         locationInv.push(lines[i][5]);
         codes.push(lines[i][0] + '+=+' + lines[i][1] + '+=+' + lines[i][3] + '+=+' + lines[i][4]);
         barcode.push(lines[i][1] + '+=+' + lines[i][2] + '+=+' + lines[i][5] + '+=+' + lines[i][6] + '+=+' + bill);
     }
-
+ */
 
 
 
@@ -90,19 +90,13 @@ function drawOutput(lines) {
 
     var item3 = document.createElement('th');
     row.appendChild(item3);
-    item3.appendChild(document.createTextNode('Categoría'));
+    item3.appendChild(document.createTextNode('CATEGORÍA'));
 
     var item4 = document.createElement('th');
     row.appendChild(item4);
-    item4.appendChild(document.createTextNode('Marca'));
+    item4.appendChild(document.createTextNode('MARCA'));
 
-    var item6 = document.createElement('th');
-    row.appendChild(item6);
-    item6.appendChild(document.createTextNode('Stock min.'));
 
-    var item7 = document.createElement('th');
-    row.appendChild(item7);
-    item7.appendChild(document.createTextNode('U. de medida'));
 
     var item5 = document.createElement('th');
     row.appendChild(item5);
@@ -190,10 +184,10 @@ function iniciar() {
     for (var i = 1; i < myarray.length-1; i++) {
         var aux = i;
         var code= $('#id' + aux + '' + 2).text();
-        if (!compare(code)) {
+   /*      if (!compare(code)) {
             $('#state' + aux).text('No. DE SERIE REPETIDO');
             continue;
-        }
+        } */
         codeaux.push(code);
        senData(aux);
 
@@ -218,10 +212,13 @@ function senData(i) {
         barcode: $('#id' + i + '' + 2).text(),
         variant: $('#id' + i + '' + 1).text(),
         location: $('#id' + i + '' + 3).text(),
-        observation: $('#id' + i + '' + 4).text()
+        observation: $('#id' + i + '' + 4).text(),
+        fdr  : $('#id' + i + '' + 5).text(),
+        cso  : $('#id' + i + '' + 6).text(),
+        wbs  : $('#id' + i + '' + 7).text(),
 
     }, function( data ) {
-        $("#state"+i).text(data);
+        $("#state"+i).text(JSON.stringify(data));
        
   
     });
@@ -275,23 +272,8 @@ function search(code, product, tbody, table, i, length) {
                 var firstNameCell4 = row.insertCell(-1);
                 firstNameCell4.appendChild((select2));
 
-                var select3 = document.createElement('input');
-                select3.id = 'stock' + i;
-                select3.className = 'form-control stock';
-                select3.style = "width:60px"
-                select3.value = 0
-                select3.type = 'number'
-                var firstNameCell6 = row.insertCell(-1);
-                firstNameCell6.appendChild((select3));
-
-                var select4 = document.createElement('input');
-                select4.id = 'unit' + i;
-                select4.className = 'form-control unit';
-                select4.style = "width:100%"
-                select4.value = 0
-                select4.type = 'number'
-                var firstNameCell7 = row.insertCell(-1);
-                firstNameCell7.appendChild((select4));
+            
+             
 
 
 
@@ -302,9 +284,7 @@ function search(code, product, tbody, table, i, length) {
                         category: $("#cat" + i).data("kendoDropDownList").value(),
                         brand: $("#bra" + i).data("kendoDropDownList").value(),
                         code: firstNameCell2.textContent,
-                        description: firstNameCell.textContent,
-                        stockmin: $("#stock" + i).val(),
-                        unit: $("#unit" + i).data("kendoDropDownList").value(),
+                        description: firstNameCell.textContent
                     }
 
                     $.post("/model/create", dataModel, function (data) {

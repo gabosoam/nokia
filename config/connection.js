@@ -1,7 +1,7 @@
 ﻿'use strict';
 let mysql = require('mysql'),
     db_config = {
-        host: '172.30.2.36',
+        host: 'localhost',
         user: 'root',
         password: '12345',
         database: 'nokia',

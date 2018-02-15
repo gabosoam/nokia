@@ -429,6 +429,7 @@ $(document).ready(function () {
                 e.sender.read();
             }
         },
+
         schema: {
             model: {
                 id: "id",
@@ -464,6 +465,8 @@ $(document).ready(function () {
                 resizable: true,
                 groupable: true,
                 toolbar: ['create', 'excel'],
+                height: 475,
+                
 
                 pageable: { refresh: true, pageSizes: true, },
                 pdf: {

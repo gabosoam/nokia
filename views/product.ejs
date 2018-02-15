@@ -6,6 +6,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <html lang="es"></html>
+
     <title>Sistema de inventario</title>
 
     <link href="../inspinia/css/bootstrap.min.css" rel="stylesheet">
@@ -160,8 +164,10 @@
 
 
                             <div class="ibox-content">
-                                    <button type="button" class="btn btn-default" onclick="print()">
-                                            <span class="fa fa-print"></span> Imprimir</button>
+                                    <button type="button" class="btn btn-default" onclick="openLotes()">
+                                            <span class="fa fa-print"></span> Ingreso por lotes</button>
+                                <button type="button" class="btn btn-default" onclick="print()">
+                                    <span class="fa fa-print"></span> Imprimir</button>
 
                                 <div class="row">
 
@@ -172,10 +178,10 @@
 
                                     <div class="col-md-12">
 
-                                 
 
 
-                                       
+
+
                                         <div id="grid2" tabindex="0"></div>
 
 
@@ -251,12 +257,18 @@
 
                                     <address>
                                         <br>
-                                        <p><strong>Proveedor: </strong><%=data.name%></p>
-                                        <p><strong>Empresa: </strong><%=data.company%></p>
-                                    
+                                        <p>
+                                            <strong>Proveedor: </strong>
+                                            <%=data.name%>
+                                        </p>
+                                        <p>
+                                            <strong>Empresa: </strong>
+                                            <%=data.company%>
+                                        </p>
+
                                         <br>
-                           
-                                         
+
+
                                     </address>
                                 </td>
                                 <td style="text-align: right">
@@ -337,7 +349,7 @@
 
                                 </td>
 
-                                <td>
+                             <!--    <td>
                                     <center>
                                         <p>
                                             REPRESENTANTE NOKIA
@@ -353,7 +365,7 @@
                                     </center>
 
 
-                                </td>
+                                </td> -->
 
                                 <td>
                                     <center>
@@ -457,29 +469,9 @@
 
 
                         <div class="form-group">
-                            <label for="pwd">Nombre del producto:</label>
+                            <label for="pwd">Nombre:</label>
                             <input type="text" class="form-control" validationMessage="Nombre" name="description" required id="description" style="width: 100%">
                         </div>
-
-
-
-
-                        <div class="form-group">
-                            <label for="pwd">Stock mín:</label>
-                            <input type="number" validationMessage="Ingresa el stock mínimo" class="form-control" required name="stockmin" placeholder="Stock mínimo"
-                                id="stockmin" style="width: 100%">
-                        </div>
-
-
-
-
-                        <div class="form-group">
-                            <label for="pwd">Unidad de medida:</label>
-                            <input type="text" class="form-control" required name="unit" id="unit" style="width: 100%">
-                        </div>
-
-
-
 
 
 
