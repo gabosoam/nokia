@@ -59,6 +59,7 @@ module.exports = {
     },
 
     update: function (datos, callback) {
+        console.log(datos.brand)
       
         connection.query('UPDATE model SET code=?, description=?,  brand=?, category=? WHERE (id=?) LIMIT 1', [datos.code.toUpperCase(), datos.description.toUpperCase(),datos.brand, datos.category, datos.id], function (error, results, fields) {
             if (error) {

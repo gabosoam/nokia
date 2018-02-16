@@ -4,6 +4,8 @@ kendo.culture("es-ES");
 $(document).ready(function () {
     var socket = io.connect();
     socket.emit('getDates', function (category, brand) {
+
+        console.log(brand)
     dataSource = new kendo.data.DataSource({
         transport:{
             read: {url:"/model/read", dataType: "json"},
@@ -13,6 +15,7 @@ $(document).ready(function () {
             parameterMap: function (options, operation) {
                 if (operation !== "read" && options.models) {
                     var datos = options.models[0]
+                    console.log(datos)
                     return datos;
                 }
             }
@@ -32,8 +35,6 @@ $(document).ready(function () {
                 fields: {
                     code: { validation: { required: true, size:13 }, type: 'string' },
                     description: { validation: { required: true, size:13 }, type: 'string' },
-    
-                   
                     brand: { validation: { required: true, }, type: 'string' },
                     category: { validation: { required: true, }, type: 'string' },
                   
