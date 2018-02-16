@@ -413,7 +413,14 @@ $(document).ready(function () {
             }
         },
      
+        group: {
+            field: "code", aggregates: [
+                { field: "barcode", aggregate: "count" },
+                { field: "code", aggregate: "count" },
+            ]
+        },
         aggregate: [{ field: "barcode", aggregate: "count" }],
+        aggregate: [{ field: "code", aggregate: "count" }],
         pageSize: 1000
     },
     );
@@ -460,7 +467,7 @@ $(document).ready(function () {
                     { field: "description", title: "Producto", filterable: { search: true, multi:true } },
                     { field: "category", title: "Tipo",filterable: { search: true, multi:true }},
                     { field: "brand", title: "Marca",filterable: { search: true, multi:true } },
-                    { field: "code", title: "Código", filterable: { search: true, multi:true }, values: codes, editor: comboCodigos},
+                    { field: "code", title: "Código", filterable: { search: true, multi:true }, values: codes, editor: comboCodigos, aggregates: ["min", "max", "count"], groupHeaderTemplate: "Cantidad: #= count#"},
                     { field: "barcode", aggregates: ["count"], title: "No. de serie", filterable: { search: true, multi:true } },
                
                     { field: "fdr", title: "FDR" },

@@ -41,7 +41,7 @@ dataSourceCategorias = new kendo.data.DataSource({
 
 function comboCategorias(container, options) {
 
-   
+
     $('<input required data-bind="value:' + options.field + '"/>')
         .appendTo(container)
         .kendoComboBox({
@@ -446,27 +446,34 @@ $(document).ready(function () {
                 }
             }
         },
-     
+        group: {
+            field: "code", aggregates: [
+                { field: "barcode", aggregate: "count" },
+                { field: "code", aggregate: "count" },
+            ]
+        },
         aggregate: [{ field: "barcode", aggregate: "count" }],
+        aggregate: [{ field: "code", aggregate: "count" }],
+
+
         pageSize: 1000
     },
     );
 
     $.get("/location/read2", function (data) {
 
-        $.get( "/model/readmodel", function( codes ) {
+        $.get("/model/readmodel", function (codes) {
             $("#grid2").kendoGrid({
                 dataSource: dataSource,
-            
+
+                height: 400,
                 resizable: true,
                 scrollable: true,
                 columnMenu: true,
                 filterable: true,
                 resizable: true,
                 groupable: true,
-                toolbar: ['create', 'excel'],
-                height: 475,
-                
+
 
                 pageable: { refresh: true, pageSizes: true, },
                 pdf: {
@@ -492,16 +499,17 @@ $(document).ready(function () {
                 },
                 columns: [
                     { field: "description", title: "Producto", filterable: { search: true } },
-                    { field: "category", title: "Tipo"},
+                    { field: "Producto", hidden: true, aggregates: ["min", "max", "count"], groupHeaderTemplate: "Cantidad: #= count#" },
+                    { field: "category", title: "Tipo" },
                     { field: "brand", title: "Marca" },
-                    { field: "code", title: "Código", filterable: { search: true }, values: codes, editor: comboCodigos},
+                    { field: "code", title: "Código", filterable: { search: true }, values: codes, editor: comboCodigos,  aggregates: ["min", "max", "count"], groupHeaderTemplate: "Cantidad: #= count#" },
                     { field: "barcode", aggregates: ["count"], title: "No. de serie", filterable: { search: true, multi: true } },
                     { field: "location", title: "Almacén", values: data, filterable: { search: true, multi: true } },
                     { field: "fdr", title: "FDR", filterable: { search: true, multi: true } },
                     { field: "cso", title: "CSO", filterable: { search: true, multi: true } },
                     { field: "wbs", title: "WBS", filterable: { search: true, multi: true } },
                     { field: "comment", title: "Comentario", filterable: { search: true, multi: false } },
-                    { field: "bill", title: "Factura", hidden:true },
+                    { field: "bill", title: "Factura", hidden: true },
                     { command: ["edit", "destroy"], title: "Acciones" }],
                 editable: "popup"
             })
