@@ -121,6 +121,11 @@ module.exports = {
 
     create2: function (data, callback) {
 
+        if (!data.fdr) {data.fdr=''}
+        if (!data.wbs) {data.wbs=''}
+        if (!data.cso) {data.cso=''}
+        if (!data.comment) {data.comment=''}
+        
 
 
         connection.query({

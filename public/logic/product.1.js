@@ -441,7 +441,7 @@ $(document).ready(function () {
                     category: { validation: { required: true }, type: 'string', editable: false },
                     description: { validation: { required: true, }, type: 'string', editable: false },
                     bill: { type: 'string', defaultValue: bill, editable: false, visible: false },
-                    location: { type: 'number' },
+                    location: { type: 'number', validation: { required: true } },
                     code: { editable: true }
                 }
             }
