@@ -206,7 +206,7 @@ module.exports = {
                                     sql = sql + " ('" + data.bill + "','" + results.insertId + "','" + data.fdr.toUpperCase() + "','" + data.cso.toUpperCase() + "','" + data.wbs.toUpperCase() + "','" + data.location + "','" + data.comment.toUpperCase() + "'),"
                                 }
 
-                                for (let i = 0; i < data.cant; i++) {
+                        
                                     connection.query({
                                         sql: sql.substr(0, (sql.length - 1)),
                                         timeout: 40000, // 40s
@@ -216,15 +216,13 @@ module.exports = {
                                             callback('existió un error', null);
                                         } else {
 
-                                            if (i == data.cant - 1) {
-                                                callback(null, 'Todo salió bien')
-                                            }
+                                            callback(null, 'Todo salió bien')
 
                                         }
                                     });
 
 
-                                }
+                          
 
 
 
