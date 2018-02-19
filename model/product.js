@@ -160,7 +160,7 @@ module.exports = {
             } else {
 
                 if (results[0]) {
-                    for (let i = 0; i < data.cant; i++) {
+                    for (var i = 0; i < data.cant; i++) {
                         connection.query({
                             sql: 'INSERT INTO `billdetail` (`bill`, `product`, `fdr`, `cso`, `wbs`, `location`, `comment`) VALUES (?,?,?,?,?,?,?)',
                             timeout: 40000, // 40s
@@ -194,7 +194,7 @@ module.exports = {
 
                             if (results.affectedRows == 1) {
 
-                                for (let i = 0; i < data.cant; i++) {
+                                for (var i = 0; i < data.cant; i++) {
                                     connection.query({
                                         sql: 'INSERT INTO `billdetail` (`bill`, `product`, `fdr`, `cso`, `wbs`, `location`, `comment`) VALUES (?,?,?,?,?,?,?)',
                                         timeout: 40000, // 40s
@@ -264,7 +264,7 @@ module.exports = {
             } else {
 
                 if (results[0]) {
-                    for (let i = 0; i < data.cant; i++) {
+                    for (var i = 0; i < data.cant; i++) {
                         connection.query({
                             sql: 'INSERT INTO `billdetail` (`bill`, `product`, `fdr`, `cso`, `wbs`, `comment`) VALUES (?,?,?,?,?,?)',
                             timeout: 40000, // 40s
@@ -298,7 +298,7 @@ module.exports = {
 
                             if (results.affectedRows == 1) {
 
-                                for (let i = 0; i < data.cant; i++) {
+                                for (var i = 0; i < data.cant; i++) {
                                     connection.query({
                                         sql: 'INSERT INTO `billdetail` (`bill`, `product`, `fdr`, `cso`, `wbs`, `comment`) VALUES (?,?,?,?,?,?)',
                                         timeout: 40000, // 40s
