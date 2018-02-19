@@ -1,8 +1,11 @@
 
-  $( "#formsave" ).hide();
-  $( "#busqueda" ).hide();
-  $( "#actions" ).hide();
-  $( "#formIngreso" ).hide();
+
+$( "#formsave" ).hide();
+$( "#busqueda" ).hide();
+$( "#actions" ).hide();
+$( "#formIngreso" ).hide();
+
+$("#txtSerie").kendoComboBox();
 
 var validator = $("#formsave").kendoValidator().data("kendoValidator");
 var validatorModel = $("#formSaveModel").kendoValidator().data("kendoValidator");
@@ -21,36 +24,99 @@ dataSourceCombo = new kendo.data.DataSource({
     }
 });
 
+$("#txtCodigo").kendoComboBox({
+    dataSource: dataSourceCombo,
+    filter: "contains",
+    dataTextField: "code",
+    dataValueField: "id",
+    placeholder: "Buscar código...",
+    minLength: 1,
+    change: onChange
+});
+
+function onChange(e) {
+
+
+
+    var code = this.value();
+
+    $('#code2').val(code);
+
+    var valor = code.replace("#", "%26");
+
+
+    $.ajax({
+        type: 'GET',
+        url: '/model/' + valor,
+        success: sendData
+    });
+
+
+
+};
+
+function sendData(data) {
+
+    if (data.length > 0) {
+
+       
+        $("#txtSerie").data("kendoComboBox").value("");
+
+        
+        dataSourceSeries = new kendo.data.DataSource({
+            transport: {
+                read: {
+                    url: "/product/read/" + data[0].id,
+                    dataType: "json"
+                }
+            }
+        });
+
+        $("#txtSerie").kendoComboBox({
+            dataSource: dataSourceSeries,
+            filter: "contains",
+            dataTextField: "barcode",
+            dataValueField: "id",
+            placeholder: "Buscar serie...",
+            minLength: 1,
+        });
+
+
+
+
+        $('#modelProduct').val(data[0].id);
+        $('#nameProduct').data('kendoComboBox').value(data[0].code);
+    } else {
+        var r = confirm("El producto con el código " + $('#code2').val() + " no existe \n ¿Desea agregarlo?");
+        if (r == true) {
+            $('#myModal').modal({
+                backdrop: 'static',
+                keyboard: false
+            })
+            $('#codeModal').val($('#code2').val());
+        } else {
+
+        }
+    }
+
+}
+
+
+dataSourceCombo = new kendo.data.DataSource({
+    transport: {
+        read: {
+            url: "/model/read",
+            dataType: "json"
+        }
+    }
+});
+
 function comboCodigos(container, options) {
     $('<input required data-bind="value:' + options.field + '"/>')
         .appendTo(container)
         .kendoComboBox({
             dataSource: dataSourceCombo,
             dataTextField: "code",
-            dataValueField: "id",
-            filter: "contains",
-            minLength: 1
-        });
-}
-
-
-dataSourceCategorias = new kendo.data.DataSource({
-    transport: {
-        read: {
-            url: "/category/read",
-            dataType: "json"
-        }
-    }
-});
-
-function comboCategorias(container, options) {
-
-
-    $('<input required data-bind="value:' + options.field + '"/>')
-        .appendTo(container)
-        .kendoComboBox({
-            dataSource: dataSourceCategorias,
-            dataTextField: "name",
             dataValueField: "id",
             filter: "contains",
             minLength: 1
@@ -124,51 +190,7 @@ $('#code2').keypress(function (e) {
     }
 });
 
-function sendData(data) {
 
-    if (data.length > 0) {
-
-       
-        $("#txtSerie").data("kendoComboBox").value("");
-
-        
-        dataSourceSeries = new kendo.data.DataSource({
-            transport: {
-                read: {
-                    url: "/product/read/" + data[0].id,
-                    dataType: "json"
-                }
-            }
-        });
-
-        $("#txtSerie").kendoComboBox({
-            dataSource: dataSourceSeries,
-            filter: "contains",
-            dataTextField: "barcode",
-            dataValueField: "id",
-            placeholder: "Buscar serie...",
-            minLength: 1,
-        });
-
-
-
-
-        $('#modelProduct').val(data[0].id);
-        $('#nameProduct').data('kendoComboBox').value(data[0].code);
-    } else {
-        var r = confirm("El producto con el código " + $('#code2').val() + " no existe \n ¿Desea agregarlo?");
-        if (r == true) {
-            $('#myModal').modal({
-                backdrop: 'static',
-                keyboard: false
-            })
-            $('#codeModal').val($('#code2').val());
-        } else {
-
-        }
-    }
-
-}
 
 function sendData2(data) {
     if (data.length > 0) {
@@ -300,16 +322,6 @@ $(document).ready(function () {
         }
     });
 
-    $("#txtCodigo").kendoComboBox({
-        dataSource: dataSourceCombo,
-        filter: "contains",
-        dataTextField: "code",
-        dataValueField: "id",
-        placeholder: "Buscar código...",
-        minLength: 1,
-        change: onChange
-    });
-
     dataSourceLocation = new kendo.data.DataSource({
         transport: {
             read: {
@@ -318,20 +330,6 @@ $(document).ready(function () {
             }
         }
     });
-
-    $("#txtUbicacion").kendoComboBox({
-        dataSource: dataSourceLocation,
-        filter: "contains",
-        dataTextField: "name",
-        dataValueField: "id",
-        placeholder: "Buscar ubicación...",
-        minLength: 1,
-
-    });
-
-    $("#txtSerie").kendoComboBox();
-
-   
 
     dataSourceBrand = new kendo.data.DataSource({
         transport: {
@@ -393,16 +391,6 @@ $(document).ready(function () {
         dataTextField: "name",
         dataValueField: "id",
         title: "Seleccionar almacén",
-        minLength: 1
-
-    });
-
-    $("#categorias").kendoDropDownList({
-        dataSource: dataSourceCategorias,
-        editable: false,
-        dataTextField: "name",
-        dataValueField: "id",
-        title: "Seleccionar tipo",
         minLength: 1
 
     });
@@ -484,7 +472,6 @@ $(document).ready(function () {
                 e.sender.read();
             }
         },
-
         schema: {
             model: {
                 id: "id",
@@ -496,11 +483,12 @@ $(document).ready(function () {
                     category: { validation: { required: true }, type: 'string', editable: false },
                     description: { validation: { required: true, }, type: 'string', editable: false },
                     bill: { type: 'string', defaultValue: bill, editable: false, visible: false },
-                    location: { type: 'number', validation: { required: true } },
+                
                     code: { editable: true }
                 }
             }
         },
+     
         group: {
             field: "code", aggregates: [
                 { field: "barcode", aggregate: "count" },
@@ -509,26 +497,25 @@ $(document).ready(function () {
         },
         aggregate: [{ field: "barcode", aggregate: "count" }],
         aggregate: [{ field: "code", aggregate: "count" }],
-
-
         pageSize: 1000
     },
     );
 
     $.get("/location/read2", function (data) {
 
-        $.get("/model/readmodel", function (codes) {
+        $.get( "/model/readmodel", function( codes ) {
             $("#grid2").kendoGrid({
                 dataSource: dataSource,
-
-                height: 400,
-                resizable: true,
-                scrollable: true,
-                columnMenu: true,
+            
+                dataSource: dataSource,
+                height: 475,
                 filterable: true,
-                resizable: true,
                 groupable: true,
+                resizable: true,
 
+                pageable: { refresh: true, pageSizes: true, },
+                toolbar: ['excel'],
+                toolbar: ['excel'],
 
                 pageable: { refresh: true, pageSizes: true, },
                 pdf: {
@@ -553,18 +540,17 @@ $(document).ready(function () {
                         });
                 },
                 columns: [
-                    { field: "description", title: "Producto", filterable: { search: true } },
-                    { field: "Producto", hidden: true, aggregates: ["min", "max", "count"], groupHeaderTemplate: "Cantidad: #= count#" },
-                    { field: "category", title: "Tipo" },
-                    { field: "brand", title: "Marca" },
-                    { field: "code", title: "Código", filterable: { search: true }, values: codes, editor: comboCodigos, aggregates: ["min", "max", "count"], groupHeaderTemplate: "Cantidad: #= count#" },
-                    { field: "barcode", aggregates: ["count"], title: "No. de serie", filterable: { search: true, multi: true } },
-                    { field: "location", title: "Almacén", values: data, filterable: { search: true, multi: true } },
-                    { field: "fdr", title: "FDR", filterable: { search: true, multi: true } },
-                    { field: "cso", title: "CSO", filterable: { search: true, multi: true } },
-                    { field: "wbs", title: "WBS", filterable: { search: true, multi: true } },
-                    { field: "comment", title: "Comentario", filterable: { search: true, multi: false } },
-                    { field: "bill", title: "Factura", hidden: true }],
+                    { field: "description", title: "Producto", filterable: { search: true, multi:true } },
+                    { field: "category", title: "Tipo",filterable: { search: true, multi:true }},
+                    { field: "brand", title: "Marca",filterable: { search: true, multi:true } },
+                    { field: "code", title: "Código", filterable: { search: true, multi:true }, values: codes, editor: comboCodigos, aggregates: ["min", "max", "count"], groupHeaderTemplate: "Cantidad: #= count#"},
+                    { field: "barcode", aggregates: ["count"], title: "No. de serie", filterable: { search: true, multi:true } },
+               
+                    { field: "fdr", title: "FDR" },
+                    { field: "cso", title: "CSO" },
+                    { field: "wbs", title: "WBS" },
+                    { field: "comment", title: "Área" },
+                    { field: "bill", title: "Factura", hidden:true }],
                 editable: "popup"
             })
 

@@ -8,7 +8,9 @@
 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-    <html lang="es"></html>
+    <html lang="es">
+
+    </html>
 
     <title>Sistema de inventario</title>
 
@@ -164,10 +166,86 @@
 
 
                             <div class="ibox-content">
-                                    <button type="button" class="btn btn-default" onclick="openLotes()">
-                                            <span class="fa fa-print"></span> Ingreso por lotes</button>
-                                <button type="button" class="btn btn-default" onclick="print()">
+
+                                <div id="actions">
+                                        <button type="button" class="btn btn-default" onclick="openLotes()">
+                                                <span class="fa fa-print"></span> Ingreso por lotes</button>
+            
+                                            <button id="closeBill" class="btn btn-default">
+                                                <span class="fa fa-times-circle"></span> Cerrar ingreso</button>
+                                </div>
+                                
+
+                                <button id="btnPrint" type="button" class="btn btn-default" onclick="print()">
                                     <span class="fa fa-print"></span> Imprimir</button>
+                                <hr>
+                                
+                                <form id="formIngreso">
+                                        <h4>Ingreso individual</h4>
+                                    <input type="hidden" value="<%= bill %>" name="bill">
+                                    <input type="hidden" value="1" id="txtCantidad" name="cant">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <label for="txtCodigo">Código:</label>
+                                            <input required id="txtCodigo" validationMessage="Este campo es obligatorio" name="code" style="width: 100%;" />
+                                            <br>
+
+                                        </div>
+
+                                        <div class="col-md-3">
+
+                                            <label for="txtSerie">Número de serie (S/N sin serie):</label>
+                                            <input required id="txtSerie" validationMessage="Este campo es obligatorio" name="barcode" style="width: 100%;" />
+                                            <br>
+
+
+
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <label for="txtFdr">FDR:</label>
+                                            <input class="form-control" name="fdr" placeholder="Ingresar FDR" id="txtFdr" name="fdr" style="width: 100%;" />
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <label for="txtCodigo">CSO:</label>
+                                            <input id="txtCso" placeholder="Ingresar CSO" name="cso" class="form-control" style="width: 100%;" />
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <label for="txtCodigo">WBS:</label>
+                                            <input class="form-control" placeholder="Ingresar WBS" name="wbs" id="txtWbs" style="width: 100%;" />
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <label for="txtCodigo">Comentario:</label>
+                                            <input class="form-control" placeholder="Ingresar comentario" name="comment" id="txtWbs" style="width: 100%;" />
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <label for="txtSerie">Ubicación:</label>
+                                            <input required validationMessage="Este campo es obligatorio" id="txtUbicacion" name="location" name="barcode" style="width: 100%;"
+                                            />
+
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <label for="txtSerie">Acción:</label>
+                                            <br>
+
+                                            <button onclick="guardarProducto()" class="btn btn-primary" type="button">Guardar</button>
+
+                                        </div>
+
+
+                                    </div>
+                                </form>
+                                <br>
+
+
+
+
+
 
                                 <div class="row">
 
@@ -177,10 +255,6 @@
                                     </div> -->
 
                                     <div class="col-md-12">
-
-
-
-
 
                                         <div id="grid2" tabindex="0"></div>
 
@@ -349,7 +423,7 @@
 
                                 </td>
 
-                             <!--    <td>
+                                <!--    <td>
                                     <center>
                                         <p>
                                             REPRESENTANTE NOKIA
@@ -398,6 +472,7 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Ingreso por lotes</h4>
+
                 </div>
                 <div class="modal-body">
                     <a class="btn btn-link" href="../PLANTILLA.csv"> Descargar plantilla</a>
@@ -594,16 +669,18 @@
     <script>
         $(document).ready(function () {
 
-            $("#form").validate({
+            $("#formIngreso").validate({
                 rules: {
-                    barcode: {
+                    codigo_input: {
                         required: true,
-                        remote: "/product/searchbarcode/" + $("#barcode").val()
                     },
 
-                    fdr: {
+                    barcode_input: {
                         required: true,
-                        pattern: /[A-Za-z0-9\w]{4,20}/,
+                    },
+
+                    barcode: {
+                        required: true
                     }
 
 
@@ -620,22 +697,98 @@
         //     }
         // }))
         function guardarProducto() {
-            if ($("#form").valid()) {
-                var data = $("#form").serialize();
-                alert(JSON.stringify(data))
+            var validator = $("#formIngreso").kendoValidator().data("kendoValidator"),
+                status = $(".status");
+
+            if (validator.validate()) {
+
+                var barcode = getFormData($("#formIngreso")).barcode_input;
+
+                if (barcode == 's/n' || barcode == 'S/N') {
+                    var cantidad = prompt('Ingrese la cantidad', 1)
+
+                    if (parseInt(cantidad)) {
+                        if (cantidad > 0) {
+                            $('#txtCantidad').val(cantidad);
+                            var data = $('#formIngreso').serialize();
+
+                            $.post("/product/create2", data, function (data) {
+                                if (data == true) {
+                                    alert('Producto guardado');
+                                    $('#grid2').data('kendoGrid').dataSource.read();
+                                    $('#grid2').data('kendoGrid').refresh();
+                                    actualizarReporte();
+
+                                    $('#formIngreso')[0].reset();
+                                } else {
+                                    alert('Algo salió mal');
+                                }
+                            });
+
+                        } else {
+                            alert('Ingrese una cantidad mayor a cero')
+                        }
+                    } else {
+                        alert('Ingrese una cantidad correcta')
+                    }
+
+                } else {
+                    $('#txtCantidad').val(1);
+                    var data = $('#formIngreso').serialize();
+
+                    $.post("/product/create2", data, function (data) {
+                        if (data == true) {
+                            $('#formIngreso')[0].reset();
+                            $('#grid2').data('kendoGrid').dataSource.read();
+                            $('#grid2').data('kendoGrid').refresh();
+                            actualizarReporte();
+                            alert('Producto guardado');
+
+                        } else {
+                            alert('Algo salió mal');
+                        }
+                    });
+
+                }
+
+
+
+
+
+
+            } else {
+
             }
+
+        }
+
+        function getFormData($form) {
+            var unindexed_array = $form.serializeArray();
+            var indexed_array = {};
+
+            $.map(unindexed_array, function (n, i) {
+                indexed_array[n['name']] = n['value'];
+            });
+
+            return indexed_array;
         }
 
     </script>
 
 
     <script>
-        $.get("/bill/read/<%=bill%>", function (data2) {
-            console.log($('#Vouchers'))
 
-            w3.displayObject("Vouchers", { voucherss: data2 });
+        actualizarReporte()
 
-        });
+        function actualizarReporte() {
+            $.get("/bill/read/<%=bill%>", function (data2) {
+                console.log($('#Vouchers'))
+
+                w3.displayObject("Vouchers", { voucherss: data2 });
+
+            });
+        }
+
 
         function print() {
             $('#print').printArea();

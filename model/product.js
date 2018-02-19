@@ -32,6 +32,22 @@ module.exports = {
         });
     },
 
+    searchBarcodes: function (model, callback) {
+        connection.query('SELECT  * FROM product WHERE model=?;', model, function (error, results, fields) {
+            if (error) {
+                callback(error, null);
+            } else {
+
+                if (results.length == 0) {
+                    callback(false);
+                } else {
+                    callback(results);
+                }
+
+            }
+        });
+    },
+
     updateFromBill: function (data, cb) {
         connection.query({
             sql: 'UPDATE `product` SET `location`=?, `observation`=? WHERE (`id`=?)',
@@ -121,42 +137,55 @@ module.exports = {
 
     create2: function (data, callback) {
 
-        if (!data.fdr) {data.fdr=''}
-        if (!data.wbs) {data.wbs=''}
-        if (!data.cso) {data.cso=''}
-        if (!data.comment) {data.comment=''}
-        
+
+
+        if (!data.fdr) { data.fdr = '' }
+        if (!data.wbs) { data.wbs = '' }
+        if (!data.cso) { data.cso = '' }
+        if (!data.comment) { data.comment = '' }
+
+        console.log(data)
+
+
 
 
         connection.query({
             sql: 'SELECT * FROM product WHERE barcode = ? and model =?',
             timeout: 40000, // 40s
-            values: [data.barcode, data.code]
+            values: [data.barcode_input, data.code]
         }, function (error, results, fields) {
             if (error) {
 
                 callback('existió un error', null);
             } else {
+
                 if (results[0]) {
-                    connection.query({
-                        sql: 'INSERT INTO `billdetail` (`bill`, `product`, `fdr`, `cso`, `wbs`, `location`, `comment`) VALUES (?,?,?,?,?,?,?)',
-                        timeout: 40000, // 40s
-                        values: [data.bill, results[0].id, data.fdr.toUpperCase(), data.cso.toUpperCase(), data.wbs.toUpperCase(), data.location, data.comment.toUpperCase()]
-                    }, function (error, results, fields) {
-                        if (error) {
-                            console.log(error)
-                            callback('existió un error', null);
-                        } else {
-                            callback(null, 'Todo salió bien')
-                        }
-                    });
+                    for (let i = 0; i < data.cant; i++) {
+                        connection.query({
+                            sql: 'INSERT INTO `billdetail` (`bill`, `product`, `fdr`, `cso`, `wbs`, `location`, `comment`) VALUES (?,?,?,?,?,?,?)',
+                            timeout: 40000, // 40s
+                            values: [data.bill, results[0].id, data.fdr.toUpperCase(), data.cso.toUpperCase(), data.wbs.toUpperCase(), data.location, data.comment.toUpperCase()]
+                        }, function (error, results, fields) {
+                            if (error) {
+                                console.log(error)
+                                callback('existió un error', null);
+                            } else {
+                                if (i == data.cant - 1) {
+                                    callback(null, 'Todo salió bien')
+                                }
+
+                            }
+                        });
+
+                    }
+
 
                 } else {
 
                     connection.query({
                         sql: 'INSERT INTO `product` (`barcode`, `model`) VALUES (?,?)',
                         timeout: 40000, // 40s
-                        values: [data.barcode.toUpperCase(), data.code]
+                        values: [data.barcode_input.toUpperCase(), data.code]
                     }, function (error, results, fields) {
                         if (error) {
                             console.log(error)
@@ -165,20 +194,131 @@ module.exports = {
 
                             if (results.affectedRows == 1) {
 
-                                connection.query({
-                                    sql: 'INSERT INTO `billdetail` (`bill`, `product`, `fdr`, `cso`, `wbs`, `location`, `comment`) VALUES (?,?,?,?,?,?,?)',
-                                    timeout: 40000, // 40s
-                                    values: [data.bill, results.insertId, data.fdr.toUpperCase(), data.cso.toUpperCase(), data.wbs.toUpperCase(), data.location, data.comment.toUpperCase()]
-                                }, function (error, results, fields) {
-                                    if (error) {
-                                        console.log(error)
-                                        callback('existió un error', null);
-                                    } else {
+                                for (let i = 0; i < data.cant; i++) {
+                                    connection.query({
+                                        sql: 'INSERT INTO `billdetail` (`bill`, `product`, `fdr`, `cso`, `wbs`, `location`, `comment`) VALUES (?,?,?,?,?,?,?)',
+                                        timeout: 40000, // 40s
+                                        values: [data.bill, results.insertId, data.fdr.toUpperCase(), data.cso.toUpperCase(), data.wbs.toUpperCase(), data.location, data.comment.toUpperCase()]
+                                    }, function (error, results, fields) {
+                                        if (error) {
+                                            console.log(error)
+                                            callback('existió un error', null);
+                                        } else {
 
-                                        callback('todo salió bien', null);
+                                            if (i == data.cant - 1) {
+                                                callback(null, 'Todo salió bien')
+                                            }
 
-                                    }
-                                });
+                                        }
+                                    });
+
+
+                                }
+
+
+
+
+                            } else {
+                                callback('existió un error', null);
+                            }
+
+
+
+                        }
+                    });
+
+                }
+
+
+
+
+
+            }
+        });
+    },
+
+
+
+    createSalida: function (data, callback) {
+
+
+
+        if (!data.fdr) { data.fdr = '' }
+        if (!data.wbs) { data.wbs = '' }
+        if (!data.cso) { data.cso = '' }
+        if (!data.comment) { data.comment = '' }
+
+     
+
+
+
+
+        connection.query({
+            sql: 'SELECT * FROM product WHERE barcode = ? and model =?',
+            timeout: 40000, // 40s
+            values: [data.barcode_input, data.code]
+        }, function (error, results, fields) {
+            if (error) {
+
+                callback('existió un error', null);
+            } else {
+
+                if (results[0]) {
+                    for (let i = 0; i < data.cant; i++) {
+                        connection.query({
+                            sql: 'INSERT INTO `billdetail` (`bill`, `product`, `fdr`, `cso`, `wbs`, `comment`) VALUES (?,?,?,?,?,?)',
+                            timeout: 40000, // 40s
+                            values: [data.bill, results[0].id, data.fdr.toUpperCase(), data.cso.toUpperCase(), data.wbs.toUpperCase(), data.comment.toUpperCase()]
+                        }, function (error, results, fields) {
+                            if (error) {
+                                console.log(error)
+                                callback('existió un error', null);
+                            } else {
+                                if (i == data.cant - 1) {
+                                    callback(null, 'Todo salió bien')
+                                }
+
+                            }
+                        });
+
+                    }
+
+
+                } else {
+
+                    connection.query({
+                        sql: 'INSERT INTO `product` (`barcode`, `model`) VALUES (?,?)',
+                        timeout: 40000, // 40s
+                        values: [data.barcode_input.toUpperCase(), data.code]
+                    }, function (error, results, fields) {
+                        if (error) {
+                            console.log(error)
+                            callback('existió un error', null);
+                        } else {
+
+                            if (results.affectedRows == 1) {
+
+                                for (let i = 0; i < data.cant; i++) {
+                                    connection.query({
+                                        sql: 'INSERT INTO `billdetail` (`bill`, `product`, `fdr`, `cso`, `wbs`, `comment`) VALUES (?,?,?,?,?,?)',
+                                        timeout: 40000, // 40s
+                                        values: [data.bill, results.insertId, data.fdr.toUpperCase(), data.cso.toUpperCase(), data.wbs.toUpperCase(), data.comment.toUpperCase()]
+                                    }, function (error, results, fields) {
+                                        if (error) {
+                                            console.log(error)
+                                            callback('existió un error', null);
+                                        } else {
+
+                                            if (i == data.cant - 1) {
+                                                callback(null, 'Todo salió bien')
+                                            }
+
+                                        }
+                                    });
+
+
+                                }
+
 
 
 

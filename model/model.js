@@ -28,7 +28,7 @@ module.exports = {
     },
 
     readOne: function (code, callback) {
-        connection.query('SELECT  * FROM model where code=?', code, function (error, results, fields) {
+        connection.query('SELECT  * FROM model where id=?', code, function (error, results, fields) {
             if (error) {
                 callback('error en la consulta: ' + error, null);
             } else {

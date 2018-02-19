@@ -1,5 +1,8 @@
 
-$('#btnPrin').hide();
+
+$('#btnPrint').hide();
+$("#txtSerie").kendoComboBox();
+
 var validator = $("#formsave").kendoValidator().data("kendoValidator");
 var validatorModel = $("#formSaveModel").kendoValidator().data("kendoValidator");
 $("#save").on("click", function () {
@@ -7,6 +10,92 @@ $("#save").on("click", function () {
         save();
     }
 });
+
+dataSourceCombo = new kendo.data.DataSource({
+    transport: {
+        read: {
+            url: "/model/read",
+            dataType: "json"
+        }
+    }
+});
+
+$("#txtCodigo").kendoComboBox({
+    dataSource: dataSourceCombo,
+    filter: "contains",
+    dataTextField: "code",
+    dataValueField: "id",
+    placeholder: "Buscar código...",
+    minLength: 1,
+    change: onChange
+});
+
+function onChange(e) {
+
+
+
+    var code = this.value();
+
+    $('#code2').val(code);
+
+    var valor = code.replace("#", "%26");
+
+
+    $.ajax({
+        type: 'GET',
+        url: '/model/' + valor,
+        success: sendData
+    });
+
+
+
+};
+
+function sendData(data) {
+
+    if (data.length > 0) {
+
+       
+        $("#txtSerie").data("kendoComboBox").value("");
+
+        
+        dataSourceSeries = new kendo.data.DataSource({
+            transport: {
+                read: {
+                    url: "/product/read/" + data[0].id,
+                    dataType: "json"
+                }
+            }
+        });
+
+        $("#txtSerie").kendoComboBox({
+            dataSource: dataSourceSeries,
+            filter: "contains",
+            dataTextField: "barcode",
+            dataValueField: "id",
+            placeholder: "Buscar serie...",
+            minLength: 1,
+        });
+
+
+
+
+        $('#modelProduct').val(data[0].id);
+        $('#nameProduct').data('kendoComboBox').value(data[0].code);
+    } else {
+        var r = confirm("El producto con el código " + $('#code2').val() + " no existe \n ¿Desea agregarlo?");
+        if (r == true) {
+            $('#myModal').modal({
+                backdrop: 'static',
+                keyboard: false
+            })
+            $('#codeModal').val($('#code2').val());
+        } else {
+
+        }
+    }
+
+}
 
 
 dataSourceCombo = new kendo.data.DataSource({
@@ -49,11 +138,11 @@ $("#closeBill").on("click", function () {
 
 
     if (userBill == userSession) {
-        const confirmation = confirm('Al cerrar el ingreso ya no se podrá agregar ni eliminar productos a esta orden \n ¿Desea continuar?');
+        const confirmation = confirm('Al cerrar la saida ya no se podrá agregar ni eliminar productos a esta orden \n ¿Desea continuar?');
         if (confirmation) {
             $.post("/bill/close", { code: bill }, function (data) {
                 if (data.affectedRows > 0) {
-                    location.href = "/bill/" + bill;
+                    location.href = "/voucher/" + bill;
 
                 } else {
 
@@ -97,24 +186,7 @@ $('#code2').keypress(function (e) {
     }
 });
 
-function sendData(data) {
-    if (data.length > 0) {
-        $('#modelProduct').val(data[0].id);
-        $('#nameProduct').data('kendoComboBox').value(data[0].code);
-    } else {
-        var r = confirm("El producto con el código " + $('#code2').val() + " no existe \n ¿Desea agregarlo?");
-        if (r == true) {
-            $('#myModal').modal({
-                backdrop: 'static',
-                keyboard: false
-            })
-            $('#codeModal').val($('#code2').val());
-        } else {
 
-        }
-    }
-
-}
 
 function sendData2(data) {
     if (data.length > 0) {
@@ -438,8 +510,8 @@ $(document).ready(function () {
                 resizable: true,
 
                 pageable: { refresh: true, pageSizes: true, },
-                toolbar: ['create', 'excel'],
-                toolbar: ['create', 'excel'],
+                toolbar: ['excel'],
+                toolbar: ['excel'],
 
                 pageable: { refresh: true, pageSizes: true, },
                 pdf: {

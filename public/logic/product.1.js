@@ -1,5 +1,6 @@
 
-$('#btnPrin').hide();
+$('#btnPrint').hide();
+
 var validator = $("#formsave").kendoValidator().data("kendoValidator");
 var validatorModel = $("#formSaveModel").kendoValidator().data("kendoValidator");
 $("#save").on("click", function () {
@@ -121,7 +122,34 @@ $('#code2').keypress(function (e) {
 });
 
 function sendData(data) {
+
     if (data.length > 0) {
+
+       
+        $("#txtSerie").data("kendoComboBox").value("");
+
+        
+        dataSourceSeries = new kendo.data.DataSource({
+            transport: {
+                read: {
+                    url: "/product/read/" + data[0].id,
+                    dataType: "json"
+                }
+            }
+        });
+
+        $("#txtSerie").kendoComboBox({
+            dataSource: dataSourceSeries,
+            filter: "contains",
+            dataTextField: "barcode",
+            dataValueField: "id",
+            placeholder: "Buscar serie...",
+            minLength: 1,
+        });
+
+
+
+
         $('#modelProduct').val(data[0].id);
         $('#nameProduct').data('kendoComboBox').value(data[0].code);
     } else {
@@ -269,6 +297,16 @@ $(document).ready(function () {
         }
     });
 
+    $("#txtCodigo").kendoComboBox({
+        dataSource: dataSourceCombo,
+        filter: "contains",
+        dataTextField: "code",
+        dataValueField: "id",
+        placeholder: "Buscar código...",
+        minLength: 1,
+        change: onChange
+    });
+
     dataSourceLocation = new kendo.data.DataSource({
         transport: {
             read: {
@@ -277,6 +315,20 @@ $(document).ready(function () {
             }
         }
     });
+
+    $("#txtUbicacion").kendoComboBox({
+        dataSource: dataSourceLocation,
+        filter: "contains",
+        dataTextField: "name",
+        dataValueField: "id",
+        placeholder: "Buscar ubicación...",
+        minLength: 1,
+
+    });
+
+    $("#txtSerie").kendoComboBox();
+
+   
 
     dataSourceBrand = new kendo.data.DataSource({
         transport: {
@@ -502,7 +554,7 @@ $(document).ready(function () {
                     { field: "Producto", hidden: true, aggregates: ["min", "max", "count"], groupHeaderTemplate: "Cantidad: #= count#" },
                     { field: "category", title: "Tipo" },
                     { field: "brand", title: "Marca" },
-                    { field: "code", title: "Código", filterable: { search: true }, values: codes, editor: comboCodigos,  aggregates: ["min", "max", "count"], groupHeaderTemplate: "Cantidad: #= count#" },
+                    { field: "code", title: "Código", filterable: { search: true }, values: codes, editor: comboCodigos, aggregates: ["min", "max", "count"], groupHeaderTemplate: "Cantidad: #= count#" },
                     { field: "barcode", aggregates: ["count"], title: "No. de serie", filterable: { search: true, multi: true } },
                     { field: "location", title: "Almacén", values: data, filterable: { search: true, multi: true } },
                     { field: "fdr", title: "FDR", filterable: { search: true, multi: true } },

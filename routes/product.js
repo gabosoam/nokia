@@ -32,6 +32,14 @@ router.get('/searchBarcode/', function (req, res, next) {
   });
 })
 
+router.get('/read/:id', function (req, res, next) {
+
+
+  product.searchBarcodes(req.params.id,function (data) {
+    res.send(data);
+  });
+})
+
 router.get('/readprice', function (req, res, next) {
  
   product.readprice(function (error, data) {
@@ -78,6 +86,14 @@ router.post('/updateprice',isLoggedInAdmin, function (req, res, next) {
 router.post('/create2', function(req, res, next) {
 
   product.create2(req.body, function (error, result) {
+    res.send(true);  
+  })
+  
+})
+
+router.post('/createSalida', function(req, res, next) {
+
+  product.createSalida(req.body, function (error, result) {
     res.send(true);  
   })
   
