@@ -160,24 +160,30 @@ module.exports = {
             } else {
 
                 if (results[0]) {
+
+                    var sql = 'INSERT INTO `billdetail` (`bill`, `product`, `fdr`, `cso`, `wbs`, `location`, `comment`) VALUES';
+
                     for (var i = 0; i < data.cant; i++) {
-                        connection.query({
-                            sql: 'INSERT INTO `billdetail` (`bill`, `product`, `fdr`, `cso`, `wbs`, `location`, `comment`) VALUES (?,?,?,?,?,?,?)',
-                            timeout: 40000, // 40s
-                            values: [data.bill, results[0].id, data.fdr.toUpperCase(), data.cso.toUpperCase(), data.wbs.toUpperCase(), data.location, data.comment.toUpperCase()]
-                        }, function (error, results, fields) {
-                            if (error) {
-                                console.log(error)
-                                callback('existió un error', null);
-                            } else {
-                                if (i == data.cant - 1) {
-                                    callback(null, 'Todo salió bien')
-                                }
-
-                            }
-                        });
-
+                        sql = sql + " ('" + data.bill + "','" + results[0].id + "','" + data.fdr.toUpperCase() + "','" + data.cso.toUpperCase() + "','" + data.wbs.toUpperCase() + "','" + data.location + "','" + data.comment.toUpperCase() + "'),"
                     }
+
+
+
+                    connection.query({
+                        sql: sql.substr(0, (sql.length - 1)),
+                        timeout: 40000, // 40s
+                        values: [data.bill, results[0].id, data.fdr.toUpperCase(), data.cso.toUpperCase(), data.wbs.toUpperCase(), data.location, data.comment.toUpperCase()]
+                    }, function (error, results, fields) {
+                        if (error) {
+                            console.log(error)
+                            callback('existió un error', null);
+                        } else {
+                            callback(null, 'Todo salió bien')
+
+                        }
+                    });
+
+
 
 
                 } else {
@@ -194,11 +200,16 @@ module.exports = {
 
                             if (results.affectedRows == 1) {
 
+                                var sql = 'INSERT INTO `billdetail` (`bill`, `product`, `fdr`, `cso`, `wbs`, `location`, `comment`) VALUES';
+
                                 for (var i = 0; i < data.cant; i++) {
+                                    sql = sql + " ('" + data.bill + "','" + results.insertId + "','" + data.fdr.toUpperCase() + "','" + data.cso.toUpperCase() + "','" + data.wbs.toUpperCase() + "','" + data.location + "','" + data.comment.toUpperCase() + "'),"
+                                }
+
+                                for (let i = 0; i < data.cant; i++) {
                                     connection.query({
-                                        sql: 'INSERT INTO `billdetail` (`bill`, `product`, `fdr`, `cso`, `wbs`, `location`, `comment`) VALUES (?,?,?,?,?,?,?)',
+                                        sql: sql.substr(0, (sql.length - 1)),
                                         timeout: 40000, // 40s
-                                        values: [data.bill, results.insertId, data.fdr.toUpperCase(), data.cso.toUpperCase(), data.wbs.toUpperCase(), data.location, data.comment.toUpperCase()]
                                     }, function (error, results, fields) {
                                         if (error) {
                                             console.log(error)
@@ -248,7 +259,7 @@ module.exports = {
         if (!data.cso) { data.cso = '' }
         if (!data.comment) { data.comment = '' }
 
-     
+
 
 
 
@@ -264,24 +275,27 @@ module.exports = {
             } else {
 
                 if (results[0]) {
+
+                    var sql = 'INSERT INTO `billdetail` (`bill`, `product`, `fdr`, `cso`, `wbs`, `comment`) VALUES';
+
                     for (var i = 0; i < data.cant; i++) {
-                        connection.query({
-                            sql: 'INSERT INTO `billdetail` (`bill`, `product`, `fdr`, `cso`, `wbs`, `comment`) VALUES (?,?,?,?,?,?)',
-                            timeout: 40000, // 40s
-                            values: [data.bill, results[0].id, data.fdr.toUpperCase(), data.cso.toUpperCase(), data.wbs.toUpperCase(), data.comment.toUpperCase()]
-                        }, function (error, results, fields) {
-                            if (error) {
-                                console.log(error)
-                                callback('existió un error', null);
-                            } else {
-                                if (i == data.cant - 1) {
-                                    callback(null, 'Todo salió bien')
-                                }
-
-                            }
-                        });
-
+                        sql = sql + " ('" + data.bill + "','" + results[0].id + "','" + data.fdr.toUpperCase() + "','" + data.cso.toUpperCase() + "','" + data.wbs.toUpperCase() + "','" + data.comment.toUpperCase() + "'),"
                     }
+
+                    connection.query({
+                        sql: sql.substr(0, (sql.length - 1)),
+                        timeout: 40000, // 40s
+                    }, function (error, results, fields) {
+                        if (error) {
+                            console.log(error)
+                            callback('existió un error', null);
+                        } else {
+                            callback(null, 'Todo salió bien')
+
+                        }
+                    });
+
+
 
 
                 } else {
@@ -298,26 +312,30 @@ module.exports = {
 
                             if (results.affectedRows == 1) {
 
+                                var sql = 'INSERT INTO `billdetail` (`bill`, `product`, `fdr`, `cso`, `wbs`, `comment`) VALUES';
+
                                 for (var i = 0; i < data.cant; i++) {
-                                    connection.query({
-                                        sql: 'INSERT INTO `billdetail` (`bill`, `product`, `fdr`, `cso`, `wbs`, `comment`) VALUES (?,?,?,?,?,?)',
-                                        timeout: 40000, // 40s
-                                        values: [data.bill, results.insertId, data.fdr.toUpperCase(), data.cso.toUpperCase(), data.wbs.toUpperCase(), data.comment.toUpperCase()]
-                                    }, function (error, results, fields) {
-                                        if (error) {
-                                            console.log(error)
-                                            callback('existió un error', null);
-                                        } else {
-
-                                            if (i == data.cant - 1) {
-                                                callback(null, 'Todo salió bien')
-                                            }
-
-                                        }
-                                    });
-
-
+                                    sql = sql + " ('" + data.bill + "','" + results.insertId + "','" + data.fdr.toUpperCase() + "','" + data.cso.toUpperCase() + "','" + data.wbs.toUpperCase() + "','" + data.comment.toUpperCase() + "'),"
                                 }
+
+
+                                connection.query({
+                                    sql: sql.substr(0, (sql.length - 1)),
+                                    timeout: 40000, // 40s
+
+                                }, function (error, results, fields) {
+                                    if (error) {
+                                        console.log(error)
+                                        callback('existió un error', null);
+                                    } else {
+
+                                        callback(null, 'Todo salió bien')
+
+                                    }
+                                });
+
+
+
 
 
 

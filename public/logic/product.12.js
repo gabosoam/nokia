@@ -81,7 +81,7 @@ function sendData(data) {
 
 
         $('#modelProduct').val(data[0].id);
-        $('#nameProduct').data('kendoComboBox').value(data[0].code);
+    
     } else {
         var r = confirm("El producto con el código " + $('#code2').val() + " no existe \n ¿Desea agregarlo?");
         if (r == true) {
