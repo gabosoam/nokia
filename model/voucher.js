@@ -8,7 +8,7 @@ var connection = require('../config/connection.js');
 module.exports = {
 
     read: function (callback) {
-        connection.query('SELECT  * FROM bill WHERE type= 2 ORDER BY id DESC;', function (error, results, fields) {
+        connection.query('SELECT  * FROM v_allbill WHERE type= 2 ORDER BY id DESC;', function (error, results, fields) {
             if (error) {
 
                 callback('error en la consulta: ' + error, null);
@@ -75,7 +75,7 @@ module.exports = {
 
         connection.query('INSERT INTO bill (client, date, reference, document, user, type) VALUES (?,?,?,?,?,?)', [datos.client, new Date(datos.date).toLocaleDateString(), datos.reference.toUpperCase(), datos.document, datos.user,2], function (error, results, fields) {
             if (error) {
-             
+             console.log(error)
                 callback('error en la consulta: ' + error, null);
             } else {
                 callback(null, results);

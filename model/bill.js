@@ -8,7 +8,7 @@ var connection = require('../config/connection.js');
 module.exports = {
 
     read: function (callback) {
-        connection.query('SELECT  * FROM bill WHERE type= 1 ORDER BY id DESC;', function (error, results, fields) {
+        connection.query('SELECT  * FROM v_allbill WHERE type= 1 ORDER BY id DESC;', function (error, results, fields) {
             if (error) {
 
                 callback('error en la consulta: ' + error, null);

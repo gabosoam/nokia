@@ -59,6 +59,7 @@ $(document).ready(function () {
                 id: "id",
                 fields: {
                     id: {editable:false},
+                    codigo: {editable:false},
                     client: { validation: { required: true, }, type: 'number' },
                     date: { validation: { type: 'date' },type:'date', },
                     reference: { type: 'string' },
@@ -81,7 +82,8 @@ $(document).ready(function () {
                 pageable: { refresh: true, pageSizes: true, },
                 toolbar: ['create', 'excel'],
                 columns: [
-                    {field: 'id', title: 'Código', filterable: { search: true, multi:true } },
+                    {field: 'id', hidden:true, title: 'Código', filterable: { search: true, multi:true } },
+                    {field: 'codigo', title: 'Código', filterable: { search: true, multi:true } },
                     { field: "client", values: clients, editor: userNameComboBoxEditor, title: "Cliente", filterable: { search: true, multi:true } },
                     { field: "date", title: "Fecha",  format: "{0:dd/MM/yyyy}" },
                     { field: "reference", title: "Referencia", filterable: { search: true,multi:true } },

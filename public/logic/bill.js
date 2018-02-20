@@ -68,6 +68,7 @@ $(document).ready(function () {
                 id: "id",
                 fields: {
                     id: { editable: false },
+                    codigo: { editable: false },
                     provider: { validation: { required: true, size: 13 }, type: 'string' },
                     document: { validation: { required: true, size: 13 }, type: 'string' },
                     date: { validation: { required: true, }, type: 'date' },
@@ -118,7 +119,8 @@ $(document).ready(function () {
                         });
                 },
                 columns: [
-                    { field: "id", title: "Código", filterable: { search: true, multi: true } },
+                    { field: "id", hidden:true, title: "Código", filterable: { search: true, multi: true } },
+                    { field: "codigo", title: "Código", filterable: { search: true, multi: true } },
                     { field: "provider", values: providers, editor: userNameComboBoxEditor, title: "Proveedor", filterable: { multi: true, search: true } },
                     { field: "date", title: "Fecha", filterable: { search: true, search: true }, format: "{0:dd/MM/yyyy}" },
                     { field: "document", values: types, title: "Tipo documento", filterable: { multi: true, search: true, search: true } },
