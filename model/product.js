@@ -250,17 +250,10 @@ module.exports = {
 
     createSalida: function (data, callback) {
 
-
-
         if (!data.fdr) { data.fdr = '' }
         if (!data.wbs) { data.wbs = '' }
         if (!data.cso) { data.cso = '' }
         if (!data.comment) { data.comment = '' }
-
-
-
-
-
 
         connection.query({
             sql: 'SELECT * FROM product WHERE barcode = ? and model =?',
@@ -293,11 +286,7 @@ module.exports = {
                         }
                     });
 
-
-
-
                 } else {
-
                     connection.query({
                         sql: 'INSERT INTO `product` (`barcode`, `model`) VALUES (?,?)',
                         timeout: 40000, // 40s
@@ -316,7 +305,6 @@ module.exports = {
                                     sql = sql + " ('" + data.bill + "','" + results.insertId + "','" + data.fdr.toUpperCase() + "','" + data.cso.toUpperCase() + "','" + data.wbs.toUpperCase() + "','" + data.comment.toUpperCase() + "'),"
                                 }
 
-
                                 connection.query({
                                     sql: sql.substr(0, (sql.length - 1)),
                                     timeout: 40000, // 40s
@@ -332,17 +320,9 @@ module.exports = {
                                     }
                                 });
 
-
-
-
-
-
-
                             } else {
                                 callback('existió un error', null);
                             }
-
-
 
                         }
                     });
