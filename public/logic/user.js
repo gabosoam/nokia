@@ -68,7 +68,7 @@ $(document).ready(function () {
             { field: "email", title: "Correo electronico", filterable: {search: true, multi:true } },
             {field: "status", title:"Estado", values:states,filterable: { search: true, multi:true }},
             { field: "rol", values: roles, title: "Rol", filterable: { multi: true, search: true, search: true } },
-            { command: ["edit", "destroy", { text: "Rest. contraseña", click: showDetails, iconClass: 'icon icon-chart-column' }], title: "Acciones" }],
+            { command: ["edit", "destroy", { text: "Reest contraseñas", click: showDetails, iconClass: 'icon icon-chart-column' }], title: "Acciones" }],
         editable: "popup"
     })
 
