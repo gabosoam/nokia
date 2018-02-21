@@ -51,8 +51,9 @@ module.exports = {
     },
 
     updateAdmin: function (datos, callback) {
-        connection.query('UPDATE bill SET `client`=?, `date`=?, `reference`=?, document=?, state=? WHERE (`id`=?) LIMIT 1', [datos.client, new Date(datos.date).toLocaleDateString(), datos.reference.toUpperCase(), datos.document,datos.state, datos.id], function (error, results, fields) {//
+        connection.query('UPDATE bill SET  state=? WHERE (`id`=?) LIMIT 1', [datos.state, datos.id], function (error, results, fields) {//
             if (error) {
+                console.log(error)
                 callback('error en la consulta: ' + error, null);
             } else {
                 callback(null, results);

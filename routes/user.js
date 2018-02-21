@@ -68,6 +68,31 @@ router.post('/update', isLoggedInAdmin, function (req, res, next) {
     }
   })
 })
+/* router.post('/updatepassword', isLoggedInAdmin, function (req, res, next) { */
+router.post('/updatepassword', function (req, res, next) {
+  var data = req.body;
+  console.log(data)
+  user.updatepassword(data, function (error, datos) {
+    if (error) {
+      console.log(error)
+      res.sendStatus(500);
+    } else {    
+        var changes = {
+          table: 'USER',
+          values: JSON.stringify(data),
+          user: req.session.adminDatos.name,
+          ip: req.ip,
+          type: 'UPDATE PASSWORD'
+        };
+  
+        event.create(changes, function (result) {
+   
+        });
+        res.send(true);
+    
+    }
+  })
+})
 
 router.post('/editPassword', function (req, res, next) {
 

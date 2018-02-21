@@ -46,6 +46,7 @@ $(document).ready(function () {
                 id: "id",
                 fields: {
                     id: {editable: false},
+                    codigo: {editable: false},
                     provider: { validation: { required: true, size: 13 }, type: 'string' },
                     type: { validation: { required: true, size: 13 }, type: 'string' },
                     date: { validation: { required: true, }, type: 'date' },
@@ -96,15 +97,16 @@ $(document).ready(function () {
                         });
                 },
                 columns: [
-                    {field:'id', title: 'ING', filterable: { multi: true,search: true } },
+                    {field:'id', title: 'ING',hidden:true, filterable: { multi: true,search: true } },
+                    {field:'codigo', title: 'Número', filterable: { multi: true,search: true } },
                     { field: "provider", values: providers, title: "Proveedor",  filterable: { multi: true,search: true } },
                     { field: "date", title: "Fecha", filterable: { search: true, search: true }, format: "{0:dd/MM/yyyy}" },
                     { field: "type", values: types, title: "Tipo documento", filterable: { multi: true,search: true } },
                     { field: "reference", title: "Referencia", filterable: { multi: true, search: true } },
                     { field: "user", values: users, title: "Creado por", filterable: { multi: true,search: true } },
                     { field: "state", values: states, title: "Estado",filterable: { multi: true,search: true } },
-
-                    { command: ["edit", { text: "Ver detalles", click: showDetails, iconClass: 'icon icon-chart-column' } ], title: "Acciones" }],
+                    { command: ["edit"], title: "Acciones" }],
+                  //  { command: ["", { text: "Ver detalles", click: showDetails, iconClass: 'icon icon-chart-column' } ], title: "Acciones" }],
                 editable: "popup"
             });
 

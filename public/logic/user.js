@@ -53,6 +53,7 @@ $(document).ready(function () {
     },
     );
 
+   
     $("#grid").kendoGrid({
         dataSource: dataSource,
         height: 475,
@@ -67,10 +68,27 @@ $(document).ready(function () {
             { field: "email", title: "Correo electronico", filterable: {search: true, multi:true } },
             {field: "status", title:"Estado", values:states,filterable: { search: true, multi:true }},
             { field: "rol", values: roles, title: "Rol", filterable: { multi: true, search: true, search: true } },
-            { command: ["edit","destroy"], title: "Acciones" }],
+            { command: ["edit", "destroy", { text: "Rest. contraseña", click: showDetails, iconClass: 'icon icon-chart-column' }], title: "Acciones" }],
         editable: "popup"
-    });
+    })
+
+    function showDetails(e) {
+        e.preventDefault();
+        var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+        var confirmacion = confirm('¿Desea reestablecer la contraseña del usuario '+ dataItem.username+'?')
+
+        if (confirmacion) {
+            $.post( "/user/updatepassword",{id:dataItem.id}, function( data ) {
+                if (data==true) {
+                    alert('La contraseña del usuario '+dataItem.username+' ha sido reestablecida correctamente')
+                } else {
+                    
+                }
+              });
+        }
+    }
+
+    
+   
+    
 });
-function redirect(location) {
-    window.location.href = location;
-}

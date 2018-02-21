@@ -6,6 +6,13 @@ var types = [{
     "text": "ACTA"
 }];
 
+var states = [{
+    "value": 0,
+    "text": "ABIERTA"
+}, {
+    "value": 1,
+    "text": "CERRADA"
+}];
 
 
 kendo.culture("es-ES");
@@ -63,7 +70,8 @@ $(document).ready(function () {
                     client: { validation: { required: true, }, type: 'number' },
                     date: { validation: { type: 'date' },type:'date', },
                     reference: { type: 'string' },
-                    user: { type: 'string', defaultValue: user, editable: false, visible: false }
+                    user: { type: 'string', defaultValue: user, editable: false, visible: false },
+                    state: { type: 'string', editable: false }
                 }
             }
         }
@@ -88,6 +96,7 @@ $(document).ready(function () {
                     { field: "date", title: "Fecha",  format: "{0:dd/MM/yyyy}" },
                     { field: "reference", title: "Referencia", filterable: { search: true,multi:true } },
                     { field: "user", values: users, title: "Creado por", filterable: { search: true, multi:true } },
+                    { field: "state", values: states, title: "Estado",filterable: { multi: true,search: true } },
                     { command: ["edit", "destroy", { text: "Ver detalles", click: showDetails, iconClass: 'icon icon-chart-column' }], title: "Acciones" }],
                 editable: "popup"
             });

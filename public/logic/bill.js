@@ -14,6 +14,13 @@ var types = [{
     "text": "OTRO"
 }];
 
+var states = [{
+    "value": 0,
+    "text": "ABIERTA"
+}, {
+    "value": 1,
+    "text": "CERRADA"
+}];
 
 
 
@@ -74,6 +81,7 @@ $(document).ready(function () {
                     date: { validation: { required: true, }, type: 'date' },
                     reference: { validation: { required: true, }, type: 'string' },
                     user: { type: 'string', defaultValue: user, editable: false, visible: false },
+                    state: { type: 'string', editable: false }
                 }
             }
         }
@@ -126,6 +134,7 @@ $(document).ready(function () {
                     { field: "document", values: types, title: "Tipo documento", filterable: { multi: true, search: true, search: true } },
                     { field: "reference", title: "Referencia", filterable: { multi: true, search: true } },
                     { field: "user", values: users, title: "Creado por", filterable: { multi: true, search: true } },
+                    { field: "state", values: states, title: "Estado",filterable: { multi: true,search: true } },
 
                     { command: ["edit", "destroy", { text: "Ver detalles", click: showDetails, iconClass: 'icon icon-chart-column' }], title: "Acciones" }],
                 editable: "popup"

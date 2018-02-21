@@ -39,6 +39,7 @@ $(document).ready(function () {
                 id: "id",
                 fields: {
                     id: {editable: false},
+                    codigo: {editable: false},
                     client: { validation: { required: true, }, type: 'number', editable:false },
                     date: { validation: { type: 'date' },type:'date', editable: false },
                     reference: { type: 'string', editable: false },
@@ -62,7 +63,8 @@ $(document).ready(function () {
                 pageable: { refresh: true, pageSizes: true, },
                 toolbar: ['excel'],
                 columns: [
-                    {field: 'id', title: 'FOPN',filterable: { multi: true,search: true }},
+                    {field: 'id', hidden:true, title: 'FOPN',filterable: { multi: true,search: true }},
+                    {field: 'codigo', title: 'Número',filterable: { multi: true,search: true }},
                     { field: "client", values: clients, title: "Cliente",filterable: { multi: true,search: true } },
                     { field: "date", title: "Fecha",  format: "{0:dd/MM/yyyy}" },
                     { field: "reference", title: "Referencia", filterable: { multi: true,search: true } },

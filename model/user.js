@@ -44,6 +44,49 @@ module.exports = {
         });
     },
 
+    updatepassword: function (datos, callback) {
+     
+        connection.query({
+            sql: 'SELECT * FROM user WHERE id=?',
+            values: [datos.id]
+        }, function (error, results, fields) {
+            if (error) {
+           
+                callback('error en la consulta: ' + error, null);
+            } else {
+         
+                if (!results[0]) {
+             
+                    callback('error en la consulta: ', null);
+                } else {
+
+                    connection.query("UPDATE user SET password='"+generateHash(results[0].username)+"' WHERE id="+datos.id, function(error, results, fields) {
+                        if (error) {
+                            console.log(error)
+                            callback('error en la consulta: ' + error, null);
+                        } else {
+                            if (!results.affectedRows > 2) {
+                        
+                                callback('error en la consulta: ', null);
+                            } else {
+                                callback(null, 'Contraseña modificada con éxito');
+                            }
+                        }
+                    })
+
+
+                  
+
+    
+
+                }
+
+            }
+        })
+
+
+    },
+
     updatePass: function (datos, callback) {
         connection.query('SELECT * from user WHERE `user`.id= ? ', [datos.user], function (e, r, f) {
             if (r[0]) {
