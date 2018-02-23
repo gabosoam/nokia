@@ -4,7 +4,7 @@ var connection = require('../config/connection.js');
 module.exports = {
 
     read: function (callback) {
-        connection.query('SELECT  * FROM  v_product', function (error, results, fields) {
+        connection.query('SELECT  * FROM  v_product3', function (error, results, fields) {
             if (error) {
 
                 callback('error en la consulta: ' + error, null);
