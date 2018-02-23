@@ -66,10 +66,10 @@ module.exports = {
     readBill: function (bill, callback) {
         connection.query('Select * from v_billdetail where bill=?', bill, function (error, results, fields) {
             if (error) {
-
+             
                 callback('error en la consulta: ' + error, null);
             } else {
-
+             
                 callback(null, results);
 
             }
@@ -139,12 +139,16 @@ module.exports = {
 
 
 
+
         if (!data.fdr) { data.fdr = '' }
         if (!data.wbs) { data.wbs = '' }
         if (!data.cso) { data.cso = '' }
         if (!data.comment) { data.comment = '' }
+        if (!data.area) { data.area = '' }
+        if (!data.contrato) { data.contrato = '' }
 
         console.log(data)
+
 
 
 
@@ -160,11 +164,13 @@ module.exports = {
             } else {
 
                 if (results[0]) {
+                    console.log('iNGRESO')
+                    console.log(results[0])
 
-                    var sql = 'INSERT INTO `billdetail` (`bill`, `product`, `fdr`, `cso`, `wbs`, `location`, `comment`) VALUES';
+                    var sql = 'INSERT INTO `billdetail` (`bill`, `product`, `fdr`, `cso`, `wbs`, `location`, `comment`, area, contrato) VALUES';
 
                     for (var i = 0; i < data.cant; i++) {
-                        sql = sql + " ('" + data.bill + "','" + results[0].id + "','" + data.fdr.toUpperCase() + "','" + data.cso.toUpperCase() + "','" + data.wbs.toUpperCase() + "','" + data.location + "','" + data.comment.toUpperCase() + "'),"
+                        sql = sql + " ('" + data.bill + "','" + results[0].id + "','" + data.fdr.toUpperCase() + "','" + data.cso.toUpperCase() + "','" + data.wbs.toUpperCase() + "','" + data.location + "','" + data.comment.toUpperCase() + "', '" + data.area.toUpperCase() + "', '" + data.contrato.toUpperCase() + "'),"
                     }
 
 
@@ -172,7 +178,7 @@ module.exports = {
                     connection.query({
                         sql: sql.substr(0, (sql.length - 1)),
                         timeout: 40000, // 40s
-                        values: [data.bill, results[0].id, data.fdr.toUpperCase(), data.cso.toUpperCase(), data.wbs.toUpperCase(), data.location, data.comment.toUpperCase()]
+                        values: [data.bill, results[0].id, data.fdr.toUpperCase(), data.cso.toUpperCase(), data.wbs.toUpperCase(), data.location, data.comment.toUpperCase(), data.area.toUpperCase(), data.contrato.toUpperCase()]
                     }, function (error, results, fields) {
                         if (error) {
                             console.log(error)
@@ -200,29 +206,29 @@ module.exports = {
 
                             if (results.affectedRows == 1) {
 
-                                var sql = 'INSERT INTO `billdetail` (`bill`, `product`, `fdr`, `cso`, `wbs`, `location`, `comment`) VALUES';
+                                var sql = 'INSERT INTO `billdetail` (`bill`, `product`, `fdr`, `cso`, `wbs`, `location`, `comment`, area, contrato) VALUES';
 
                                 for (var i = 0; i < data.cant; i++) {
-                                    sql = sql + " ('" + data.bill + "','" + results.insertId + "','" + data.fdr.toUpperCase() + "','" + data.cso.toUpperCase() + "','" + data.wbs.toUpperCase() + "','" + data.location + "','" + data.comment.toUpperCase() + "'),"
+                                    sql = sql + " ('" + data.bill + "','" + results.insertId + "','" + data.fdr.toUpperCase() + "','" + data.cso.toUpperCase() + "','" + data.wbs.toUpperCase() + "','" + data.location + "','" + data.comment.toUpperCase() + "', '" + data.area.toUpperCase() + "', '" + data.contrato.toUpperCase() + "'),"
                                 }
 
-                        
-                                    connection.query({
-                                        sql: sql.substr(0, (sql.length - 1)),
-                                        timeout: 40000, // 40s
-                                    }, function (error, results, fields) {
-                                        if (error) {
-                                            console.log(error)
-                                            callback('existió un error', null);
-                                        } else {
 
-                                            callback(null, 'Todo salió bien')
+                                connection.query({
+                                    sql: sql.substr(0, (sql.length - 1)),
+                                    timeout: 40000, // 40s
+                                }, function (error, results, fields) {
+                                    if (error) {
+                                        console.log(error)
+                                        callback('existió un error', null);
+                                    } else {
 
-                                        }
-                                    });
+                                        callback(null, 'Todo salió bien')
+
+                                    }
+                                });
 
 
-                          
+
 
 
 
@@ -249,89 +255,21 @@ module.exports = {
 
 
     createSalida: function (data, callback) {
+        var sql = 'INSERT INTO `billdetail` (`bill`, `product`, `fdr`, `cso`, `wbs`, `comment`, area, contrato) VALUES';
 
-        if (!data.fdr) { data.fdr = '' }
-        if (!data.wbs) { data.wbs = '' }
-        if (!data.cso) { data.cso = '' }
-        if (!data.comment) { data.comment = '' }
+        for (var i = 0; i < data.cant; i++) {
+            sql = sql + " ('" + data.bill + "','" + data.barcode + "','" + data.fdr.toUpperCase() + "','" + data.cso.toUpperCase() + "','" + data.wbs.toUpperCase() + "','" + data.comment.toUpperCase() + "','" + data.area.toUpperCase() + "','" + data.contrato.toUpperCase() + "'),"
+        }
 
         connection.query({
-            sql: 'SELECT * FROM product WHERE barcode = ? and model =?',
+            sql: sql.substr(0, (sql.length - 1)),
             timeout: 40000, // 40s
-            values: [data.barcode_input, data.code]
         }, function (error, results, fields) {
             if (error) {
-
+                console.log(error)
                 callback('existió un error', null);
             } else {
-
-                if (results[0]) {
-
-                    var sql = 'INSERT INTO `billdetail` (`bill`, `product`, `fdr`, `cso`, `wbs`, `comment`) VALUES';
-
-                    for (var i = 0; i < data.cant; i++) {
-                        sql = sql + " ('" + data.bill + "','" + results[0].id + "','" + data.fdr.toUpperCase() + "','" + data.cso.toUpperCase() + "','" + data.wbs.toUpperCase() + "','" + data.comment.toUpperCase() + "'),"
-                    }
-
-                    connection.query({
-                        sql: sql.substr(0, (sql.length - 1)),
-                        timeout: 40000, // 40s
-                    }, function (error, results, fields) {
-                        if (error) {
-                            console.log(error)
-                            callback('existió un error', null);
-                        } else {
-                            callback(null, 'Todo salió bien')
-
-                        }
-                    });
-
-                } else {
-                    connection.query({
-                        sql: 'INSERT INTO `product` (`barcode`, `model`) VALUES (?,?)',
-                        timeout: 40000, // 40s
-                        values: [data.barcode_input.toUpperCase(), data.code]
-                    }, function (error, results, fields) {
-                        if (error) {
-                            console.log(error)
-                            callback('existió un error', null);
-                        } else {
-
-                            if (results.affectedRows == 1) {
-
-                                var sql = 'INSERT INTO `billdetail` (`bill`, `product`, `fdr`, `cso`, `wbs`, `comment`) VALUES';
-
-                                for (var i = 0; i < data.cant; i++) {
-                                    sql = sql + " ('" + data.bill + "','" + results.insertId + "','" + data.fdr.toUpperCase() + "','" + data.cso.toUpperCase() + "','" + data.wbs.toUpperCase() + "','" + data.comment.toUpperCase() + "'),"
-                                }
-
-                                connection.query({
-                                    sql: sql.substr(0, (sql.length - 1)),
-                                    timeout: 40000, // 40s
-
-                                }, function (error, results, fields) {
-                                    if (error) {
-                                        console.log(error)
-                                        callback('existió un error', null);
-                                    } else {
-
-                                        callback(null, 'Todo salió bien')
-
-                                    }
-                                });
-
-                            } else {
-                                callback('existió un error', null);
-                            }
-
-                        }
-                    });
-
-                }
-
-
-
-
+                callback(null, 'Todo salió bien')
 
             }
         });
@@ -356,9 +294,9 @@ module.exports = {
 
 
                     connection.query({
-                        sql: 'UPDATE `billdetail` SET `bill`=?, `product`=?, `fdr`=?, `cso`=?, `wbs`=?, `comment`=? WHERE (`id`=?) LIMIT 1',
+                        sql: 'UPDATE `billdetail` SET `bill`=?, `product`=?, `fdr`=?, `cso`=?, `wbs`=?, `comment`=?, `area`=?, `contrato`=? WHERE (`id`=?) LIMIT 1',
                         timeout: 40000, // 40s
-                        values: [data.bill, results[0].id, data.fdr.toUpperCase(), data.cso.toUpperCase(), data.wbs.toUpperCase(), data.comment.toUpperCase(), data.id]
+                        values: [data.bill, results[0].id, data.fdr.toUpperCase(), data.cso.toUpperCase(), data.wbs.toUpperCase(), data.comment.toUpperCase(), data.area.toUpperCase(), data.contrato.toUpperCase(), data.id]
                     }, function (error, results, fields) {
                         if (error) {
                             console.log(error)
@@ -387,9 +325,9 @@ module.exports = {
                             if (results.affectedRows == 1) {
 
                                 connection.query({
-                                    sql: 'UPDATE `billdetail` SET `bill`=?, `product`=?, `fdr`=?, `cso`=?, `wbs`=?, `comment`=? WHERE (`id`=?) LIMIT 1',
+                                    sql: 'UPDATE `billdetail` SET `bill`=?, `product`=?, `fdr`=?, `cso`=?, `wbs`=?, `comment`=?, `area`=?, `contrato`=? WHERE (`id`=?) LIMIT 1',
                                     timeout: 40000, // 40s
-                                    values: [data.bill, results.insertId, data.fdr.toUpperCase(), data.cso.toUpperCase(), data.wbs.toUpperCase(), data.comment.toUpperCase(), data.id]
+                                    values: [data.bill, results.insertId, data.fdr.toUpperCase(), data.cso.toUpperCase(), data.wbs.toUpperCase(), data.comment.toUpperCase(), data.area.toUpperCase(), data.contrato.toUpperCase(), data.id]
                                 }, function (error, results, fields) {
                                     if (error) {
                                         console.log(error)

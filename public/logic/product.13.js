@@ -489,12 +489,9 @@ $(document).ready(function () {
             }
         },
      
-        group: {
-            field: "code", aggregates: [
-                { field: "barcode", aggregate: "count" },
-                { field: "code", aggregate: "count" },
-            ]
-        },
+        group: [ 
+            { field: "code", aggregates: [{ field: "cant", aggregate: "sum" }, { field: "cant", aggregate: "count" }] },
+            { field: "cant", aggregates: [{ field: "cant", aggregate: "sum" }, { field: "cant", aggregate: "count" }] } ], 
         aggregate: [{ field: "barcode", aggregate: "count" }],
         aggregate: [{ field: "code", aggregate: "count" }],
         pageSize: 1000
@@ -543,13 +540,15 @@ $(document).ready(function () {
                     { field: "description", title: "Producto", filterable: { search: true, multi:true } },
                     { field: "category", title: "Tipo",filterable: { search: true, multi:true }},
                     { field: "brand", title: "Marca",filterable: { search: true, multi:true } },
-                    { field: "code", title: "Código", filterable: { search: true, multi:true }, values: codes, editor: comboCodigos, aggregates: ["min", "max", "count"], groupHeaderTemplate: "Cantidad: #= count#"},
+                    { field: "code", title: "Código", filterable: { search: true, multi:true }, values: codes, editor: comboCodigos, aggregates: ["min", "max", "count"]},
                     { field: "barcode", aggregates: ["count"], title: "No. de serie", filterable: { search: true, multi:true } },
-               
-                    { field: "fdr", title: "FDR" },
-                    { field: "cso", title: "CSO" },
-                    { field: "wbs", title: "WBS" },
-                    { field: "comment", title: "Área" },
+                    { field: "cant", aggregates: ["sum"], title: "Cant.", filterable: { search: true, multi: true }, aggregates: ["sum"], groupHeaderTemplate: "Cantidad: #= sum #" },
+                    { field: "fdr", title: "FDR" , filterable: { search: true, multi: true }  },
+                    { field: "cso", title: "CSO", filterable: { search: true, multi: true }  },
+                    { field: "wbs", title: "WBS", filterable: { search: true, multi: true }  },
+                    { field: "contrato", title: "Contrato", filterable: { search: true, multi: true } },
+                    { field: "area", title: "Área", filterable: { search: true, multi: true } },
+                    { field: "comment", title: "Comentario" },
                     { field: "bill", title: "Factura", hidden:true }],
                 editable: "popup"
             })

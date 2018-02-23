@@ -64,6 +64,7 @@ $(document).ready(function () {
         batch: true,
         pageSize: 1000,
         serverFiltering: false,
+        
         requestEnd: function (e) {
             if (e.type != "read") {
                 // refresh the grid
@@ -127,7 +128,7 @@ $(document).ready(function () {
                         });
                 },
                 columns: [
-                    { field: "id", hidden:true, title: "Código", filterable: { search: true, multi: true } },
+                  
                     { field: "codigo", title: "Código", filterable: { search: true, multi: true } },
                     { field: "provider", values: providers, editor: userNameComboBoxEditor, title: "Proveedor", filterable: { multi: true, search: true } },
                     { field: "date", title: "Fecha", filterable: { search: true, search: true }, format: "{0:dd/MM/yyyy}" },

@@ -1,7 +1,7 @@
 
 
 $('#btnPrint').hide();
-$("#txtSerie").kendoComboBox();
+$("#txtSerie").kendoDropDownList();
 
 var validator = $("#formsave").kendoValidator().data("kendoValidator");
 var validatorModel = $("#formSaveModel").kendoValidator().data("kendoValidator");
@@ -20,7 +20,7 @@ dataSourceCombo = new kendo.data.DataSource({
     }
 });
 
-$("#txtCodigo").kendoComboBox({
+$("#txtCodigo").kendoDropDownList({
     dataSource: dataSourceCombo,
     filter: "contains",
     dataTextField: "code",
@@ -55,10 +55,10 @@ function sendData(data) {
 
     if (data.length > 0) {
 
-       
-        $("#txtSerie").data("kendoComboBox").value("");
 
-        
+        $("#txtSerie").data("kendoDropDownList").value("");
+
+
         dataSourceSeries = new kendo.data.DataSource({
             transport: {
                 read: {
@@ -68,7 +68,7 @@ function sendData(data) {
             }
         });
 
-        $("#txtSerie").kendoComboBox({
+        $("#txtSerie").kendoDropDownList({
             dataSource: dataSourceSeries,
             filter: "contains",
             dataTextField: "barcode",
@@ -81,7 +81,7 @@ function sendData(data) {
 
 
         $('#modelProduct').val(data[0].id);
-    
+
     } else {
         var r = confirm("El producto con el código " + $('#code2').val() + " no existe \n ¿Desea agregarlo?");
         if (r == true) {
@@ -479,30 +479,30 @@ $(document).ready(function () {
                     category: { validation: { required: true }, type: 'string', editable: false },
                     description: { validation: { required: true, }, type: 'string', editable: false },
                     bill: { type: 'string', defaultValue: bill, editable: false, visible: false },
-                
+
                     code: { editable: true }
                 }
             }
         },
-     
-        group: {
-            field: "code", aggregates: [
-                { field: "barcode", aggregate: "count" },
-                { field: "code", aggregate: "count" },
-            ]
-        },
+
+
+        group: [ 
+            { field: "code", aggregates: [{ field: "cant", aggregate: "sum" }, { field: "cant", aggregate: "count" }] },
+            { field: "cant", aggregates: [{ field: "cant", aggregate: "sum" }, { field: "cant", aggregate: "count" }] } ], 
+
         aggregate: [{ field: "barcode", aggregate: "count" }],
         aggregate: [{ field: "code", aggregate: "count" }],
+        aggregate: [{ field: "cant", aggregate: "sum" }],
         pageSize: 1000
     },
     );
 
     $.get("/location/read2", function (data) {
 
-        $.get( "/model/readmodel", function( codes ) {
+        $.get("/model/readmodel", function (codes) {
             $("#grid2").kendoGrid({
                 dataSource: dataSource,
-            
+
                 dataSource: dataSource,
                 height: 475,
                 filterable: true,
@@ -536,17 +536,20 @@ $(document).ready(function () {
                         });
                 },
                 columns: [
-                    { field: "description", title: "Producto", filterable: { search: true, multi:true } },
-                    { field: "category", title: "Tipo",filterable: { search: true, multi:true }},
-                    { field: "brand", title: "Marca",filterable: { search: true, multi:true } },
-                    { field: "code", title: "Código", filterable: { search: true, multi:true }, values: codes, editor: comboCodigos, aggregates: ["min", "max", "count"], groupHeaderTemplate: "Cantidad: #= count#"},
-                    { field: "barcode", aggregates: ["count"], title: "No. de serie", filterable: { search: true, multi:true } },
-               
-                    { field: "fdr", title: "FDR" },
-                    { field: "cso", title: "CSO" },
-                    { field: "wbs", title: "WBS" },
-                    { field: "comment", title: "Área" },
-                    { field: "bill", title: "Factura", hidden:true },
+                    { field: "description", title: "Producto", filterable: { search: true, multi: true } },
+                    { field: "category", title: "Tipo", filterable: { search: true, multi: true } },
+                    { field: "brand", title: "Marca", filterable: { search: true, multi: true } },
+                    { field: "code", title: "Código", filterable: { search: true, multi: true }, values: codes, editor: comboCodigos },
+                    { field: "barcode", aggregates: ["count"], title: "No. de serie", filterable: { search: true, multi: true } },
+                    { field: "cant", aggregates: ["sum"], title: "Cant.", filterable: { search: true, multi: true }, aggregates: ["sum"], groupHeaderTemplate: "Cantidad: #= sum #" },
+
+                    { field: "fdr", title: "FDR", filterable: { search: true, multi: true } },
+                    { field: "cso", title: "CSO", filterable: { search: true, multi: true } },
+                    { field: "wbs", title: "WBS", filterable: { search: true, multi: true } },
+                    { field: "contrato", title: "Contrato", filterable: { search: true, multi: true } },
+                    { field: "area", title: "Área", filterable: { search: true, multi: true } },
+                    { field: "comment", title: "Comentario" },
+                    { field: "bill", title: "Factura", hidden: true },
                     { command: ["edit", "destroy"], title: "Acciones" }],
                 editable: "popup"
             })

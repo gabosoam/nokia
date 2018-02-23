@@ -168,21 +168,22 @@
                             <div class="ibox-content">
 
                                 <div id="actions">
-                                      
-            
-                                            <button id="closeBill" class="btn btn-default">
-                                                <span class="fa fa-times-circle"></span> Cerrar salida</button>
+
+
+                                    <button id="closeBill" class="btn btn-default">
+                                        <span class="fa fa-times-circle"></span> Cerrar salida</button>
                                 </div>
-                                
+
 
                                 <button id="btnPrint" type="button" class="btn btn-default" onclick="print()">
                                     <span class="fa fa-print"></span> Imprimir</button>
                                 <hr>
-                                
+
                                 <form id="formIngreso">
-                                   
+
                                     <input type="hidden" value="<%= bill %>" name="bill">
                                     <input type="hidden" value="1" id="txtCantidad" name="cant">
+
                                     <div class="row">
                                         <div class="col-md-3">
                                             <label for="txtCodigo">Código:</label>
@@ -211,28 +212,35 @@
                                             <input id="txtCso" placeholder="Ingresar CSO" name="cso" class="form-control" style="width: 100%;" />
                                         </div>
 
+                                    </div>
+                                    <div class="row">
                                         <div class="col-md-3">
                                             <label for="txtCodigo">WBS:</label>
                                             <input class="form-control" placeholder="Ingresar WBS" name="wbs" id="txtWbs" style="width: 100%;" />
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="txtCodigo">Contrato:</label>
+                                            <input required class="form-control" validationMessage="Este campo es obligatorio" placeholder="Ingresar contrato" name="contrato" id="txtContrato" style="width: 100%;" />
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="txtCodigo">Área:</label>
+                                            <input class="form-control" placeholder="Ingresar área" name="area" id="txtArea" style="width: 100%;" />
                                         </div>
 
                                         <div class="col-md-3">
                                             <label for="txtCodigo">Comentario:</label>
                                             <input class="form-control" placeholder="Ingresar comentario" name="comment" id="txtWbs" style="width: 100%;" />
                                         </div>
-
-                                  
-
+                                    </div>
+                                    <div class="row">
                                         <div class="col-md-3">
                                             <label for="txtSerie">Acción:</label>
                                             <br>
-
                                             <button onclick="guardarProducto()" class="btn btn-primary" type="button">Guardar</button>
 
                                         </div>
-
-
                                     </div>
+
                                 </form>
                                 <br>
 
@@ -293,141 +301,148 @@
                 <div class="modal-body">
                     <button onclick="print()" class="btn btn-primary">Imprimir</button>
                     <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h4 class="modal-title">Reporte</h4>
-                            </div>
-                            <div class="modal-body">
-                                <button onclick="print()" class="btn btn-primary">Imprimir</button>
-                                <div id="print" style="min-width: 210mm; font-family: 'Arial Narrow'">
-            
-                                    <table style="width: 100%">
-                                        <tr>
-                                            <td></td>
-                                            <td>
-                                                <center>
-                                                    <img class="" src="../images/nokia.png" width="280px" />
-            
-            
-            
-            
-                                                </center>
-                                            </td>
-                                            <td style="text-align: right">
-                                                <h5>
-                                                    <%=data.codigo%>
-            
-                                                </h5>
-                                            </td>
-                                        </tr>
-                                    </table>
-            
-            
-                                    <hr>
-                                    <center>
-                                        <strong style="font-size: 18px">Reporte de Salida</strong>
-                                    </center>
-                                    <table style="width: 100%; font-size: 12px">
-                                        <tr>
-                                            <td>
-            
-                                                <address>
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Reporte</h4>
+                        </div>
+                        <div class="modal-body">
+                            <button onclick="print()" class="btn btn-primary">Imprimir</button>
+                            <div id="print" style="min-width: 210mm; font-family: 'Arial Narrow'">
+
+                                <table style="width: 100%">
+                                    <tr>
+                                        <td></td>
+                                        <td>
+                                            <center>
+                                                <img class="" src="../images/nokia.png" width="280px" />
+
+
+
+
+                                            </center>
+                                        </td>
+                                        <td style="text-align: right">
+                                            <h5>
+                                                <%=data.codigo%>
+
+                                            </h5>
+                                        </td>
+                                    </tr>
+                                </table>
+
+
+                                <hr>
+                                <center>
+                                    <strong style="font-size: 18px">Reporte de Entrega</strong>
+                                </center>
+                                <table style="width: 100%; font-size: 12px">
+                                    <tr>
+                                        <td>
+
+                                            <address>
+                                                <br>
+                                                <p>
+                                                    <strong>Cliente: </strong>
+                                                    <%=data.client%>
+                                                </p>
+                                                <p>
+                                                    <strong>Empresa: </strong>
+                                                    <%=data.clientcompany%>
+                                                </p>
+
+                                                <br>
+
+
+                                            </address>
+                                        </td>
+                                        <td style="text-align: right">
+
+                                            <address>
+                                                <strong>Fecha:</strong>
+                                                <%=data.date%>
+
                                                     <br>
-                                                    <p>
-                                                        <strong>Cliente: </strong>
-                                                        <%=data.client%>
-                                                    </p>
-                                                    <p>
-                                                        <strong>Empresa: </strong>
-                                                        <%=data.clientcompany%>
-                                                    </p>
-            
-                                                    <br>
-            
-            
-                                                </address>
-                                            </td>
-                                            <td style="text-align: right">
-            
-                                                <address>
-                                                    <strong>Fecha:</strong>
-                                                    <%=data.date%>
-            
-                                                        <br>
-                                                        <strong>Referencia:</strong>
-                                                        <%=data.reference%>
-            
-            
-                                                </address>
-                                            </td>
+                                                    <strong>Referencia:</strong>
+                                                    <%=data.reference%>
+
+
+                                            </address>
+                                        </td>
+                                    </tr>
+
+                                </table>
+                                <hr>
+                                <table id="Vouchers" class="table ">
+                                    <thead style="font-size:13px;">
+                                        <tr>
+                                            <th style="text-align: center">Nombre</th>
+                                            <th style="text-align: center">Código</th>
+                                            <th style="text-align: center">No. de Serie</th>
+                                            <th style="text-align: center">Cant</th>
+                                            <th style="text-align: center">Tipo</th>
+                                            <!-- <th style="text-align: center">Marca</th> -->
+                                            <th style="text-align: center">FDR</th>
+                                            <th style="text-align: center">CSO</th>
+                                            <th style="text-align: center">WBS</th>
+                                            <th style="text-align: center">Contrato</th>
+                                            <th style="text-align: center">Área</th>
+
+                                            <!-- <th style="text-align: center">Comentario</th> -->
                                         </tr>
-            
-                                    </table>
-                                    <hr>
-                                    <table id="Vouchers" class="table ">
-                                        <thead style="font-size:13px;">
-                                            <tr>
-                                                <th style="text-align: center">Nombre</th>
-                                                <th style="text-align: center">Código</th>
-                                                <th style="text-align: center">No. de Serie</th>
-                                                <th style="text-align: center">Tipo</th>
-                                                <th style="text-align: center">Marca</th>
-                                                <th style="text-align: center">FDR</th>
-                                                <th style="text-align: center">CSO</th>
-                                                <th style="text-align: center">WBS</th>
-            
-                                                <!-- <th style="text-align: center">Comentario</th> -->
-                                            </tr>
-                                        </thead>
-                                        <tbody style="font-size:11px;">
-                                            <tr w3-repeat="voucherss">
-                                                <td style="text-align: center">{{description}}</td>
-                                                <td style="text-align: center">{{code2}}</td>
-                                                <td style="text-align: center">{{barcode}}</td>
-                                                <td style="text-align: center">{{category}}</td>
-                                                <td style="text-align: center">{{brand}}</td>
-                                                <td style="text-align: center">{{fdr}}</td>
-                                                <td style="text-align: center">{{cso}}</td>
-                                                <td style="text-align: center">{{wbs}}</td>
-            
-                                               <!--  <td style="text-align: center">
+                                    </thead>
+                                    <tbody style="font-size:11px;">
+                                        <tr w3-repeat="voucherss">
+                                            <td style="text-align: center">{{description}}</td>
+                                            <td style="text-align: center">{{code2}}</td>
+                                            <td style="text-align: center">{{barcode}}</td>
+                                            <td style="text-align: center">{{cant}}</td>
+                                            <td style="text-align: center">{{category}}</td>
+                                            <!-- <td style="text-align: center">{{brand}}</td> -->
+                                            <td style="text-align: center">{{fdr}}</td>
+                                            <td style="text-align: center">{{cso}}</td>
+                                            <td style="text-align: center">{{wbs}}</td>
+                                            <td style="text-align: center">{{contrato}}</td>
+                                            <td style="text-align: center">{{area}}</td>
+
+                                            <!--  <td style="text-align: center">
                                                     {{comment}}
                                                 </td> -->
-                                            </tr>
-            
-            
-                                        </tbody>
-                                    </table>
-                                    <hr>
-            
-                                    <!-- <div class="well m-t">
+                                        </tr>
+
+
+                                    </tbody>
+                                </table>
+                                <hr>
+
+                                <!-- <div class="well m-t">
                                             <strong>Comentario</strong>
                                             <input class="form-control" type="text">
                                         </div> -->
-            
-            
-            
-                                    <table style="width: 100%; border: 1; font-size: 12px ">
-                                        <tr>
-                                            <td>
-                                                <center>
-                                                    <p>
-                                                        ENTREGADO POR
-                                                        <br>
-                                                        <br>
-                                                        <br>
-                                                        <br>
-                                                        <br> _______________________________
-                                                        <br>
-                                                        <br>
-                                                        <input type="text" style="border: 0; width: 100%; text-align: center; text-transform: uppercase">
-                                                    </p>
-                                                </center>
-            
-            
-                                            </td>
-            
-                                          <!--   <td>
+
+
+
+                                <table style="width: 100%; border: 1; font-size: 12px ">
+                                    <tr>
+                                        <td>
+                                            <center>
+                                                <p>
+                                                    ENTREGADO POR
+                                                    <br>
+                                                    <br>
+                                                    <br>
+                                                    <br>
+                                                    <br> _______________________________
+                                                    <br>
+                                                    <br>
+                                                    <%=data.user%>
+                                                    <input type="text" style="border: 0; width: 100%; text-align: center; text-transform: uppercase">
+                                                </p>
+                                            </center>
+
+
+                                        </td>
+
+                                        <!--   <td>
                                                 <center>
                                                     <p>
                                                         REPRESENTANTE NOKIA
@@ -442,29 +457,31 @@
                                                     </p>
                                                 </center>
                                             </td> -->
-            
-                                            <td>
-                                                <center>
-                                                    <p>
-                                                        RECIBIDO POR
-                                                        <br>
-                                                        <br>
-                                                        <br>
-                                                        <br>
-                                                        <br> _______________________________
-                                                        <br>
-                                                        <br>
-                                                        <input type="text" style="border: 0; width: 100%; text-align: center; text-transform: uppercase">
-                                                    </p>
-                                                </center>
-            
-            
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </div>
+
+                                        <td>
+                                            <center>
+                                                <p>
+                                                    RECIBIDO POR
+                                                    <br>
+                                                    <br>
+                                                    <br>
+                                                    <br>
+                                                    <br> _______________________________
+                                                    <br>
+                                                    <br>
+                                                    <p>Nombre______________________</p>
+                                                <p>C.I.__________________________</p>
+                                                    <input type="text" style="border: 0; width: 100%; text-align: center; text-transform: uppercase">
+                                                </p>
+                                            </center>
+
+
+                                        </td>
+                                    </tr>
+                                </table>
                             </div>
                         </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -701,13 +718,15 @@
         //     }
         // }))
         function guardarProducto() {
-           
+
             var validator = $("#formIngreso").kendoValidator().data("kendoValidator"),
                 status = $(".status");
 
             if (validator.validate()) {
 
-                var barcode = getFormData($("#formIngreso")).barcode_input;
+                var barcode = $("#txtSerie").data("kendoDropDownList").text()
+               
+                
 
                 if (barcode == 's/n' || barcode == 'S/N') {
                     var cantidad = prompt('Ingrese la cantidad', 1)
@@ -718,7 +737,7 @@
                             var data = $('#formIngreso').serialize();
 
                             $.post("/product/createSalida", data, function (data) {
-                         
+
                                 if (data == true) {
                                     alert('Producto guardado');
                                     $('#grid2').data('kendoGrid').dataSource.read();
@@ -741,23 +760,23 @@
                 } else {
                     $('#txtCantidad').val(1);
                     var data = $('#formIngreso').serialize();
-                
+
 
                     $.post("/product/createSalida", data, function (data) {
-                      
-                                if (data == true) {
 
-                               
-                                    alert('Producto guardado');
-                                    $('#grid2').data('kendoGrid').dataSource.read();
-                                    $('#grid2').data('kendoGrid').refresh();
-                                    actualizarReporte();
+                        if (data == true) {
 
-                                    $('#formIngreso')[0].reset();
-                                } else {
-                                    alert('Algo salió mal');
-                                }
-                            });
+
+                            alert('Producto guardado');
+                            $('#grid2').data('kendoGrid').dataSource.read();
+                            $('#grid2').data('kendoGrid').refresh();
+                            actualizarReporte();
+
+                            $('#formIngreso')[0].reset();
+                        } else {
+                            alert('Algo salió mal');
+                        }
+                    });
 
                 }
 
@@ -787,6 +806,7 @@
 
 
     <script>
+
 
         actualizarReporte()
 

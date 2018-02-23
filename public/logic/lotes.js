@@ -212,10 +212,13 @@ function senData(i) {
         barcode: $('#id' + i + '' + 2).text(),
         variant: $('#id' + i + '' + 1).text(),
         location: $('#id' + i + '' + 3).text(),
-        observation: $('#id' + i + '' + 4).text(),
-        fdr  : $('#id' + i + '' + 5).text(),
-        cso  : $('#id' + i + '' + 6).text(),
-        wbs  : $('#id' + i + '' + 7).text(),
+        
+        fdr  : $('#id' + i + '' + 4).text(),
+        cso  : $('#id' + i + '' + 5).text(),
+        wbs  : $('#id' + i + '' + 6).text(),
+        contrato  : $('#id' + i + '' + 7).text(),
+        area  : $('#id' + i + '' + 8).text(),
+        observation: $('#id' + i + '' + 9).text(),
 
     }, function( data ) {
         $("#state"+i).text(JSON.stringify(data));

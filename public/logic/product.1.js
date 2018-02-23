@@ -150,19 +150,10 @@ function sendData(data) {
 
 
 
-        $('#modelProduct').val(data[0].id);
-        $('#nameProduct').data('kendoComboBox').value(data[0].code);
+     
+       
     } else {
-        var r = confirm("El producto con el código " + $('#code2').val() + " no existe \n ¿Desea agregarlo?");
-        if (r == true) {
-            $('#myModal').modal({
-                backdrop: 'static',
-                keyboard: false
-            })
-            $('#codeModal').val($('#code2').val());
-        } else {
-
-        }
+        $('#txtCodigo').data('kendoComboBox').value('');
     }
 
 }
@@ -297,7 +288,7 @@ $(document).ready(function () {
         }
     });
 
-    $("#txtCodigo").kendoComboBox({
+    $("#txtCodigo").kendoDropDownList({
         dataSource: dataSourceCombo,
         filter: "contains",
         dataTextField: "code",
@@ -316,7 +307,7 @@ $(document).ready(function () {
         }
     });
 
-    $("#txtUbicacion").kendoComboBox({
+    $("#txtUbicacion").kendoDropDownList({
         dataSource: dataSourceLocation,
         filter: "contains",
         dataTextField: "name",
@@ -498,12 +489,10 @@ $(document).ready(function () {
                 }
             }
         },
-        group: {
-            field: "code", aggregates: [
-                { field: "barcode", aggregate: "count" },
-                { field: "code", aggregate: "count" },
-            ]
-        },
+        group: [ 
+            { field: "code", aggregates: [{ field: "cant", aggregate: "sum" }, { field: "cant", aggregate: "count" }] },
+            { field: "cant", aggregates: [{ field: "cant", aggregate: "sum" }, { field: "cant", aggregate: "count" }] } ], 
+
         aggregate: [{ field: "barcode", aggregate: "count" }],
         aggregate: [{ field: "code", aggregate: "count" }],
 
@@ -550,16 +539,19 @@ $(document).ready(function () {
                         });
                 },
                 columns: [
-                    { field: "description", title: "Producto", filterable: { search: true } },
+                    { field: "description", title: "Producto", filterable: { search: true, multi:true } },
                     { field: "Producto", hidden: true, aggregates: ["min", "max", "count"], groupHeaderTemplate: "Cantidad: #= count#" },
-                    { field: "category", title: "Tipo" },
-                    { field: "brand", title: "Marca" },
-                    { field: "code", title: "Código", filterable: { search: true }, values: codes, editor: comboCodigos, aggregates: ["min", "max", "count"], groupHeaderTemplate: "Cantidad: #= count#" },
+                    { field: "category", title: "Tipo", filterable: { search: true, multi:true } },
+                    { field: "brand", title: "Marca", filterable: { search: true, multi:true } },
+                    { field: "code", title: "Código", filterable: { search: true, multi: true }, values: codes, editor: comboCodigos },
                     { field: "barcode", aggregates: ["count"], title: "No. de serie", filterable: { search: true, multi: true } },
+                    { field: "cant", aggregates: ["sum"], title: "Cant.", filterable: { search: true, multi: true }, aggregates: ["sum"], groupHeaderTemplate: "Cantidad: #= sum #" },
                     { field: "location", title: "Almacén", values: data, filterable: { search: true, multi: true } },
                     { field: "fdr", title: "FDR", filterable: { search: true, multi: true } },
                     { field: "cso", title: "CSO", filterable: { search: true, multi: true } },
                     { field: "wbs", title: "WBS", filterable: { search: true, multi: true } },
+                    { field: "contrato", title: "Contrato", filterable: { search: true, multi: true } },
+                    { field: "area", title: "Área", filterable: { search: true, multi: true } },
                     { field: "comment", title: "Comentario", filterable: { search: true, multi: false } },
                     { field: "bill", title: "Factura", hidden: true },
                     { command: ["edit", "destroy"], title: "Acciones" }],

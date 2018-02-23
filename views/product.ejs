@@ -168,20 +168,20 @@
                             <div class="ibox-content">
 
                                 <div id="actions">
-                                        <button type="button" class="btn btn-default" onclick="openLotes()">
-                                                <span class="fa fa-print"></span> Ingreso por lotes</button>
-            
-                                            <button id="closeBill" class="btn btn-default">
-                                                <span class="fa fa-times-circle"></span> Cerrar ingreso</button>
+                                    <button type="button" class="btn btn-default" onclick="openLotes()">
+                                        <span class="fa fa-print"></span> Ingreso por lotes</button>
+
+                                    <button id="closeBill" class="btn btn-default">
+                                        <span class="fa fa-times-circle"></span> Cerrar ingreso</button>
                                 </div>
-                                
+
 
                                 <button id="btnPrint" type="button" class="btn btn-default" onclick="print()">
                                     <span class="fa fa-print"></span> Imprimir</button>
                                 <hr>
-                                
+
                                 <form id="formIngreso">
-                                        <h4>Ingreso individual</h4>
+
                                     <input type="hidden" value="<%= bill %>" name="bill">
                                     <input type="hidden" value="1" id="txtCantidad" name="cant">
                                     <div class="row">
@@ -191,7 +191,6 @@
                                             <br>
 
                                         </div>
-
                                         <div class="col-md-3">
 
                                             <label for="txtSerie">Número de serie (S/N sin serie):</label>
@@ -211,17 +210,32 @@
                                             <label for="txtCodigo">CSO:</label>
                                             <input id="txtCso" placeholder="Ingresar CSO" name="cso" class="form-control" style="width: 100%;" />
                                         </div>
+                                    </div>
 
+                                    <div class="row">
                                         <div class="col-md-3">
                                             <label for="txtCodigo">WBS:</label>
                                             <input class="form-control" placeholder="Ingresar WBS" name="wbs" id="txtWbs" style="width: 100%;" />
                                         </div>
 
                                         <div class="col-md-3">
+                                            <label for="txtCodigo">Contrato:</label>
+                                            <input required class="form-control" validationMessage="Este campo es obligatorio" placeholder="Ingresar contrato" name="contrato"
+                                                id="txtContrato" style="width: 100%;" />
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <label for="txtCodigo">Área:</label>
+                                            <input class="form-control" placeholder="Ingresar área" name="area" id="txtAerea" style="width: 100%;" />
+                                        </div>
+
+                                        <div class="col-md-3">
                                             <label for="txtCodigo">Comentario:</label>
                                             <input class="form-control" placeholder="Ingresar comentario" name="comment" id="txtWbs" style="width: 100%;" />
                                         </div>
+                                    </div>
 
+                                    <div class="row">
                                         <div class="col-md-3">
                                             <label for="txtSerie">Ubicación:</label>
                                             <input required validationMessage="Este campo es obligatorio" id="txtUbicacion" name="location" name="barcode" style="width: 100%;"
@@ -237,8 +251,15 @@
 
                                         </div>
 
-
                                     </div>
+
+
+
+
+
+
+
+
                                 </form>
                                 <br>
 
@@ -366,13 +387,16 @@
                                     <th style="text-align: center">Nombre</th>
                                     <th style="text-align: center">Código</th>
                                     <th style="text-align: center">No. de Serie</th>
+                                    <th style="text-align: center">Cant</th>
                                     <th style="text-align: center">Tipo</th>
                                     <th style="text-align: center">Marca</th>
                                     <th style="text-align: center">FDR</th>
                                     <th style="text-align: center">CSO</th>
                                     <th style="text-align: center">WBS</th>
                                     <th style="text-align: center">Ubicación</th>
+                                    <th style="text-align: center">Contrato</th>
                                     <th style="text-align: center">Área</th>
+                                    <th style="text-align: center">Comentario</th>
                                 </tr>
                             </thead>
                             <tbody style="font-size:11px;">
@@ -380,12 +404,15 @@
                                     <td style="text-align: center">{{description}}</td>
                                     <td style="text-align: center">{{code2}}</td>
                                     <td style="text-align: center">{{barcode}}</td>
+                                    <td style="text-align: center">{{cant}}</td>
                                     <td style="text-align: center">{{category}}</td>
                                     <td style="text-align: center">{{brand}}</td>
                                     <td style="text-align: center">{{fdr}}</td>
                                     <td style="text-align: center">{{cso}}</td>
                                     <td style="text-align: center">{{wbs}}</td>
                                     <td style="text-align: center">{{location2}}</td>
+                                    <td style="text-align: center">{{contrato}}</td>
+                                    <td style="text-align: center">{{area}}</td>
                                     <td style="text-align: center">
                                         {{comment}}
                                     </td>
@@ -416,6 +443,11 @@
                                             <br> _______________________________
                                             <br>
                                             <br>
+                                           
+                                                <p>Nombre______________________</p>
+                                                <p>C.I.__________________________</p>
+                                           
+
                                             <input type="text" style="border: 0; width: 100%; text-align: center; text-transform: uppercase">
                                         </p>
                                     </center>
@@ -450,6 +482,10 @@
                                             <br>
                                             <br>
                                             <br> _______________________________
+                                            <br>
+                                            <br>
+                                            <%=data.user%>
+                                            <br>
                                             <br>
                                             <br>
                                             <input type="text" style="border: 0; width: 100%; text-align: center; text-transform: uppercase">
@@ -680,6 +716,10 @@
                     },
 
                     barcode: {
+                        required: true
+                    },
+
+                    contrato: {
                         required: true
                     }
 

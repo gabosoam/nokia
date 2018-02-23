@@ -15,6 +15,18 @@ module.exports = {
     });
   },
 
+  existencia: function (callback) {
+    connection.query('SELECT * FROM v_existencias', function (error, results, fields) {
+      if (error) {
+        console.log(error);
+        callback('error en la consulta: ' + error, null);
+      } else {
+     
+        callback(null, results);
+      }
+    });
+  },
+
 
 
   buscar: function (sql,callback) {

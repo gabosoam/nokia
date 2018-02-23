@@ -69,8 +69,8 @@ module.exports = {
                                                         callback('El producto ya existe en el ingreso actual');
                                                     }else{
                                                         connection.query({
-                                                            sql: 'INSERT INTO `billdetail` (`bill`, `product`, `location`, `comment`, `fdr`, `cso`, `wbs`) VALUES (?,?,?,?,?,?,?)',
-                                                            values: [data.bill,code,location, data.observation,data.fdr, data.cso, data.wbs]
+                                                            sql: 'INSERT INTO `billdetail` (`bill`, `product`, `location`, `comment`, `fdr`, `cso`, `wbs`, area, contrato) VALUES (?,?,?,?,?,?,?,?,?)',
+                                                            values: [data.bill,code,location, data.observation,data.fdr, data.cso, data.wbs,data.area,data.contrato]
                                                         }, function(err, results, fields) {
                                                             if (err) {
                                                                 console.log(err)
@@ -117,8 +117,8 @@ module.exports = {
                                                                     callback('El producto ya existe en el ingreso actual');
                                                                 }else{
                                                                     connection.query({
-                                                                        sql: 'INSERT INTO `billdetail` (`bill`, `product`, `location`, `comment`, `fdr`, `cso`, `wbs`) VALUES (?,?,?,?,?,?,?)',
-                                                                        values: [data.bill,code,location, data.observation, data.fdr, data.cso, data.wbs]
+                                                                        sql: 'INSERT INTO `billdetail` (`bill`, `product`, `location`, `comment`, `fdr`, `cso`, `wbs`, area, contrato) VALUES (?,?,?,?,?,?,?,?,?)',
+                                                                        values: [data.bill,code,location, data.observation, data.fdr, data.cso, data.wbs, data.area, data.contrato]
                                                                     }, function(err, results, fields) {
                                                                         if (err) {
                                                                             console.log(err)
