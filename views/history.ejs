@@ -87,7 +87,7 @@
                         <li>
                             <a href="/vouchers">
                                 <i class="fa fa-arrow-left"></i>
-                                <span class="nav-label">Salidas</span>
+                                <span class="nav-label">Entregas</span>
                             </a>
                         </li>
     
@@ -312,6 +312,7 @@
                                 <th style="text-align: center">FDR</th>
                                 <th style="text-align: center">CSO</th>
                                 <th style="text-align: center">WBS</th>
+                                <th style="text-align: center">Contrato</th>
                                 <th style="text-align: center">Ubicación</th>
                                 <th style="text-align: center">Proveedor</th>
                                 <th style="text-align: center">Empresa</th>
@@ -327,12 +328,13 @@
                                 <td style="text-align: center">{{fdr}}</td>
                                 <td style="text-align: center">{{cso}}</td>
                                 <td style="text-align: center">{{wbs}}</td>
+                                <td style="text-align: center">{{contrato}}</td>
                                 <td style="text-align: center">{{location}}</td>
                                 <td style="text-align: center">{{name}}</td>
                                 <td style="text-align: center">{{company}}</td>
                                 <td style="text-align: center">{{client}}</td>
                                 <td style="text-align: center">{{clientcompany}}</td>
-                                <td style="text-align: center">{{comment}}</td>
+                                <td style="text-align: center">{{area}}</td>
 
 
                             </tr>
@@ -408,3 +410,8 @@
         </div>
     </div>
 </div>
+
+<script>
+    var codigonombre='<%= product.code %>'
+    var serienombre='<%= product.barcode %>'
+</script>

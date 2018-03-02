@@ -489,11 +489,17 @@ $(document).ready(function () {
             }
         },
      
-        group: [ 
-            { field: "code", aggregates: [{ field: "cant", aggregate: "sum" }, { field: "cant", aggregate: "count" }] },
-            { field: "cant", aggregates: [{ field: "cant", aggregate: "sum" }, { field: "cant", aggregate: "count" }] } ], 
-        aggregate: [{ field: "barcode", aggregate: "count" }],
-        aggregate: [{ field: "code", aggregate: "count" }],
+        group: [{
+            field: "code2", dir: "asc", aggregates: [
+                { field: "code2", aggregate: "count" }, 
+                { field: "cant", aggregate: "sum" }
+            ]
+        }],
+
+        aggregate: [
+            { field: "cant", aggregate: "sum" },
+         
+        ],
         pageSize: 1000
     },
     );
@@ -507,7 +513,7 @@ $(document).ready(function () {
                 dataSource: dataSource,
                 height: 475,
                 filterable: true,
-                groupable: true,
+        
                 resizable: true,
 
                 pageable: { refresh: true, pageSizes: true, },
@@ -537,18 +543,21 @@ $(document).ready(function () {
                         });
                 },
                 columns: [
-                    { field: "description", title: "Producto", filterable: { search: true, multi:true } },
-                    { field: "category", title: "Tipo",filterable: { search: true, multi:true }},
-                    { field: "brand", title: "Marca",filterable: { search: true, multi:true } },
-                    { field: "code", title: "Código", filterable: { search: true, multi:true }, values: codes, editor: comboCodigos, aggregates: ["min", "max", "count"]},
-                    { field: "barcode", aggregates: ["count"], title: "No. de serie", filterable: { search: true, multi:true } },
-                    { field: "cant", aggregates: ["sum"], title: "Cant.", filterable: { search: true, multi: true }, aggregates: ["sum"], groupHeaderTemplate: "Cantidad: #= sum #" },
-                    { field: "fdr", title: "FDR" , filterable: { search: true, multi: true }  },
-                    { field: "cso", title: "CSO", filterable: { search: true, multi: true }  },
-                    { field: "wbs", title: "WBS", filterable: { search: true, multi: true }  },
+                    { field: "code2", title: "Código", filterable: { search: true, multi: true }, editor: comboCodigos,groupHeaderTemplate: "#= value# [#= count# ítem(s)]" },
+                    { field: "description", title: "Nombre", filterable: { search: true, multi: true } },
+                    { field: "category", title: "Tipo", filterable: { search: true, multi: true } },
+                    { field: "brand", title: "Marca", filterable: { search: true, multi: true },  groupFooterTemplate: "Total:"  },
+                    
+                    { field: "barcode", aggregates: ["count"], title: "Serie", filterable: { search: true, multi: true } },
+                    { field: "cant", aggregates: ["sum"], title: "Cant.", filterable: { search: true, multi: true }, aggregates: ["sum"],  groupFooterTemplate: "#=sum#" },
+
+                    { field: "fdr", title: "FDR", filterable: { search: true, multi: true } },
+                    { field: "cso", title: "CSO", filterable: { search: true, multi: true } },
+                    { field: "wbs", title: "WBS", filterable: { search: true, multi: true } },
                     { field: "contrato", title: "Contrato", filterable: { search: true, multi: true } },
                     { field: "area", title: "Área", filterable: { search: true, multi: true } },
-                    { field: "comment", title: "Comentario" },
+                    { field: "comment", title: "Comentario", filterable: { search: true, multi: true }},
+     
                     { field: "bill", title: "Factura", hidden:true }],
                 editable: "popup"
             })

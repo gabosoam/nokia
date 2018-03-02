@@ -58,7 +58,7 @@ $(document).ready(function () {
           pageable: { refresh: true, pageSizes: true, },
           toolbar: ['excel'],
           excel: {
-            fileName: "Kendo UI Grid Export.xlsx",
+            fileName: codigonombre+" - "+serienombre+".xlsx",
             filterable: true,
             allPages: true
         },
@@ -67,6 +67,7 @@ $(document).ready(function () {
           columns: [
             { field: "type",values: types, title: "Transacción", filterable: {search: true,multi:true }, hidden: false,sortable: false },
             { field: "date", title: "Fecha", filterable: {search: true,multi:false }, hidden: false, format: "{0:dd/MM/yyyy}",sortable: true },
+            { field: "cant", title: "Cantidad", filterable: {search: true,multi:true }, hidden: false,sortable: false },
             { field: "fdr", title: "FDR", filterable: {search: true,multi:true }, hidden: false,sortable: false },
             { field: "cso", title: "CSO", filterable: {search: true,multi:true }, hidden: false,sortable: false },
             { field: "wbs", title: "WBS", filterable: {search: true,multi:true }, hidden: false,sortable: false },
@@ -74,7 +75,10 @@ $(document).ready(function () {
             { field: "name", title: "Proveedor", filterable: {search: true,multi:true }, hidden: false,sortable: false },
             { field: "company", title: "Empresa", filterable: {search: true,multi:true }, hidden: false,sortable: false },
             { field: "client", title: "Cliente", filterable: {search: true,multi:true }, hidden: false,sortable: false },
-            { field: "clientcompany", title: "Empresa", filterable: {search: true,multi:true }, hidden: false,sortable: false },],
+            { field: "contrato", title: "Contrato", filterable: {search: true,multi:true }, hidden: false,sortable: false },
+            { field: "area", title: "Área", filterable: {search: true,multi:true }, hidden: false,sortable: false },
+            { field: "clientcompany", title: "Empresa", filterable: {search: true,multi:true }, hidden: false,sortable: false },
+            { field: "user", title: "Realizado por", filterable: {search: true,multi:true }, hidden: false,sortable: false }],
           editable: "popup"
       });
 

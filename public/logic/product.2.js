@@ -1,8 +1,8 @@
 
-  $( "#formsave" ).hide();
-  $( "#busqueda" ).hide();
-  $( "#actions" ).hide();
-  $( "#formIngreso" ).hide();
+$("#formsave").hide();
+$("#busqueda").hide();
+$("#actions").hide();
+$("#formIngreso").hide();
 
 var validator = $("#formsave").kendoValidator().data("kendoValidator");
 var validatorModel = $("#formSaveModel").kendoValidator().data("kendoValidator");
@@ -128,10 +128,10 @@ function sendData(data) {
 
     if (data.length > 0) {
 
-       
+
         $("#txtSerie").data("kendoComboBox").value("");
 
-        
+
         dataSourceSeries = new kendo.data.DataSource({
             transport: {
                 read: {
@@ -331,7 +331,7 @@ $(document).ready(function () {
 
     $("#txtSerie").kendoComboBox();
 
-   
+
 
     dataSourceBrand = new kendo.data.DataSource({
         transport: {
@@ -490,6 +490,7 @@ $(document).ready(function () {
                 id: "id",
                 fields: {
                     id: { editable: false },
+                    idproduct: { editable: false },
                     Producto: { editable: false },
                     barcode: { validation: { required: true }, type: 'string', editable: true },
                     brand: { validation: { required: true }, type: 'string', editable: false },
@@ -501,12 +502,18 @@ $(document).ready(function () {
                 }
             }
         },
-        group: [ 
-            { field: "code", aggregates: [{ field: "cant", aggregate: "sum" }, { field: "cant", aggregate: "count" }] },
-            { field: "cant", aggregates: [{ field: "cant", aggregate: "sum" }, { field: "cant", aggregate: "count" }] } ], 
+        group: [{
+            field: "code2", dir: "asc", aggregates: [
+                { field: "code2", aggregate: "count" },
+                { field: "cant", aggregate: "sum" }
+            ]
+        }],
 
-        aggregate: [{ field: "barcode", aggregate: "count" }],
-        aggregate: [{ field: "code", aggregate: "count" }],
+        aggregate: [
+            { field: "cant", aggregate: "sum" },
+
+        ],
+
 
 
         pageSize: 1000
@@ -518,54 +525,35 @@ $(document).ready(function () {
         $.get("/model/readmodel", function (codes) {
             $("#grid2").kendoGrid({
                 dataSource: dataSource,
+                toolbar: ['excel'],
 
                 height: 400,
                 resizable: true,
                 scrollable: true,
-                columnMenu: true,
+
+
                 filterable: true,
                 resizable: true,
-                groupable: true,
-
-
                 pageable: { refresh: true, pageSizes: true, },
-                pdf: {
-                    allPages: true,
-                    avoidLinks: true,
-                    paperSize: "A4",
-                    margin: { top: "7.8cm", left: "1cm", right: "1cm", bottom: "2.54cm" },
-                    landscape: false,
-                    repeatHeaders: true,
-                    template: $("#page-template").html(),
-                    scale: 0.8
-                },
-                pdfExport: function (e) {
-                    var grid = $("#grid2").data("kendoGrid");
-                    grid.hideColumn(5);
-                    grid.hideColumn(7);
-
-                    e.promise
-                        .done(function () {
-                            grid.showColumn(5);
-                            grid.showColumn(7);
-                        });
-                },
                 columns: [
-                    { field: "description", title: "Producto", filterable: { search: true } },
-                    { field: "Producto", hidden: true, aggregates: ["min", "max", "count"], groupHeaderTemplate: "Cantidad: #= count#" },
-                    { field: "category", title: "Tipo", filterable: { search: true, multi: true } },
-                    { field: "brand", title: "Marca", filterable: { search: true, multi: true } },
-                    { field: "code", title: "Código", filterable: { search: true, multi: true }, values: codes, editor: comboCodigos },
+                    { field: "code2", title: "Código", filterable: { search: true, multi: true }, editor: comboCodigos, groupHeaderTemplate: "#= value#  [#= count# ítem(s)]" },
+                    { field: "description", title: "Nombre", filterable: { search: true, multi: true } },
                     { field: "barcode", aggregates: ["count"], title: "No. de serie", filterable: { search: true, multi: true } },
-                    { field: "cant", aggregates: ["sum"], title: "Cant.", filterable: { search: true, multi: true }, aggregates: ["sum"], groupHeaderTemplate: "Cantidad: #= sum #" },
+                    { field: "Producto", hidden: true, aggregates: ["min", "max", "count"] },
+                    { field: "category", title: "Tipo", filterable: { search: true, multi: true } },
+                    { field: "brand", title: "Marca", filterable: { search: true, multi: true } ,  groupFooterTemplate: "Total:"},
+
+
+                    { field: "cant", aggregates: ["sum"], title: "Cant.", filterable: { search: true, multi: true }, aggregates: ["sum"], groupFooterTemplate: "#=sum#" },
                     { field: "location", title: "Almacén", values: data, filterable: { search: true, multi: true } },
                     { field: "fdr", title: "FDR", filterable: { search: true, multi: true } },
                     { field: "cso", title: "CSO", filterable: { search: true, multi: true } },
                     { field: "wbs", title: "WBS", filterable: { search: true, multi: true } },
                     { field: "contrato", title: "Contrato", filterable: { search: true, multi: true } },
                     { field: "area", title: "Área", filterable: { search: true, multi: true } },
-                    { field: "comment", title: "Comentario", filterable: { search: true, multi: false } },
+                    { field: "comment", title: "Comentario", filterable: { search: true, multi: true } },
                     { field: "bill", title: "Factura", hidden: true }],
+                groupable: false,
                 editable: "popup"
             })
 

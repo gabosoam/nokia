@@ -97,7 +97,7 @@
                     <li class="active">
                         <a href="/vouchers">
                             <i class="fa fa-arrow-left"></i>
-                            <span class="nav-label">Salidas</span>
+                            <span class="nav-label">Entregas</span>
                         </a>
                     </li>
 
@@ -309,7 +309,7 @@
                             <button onclick="print()" class="btn btn-primary">Imprimir</button>
                             <div id="print" style="min-width: 210mm; font-family: 'Arial Narrow'">
 
-                                <table style="width: 100%">
+                                <table class="e" style="width: 100%">
                                     <tr>
                                         <td></td>
                                         <td>
@@ -372,10 +372,10 @@
 
                                 </table>
                                 <hr>
-                                <table id="Vouchers" class="table ">
+                                <table class="w3-table w3-striped" id="Vouchers" class="table ">
                                     <thead style="font-size:13px;">
-                                        <tr>
-                                            <th style="text-align: center">Nombre</th>
+                                        <tr class="w3-blue">
+                                            <th class="w3-blue" style="text-align: center">Nombre</th>
                                             <th style="text-align: center">Código</th>
                                             <th style="text-align: center">No. de Serie</th>
                                             <th style="text-align: center">Cant</th>
@@ -430,12 +430,12 @@
                                                     <br>
                                                     <br>
                                                     <br>
-                                                    <br>
+                                                 
                                                     <br> _______________________________
                                                     <br>
                                                     <br>
-                                                    <%=data.user%>
-                                                    <input type="text" style="border: 0; width: 100%; text-align: center; text-transform: uppercase">
+                                                    <p>Nombre______________________</p>
+                                                    <p>C.I.__________________________</p>
                                                 </p>
                                             </center>
 
@@ -465,13 +465,13 @@
                                                     <br>
                                                     <br>
                                                     <br>
-                                                    <br>
+                                               
                                                     <br> _______________________________
                                                     <br>
                                                     <br>
                                                     <p>Nombre______________________</p>
                                                 <p>C.I.__________________________</p>
-                                                    <input type="text" style="border: 0; width: 100%; text-align: center; text-transform: uppercase">
+                                                
                                                 </p>
                                             </center>
 
@@ -479,6 +479,10 @@
                                         </td>
                                     </tr>
                                 </table>
+
+                                <div style="position: relative; bottom: 0">
+                                    <h1 class="w3-display-bottommiddle">Soy un footer</h1>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -685,7 +689,10 @@
     <script src="../kendo/js/kendo.messages.es-MX.min.js"></script>
     <script src="../js/w3.js"></script>
     <script src="../js/jquery.PrintArea.js"></script>
+    <script src="../js/pdf/printme.js"></script>
+    <script src="../js/pdf/printme2.js"></script>
     <script src="../js/datatables.min.js"></script>
+    
 
     <script>
         $(document).ready(function () {
@@ -738,7 +745,7 @@
 
                             $.post("/product/createSalida", data, function (data) {
 
-                                if (data == true) {
+                                if (data == 'Entrega realizada correctamente') {
                                     alert('Producto guardado');
                                     $('#grid2').data('kendoGrid').dataSource.read();
                                     $('#grid2').data('kendoGrid').refresh();
@@ -746,7 +753,7 @@
 
                                     $('#formIngreso')[0].reset();
                                 } else {
-                                    alert('Algo salió mal');
+                                    alert(data);
                                 }
                             });
 
@@ -764,7 +771,7 @@
 
                     $.post("/product/createSalida", data, function (data) {
 
-                        if (data == true) {
+                        if (data == 'Entrega realizada correctamente') {
 
 
                             alert('Producto guardado');
@@ -774,7 +781,7 @@
 
                             $('#formIngreso')[0].reset();
                         } else {
-                            alert('Algo salió mal');
+                            alert(data);
                         }
                     });
 
@@ -820,9 +827,11 @@
         }
 
 
-        function print() {
-            $('#print').printArea();
 
+
+        function print() {
+            //$('#print').printArea({ mode: 'iframe'});
+            $("#print").printMe({ "path": ["/css/w3.css"] });
         }
         function openLotes() {
 
@@ -835,13 +844,20 @@
         <script>
             var bill = '<%= bill %>';
             var userBill = '<%=data.iduser%>';
+            var databill = '<%=data%>';
             var userSession = '<%=user.id%>';
             var user = '<%=data.user%>';
+            var userid = '<%=user.id%>';
             var reference = '<%=data.reference%>';
+
+            alert(userid+" "+userbill)
+           
         </script>
         <% } %>
 
             <% if (data.state == 0) { %>
+
+            
                 <script src="../logic/product.12.js"></script>
                 <% } else { %>
                     <script src="../logic/product.13.js"></script>

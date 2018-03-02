@@ -88,7 +88,7 @@
                     <li>
                         <a href="/vouchers">
                             <i class="fa fa-arrow-left"></i>
-                            <span class="nav-label">Salidas</span>
+                            <span class="nav-label">Entregas</span>
                         </a>
                     </li>
 
@@ -156,14 +156,14 @@
                                             <a data-toggle="tab" href="#tab-1"> Existencias</a>
                                         </li>
                                         <li class="">
-                                            <a data-toggle="tab" href="#tab-2">Busquedas</a>
+                                            <a data-toggle="tab" href="#tab-2">Historial</a>
                                         </li>
                                     </ul>
                                     <div class="tab-content">
                                         <div id="tab-1" class="tab-pane active">
                                             <div class="panel-body">
-                                                <h1>Pendiente</h1>
-                                                <div id="gridexistencias2"></div>
+
+                                                <div id="gridexistencias"></div>
                                             </div>
                                         </div>
                                         <div id="tab-2" class="tab-pane">
@@ -221,13 +221,26 @@
 
                                                     </div>
 
+
+
                                                     <div class="col-md-3">
+
+
+                                                        <div class="form-group">
+                                                            <label for="cso">Contrato:</label>
+                                                            <input autocomplete="true" placeholder="Contrato" type="text" class="form-control" id="contrato">
+                                                        </div>
+
+
+
                                                         <div class="form-group">
                                                             <label for="mibuton">Acción</label>
                                                             <br>
                                                             <button id="mibuton" onclick="buscar()" class="btn btn-success">Buscar</button>
 
                                                         </div>
+
+
 
                                                     </div>
 
@@ -373,79 +386,100 @@
 
 
     <script>
-        // dataSourceExistenias = new kendo.data.DataSource({
-        //     transport: {
-        //         read: { url: "existencia", type: 'get', dataType: "json" },
-        //         update: { url: "/bill/update", type: "POST", dataType: "json" },
-        //         destroy: { url: "/bill/delete", type: "POST", dataType: "json" },
-        //         create: { url: "/bill/create", type: "POST", dataType: "json" },
-        //         parameterMap: function (options, operation) {
-        //             if (operation !== "read" && options.models) {
-        //                 var datos = options.models[0]
-        //                 return datos;
-        //             }
-        //         }
-        //     },
-        //     batch: true,
-        //     pageSize: 1000,
-        //     serverFiltering: false,
-        //     requestEnd: function (e) {
-        //         if (e.type != "read") {
-        //             // refresh the grid
-        //             e.sender.read();
-        //         }
-        //     },
-        //     schema: {
-        //         model: {
-        //             id: "idprod",
-        //             fields: {
-        //                 idprod: { editable: false },
-        //                 estado: {editable:false}
+        dataSourceExistenias = new kendo.data.DataSource({
+            transport: {
+                read: { url: "existencia", type: 'get', dataType: "json" },
+                update: { url: "/bill/update", type: "POST", dataType: "json" },
+                destroy: { url: "/bill/delete", type: "POST", dataType: "json" },
+                create: { url: "/bill/create", type: "POST", dataType: "json" },
+                parameterMap: function (options, operation) {
+                    if (operation !== "read" && options.models) {
+                        var datos = options.models[0]
+                        return datos;
+                    }
+                }
+            },
+            batch: true,
+            pageSize: 1000,
+            serverFiltering: false,
+            requestEnd: function (e) {
+                if (e.type != "read") {
+                    // refresh the grid
+                    e.sender.read();
+                }
+            },
+            schema: {
+                model: {
+                    id: "idprod",
+                    fields: {
+                        idprod: { editable: false },
+                        estado: { editable: false }
 
-        //             }
-        //         }
-        //     },
+                    }
+                }
+            },
 
-        //     group: [{ field: "code", dir: "asc" },{ field: "estado", dir: "asc" }],
-        //     aggregate: [
-        //         { field: "code", aggregate: "count" },
-        //         { field: "category", aggregate: "count" },
-        //         { field: "estado", aggregate: "count" }],
-        // },
-        // );
+            group: [{
+                field: "code", dir: "asc", aggregates: [
+                    { field: "code", aggregate: "count" },
+                    { field: "enbodega", aggregate: "sum" },
+                    { field: "counting", aggregate: "sum" },
+                    { field: "countegs", aggregate: "sum" },
+                ]
+            }],
 
+            aggregate: [
+                { field: "enbodega", aggregate: "sum" },
+                { field: "counting", aggregate: "sum" },
+                { field: "countegs", aggregate: "sum" },
 
-        // $("#gridexistencias").kendoGrid({
-        //     dataSource: dataSourceExistenias,
-        //     height: 475,
-        //     filterable: true,
-        //     columnMenu: true,
-        //     groupable: true,
-        //     resizable: true,
-        //     pageable: { refresh: true, pageSizes: true, },
-
-        //     columns: [
-
-        //         { field: "idprod", hidden: true, title: "FDR", filterable: { search: true, multi: true } },
-        //         { field: "code", title: "Código", filterable: { search: true, multi: true } },
-        //         { field: "description", title: "Nombre", filterable: { search: true, multi: true } },
-        //         { field: "barcode", title: "No. de serie", filterable: { search: true, multi: true } },
-        //         { field: "category", title: "Categoría", filterable: { search: true, multi: true } },
-        //         { field: "brand", title: "Marca", filterable: { search: true, multi: true } },
-        //         { field: "counting", title: "T. Ingresos", filterable: { search: true, multi: true } },
-        //         { field: "countegs", title: "T. Entregas", filterable: { search: true, multi: true } },
-        //         { field: "estado", title: "Estado", filterable: { search: true, multi: true }, aggregates: ["min", "max", "count"], groupHeaderTemplate: "Cantidad: #= count#" },
+            ],
+        },
+        );
 
 
-        //         { command: [{ text: "Historial", click: showDetails, iconClass: 'icon icon-chart-column' }], title: "Acciones" }],
-        //     editable: "popup"
-        // });
+        $("#gridexistencias").kendoGrid({
+            dataSource: dataSourceExistenias,
+            height: 475,
+            filterable: true,
+           
+            toolbar: ['excel'],
+            resizable: true,
+            pageable: { refresh: true, pageSizes: true, },
 
-        // function showDetails(e) {
-        //     e.preventDefault();
-        //     var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
-        //     location.href = "/history/" + dataItem.idprod;
-        // }
+            columns: [
+
+                { field: "idprod", hidden: true, title: "FDR", filterable: { search: true, multi: true } },
+                { field: "code", title: "Código", filterable: { search: true, multi: true } },
+                { field: "description", title: "Nombre", filterable: { search: true, multi: true } },
+                { field: "barcode", title: "No. de serie", filterable: { search: true, multi: true } },
+                { field: "category", title: "Categoría", filterable: { search: true, multi: true } },
+                { field: "brand", title: "Marca", filterable: { search: true, multi: true }, groupFooterTemplate: " Total:" },
+                { field: "counting", title: "T. Ingresos", filterable: { search: true, multi: true }, aggregates: ["sum"], groupFooterTemplate: " #=sum#" },
+                { field: "countegs", title: "T. Entregas", filterable: { search: true, multi: true }, aggregates: ["sum"], groupFooterTemplate: " #=sum#" },
+                { field: "enbodega", title: "En bodega", filterable: { search: true, multi: true }, aggregates: ["sum"], groupFooterTemplate: " #=sum#" },
+
+
+                { command: [{ text: "Historial", click: showDetails, iconClass: 'icon icon-chart-column' }], title: "Acciones" }],
+            dataBound: function (e) {
+                if (this.dataSource.group().length > 0) {
+                    console.log($(".k-grouping-row"));
+
+                    for (var i = 0; i < $(".k-grouping-row").length; i++) {
+                        this.collapseGroup($(".k-grouping-row")[i]);
+                    }
+
+                }
+            },
+
+            editable: "popup"
+        });
+
+        function showDetails(e) {
+            e.preventDefault();
+            var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+            location.href = "/history/" + dataItem.idprod;
+        }
 
     </script>
 
@@ -479,12 +513,13 @@
 
         function buscar() {
 
-            var code = { text: 'code', value: $('#codigo').val() };
-            var barcode = { text: 'barcode', value: $('#serie').val() };
-            var fdr = { text: 'fdr', value: $('#fdr').val() };
-            var cso = { text: 'cso', value: $('#cso').val() };
-            var tipo = { text: 'categoryid', value: $('#Cat').val() };
-            var wbs = { text: 'wbs', value: $('#wbs').val() };
+            var code = { text: 'code', value: $('#codigo').val().trim() };
+            var barcode = { text: 'barcode', value: $('#serie').val().trim() };
+            var fdr = { text: 'fdr', value: $('#fdr').val().trim() };
+            var cso = { text: 'cso', value: $('#cso').val().trim() };
+            var tipo = { text: 'categoryid', value: $('#Cat').val().trim() };
+            var wbs = { text: 'wbs', value: $('#wbs').val().trim() };
+            var contrato = { text: 'contrato', value: $('#contrato').val().trim() };
 
 
 
@@ -498,8 +533,12 @@
             if (cso.value.trim() != '') { data.push(cso) }
             if (tipo.value.trim() != '') { data.push(tipo) }
             if (wbs.value.trim() != '') { data.push(wbs) }
+            if (contrato.value.trim() != '') { data.push(contrato) }
+
+
 
             sql = "SELECT * FROM v_historico WHERE"
+            sqlAll = "SELECT * FROM v_historico";
 
 
 
@@ -518,10 +557,37 @@
             if ($("#grid2").data("kendoGrid")) {
                 $("#grid2").data("kendoGrid").destroy();
             }
+
+            if (
+                codigo.value.trim() == ''
+                && barcode.value.trim() == ''
+                && fdr.value.trim() == ''
+                && cso.value.trim() == ''
+                && tipo.value.trim() == ''
+                && wbs.value.trim() == ''
+                && contrato.value.trim() == '') {
+                sql = sqlAll;
+            }
+
+
+
             $.post("/buscar", { sql: sql }, function (data) {
                 dataSource = new kendo.data.DataSource({
-                    data: data
+                    data: data,
+                    schema: {
+                        model: {
+                            id: "id",
+                            fields: {
+
+                                date: { validation: { required: true, }, type: 'date' },
+                                cant: { validation: { required: true, }, type: 'number' },
+
+                            }
+                        }
+                    },
+                    pageSize: 1000,
                 },
+
                 );
 
                 $.get("/model/readmodel", function (codes) {
@@ -529,8 +595,7 @@
                         dataSource: dataSource,
                         height: 475,
                         filterable: true,
-                        columnMenu: true,
-                        groupable: true,
+                        toolbar: ['excel'],
                         resizable: true,
 
                         // <td style="text-align: center">{{type2}}</td>
@@ -549,14 +614,19 @@
 
                         columns: [
                             { field: "type2", title: "Transacción", filterable: { search: true, multi: true } },
+                            { field: "numero", title: "Número", filterable: { search: true, multi: true } },
+                            { field: "date", title: "Fecha", filterable: { search: true, search: true }, format: "{0:dd/MM/yyyy}" },
                             { field: "description", title: "Nombre", filterable: { search: true, multi: true } },
                             { field: "code", title: "Código", filterable: { search: true, multi: true } },
-                            { field: "barcode", title: "Número de serie", filterable: { search: true, multi: true } },
+                            { field: "barcode", title: "Serie", filterable: { search: true, multi: true } },
+                            { field: "cant", title: "Cant.", filterable: { search: true, multi: false } },
                             { field: "category", editable: false, title: "Tipo", filterable: { search: true, multi: true } },
                             { field: "brand", editable: false, title: "Marca", filterable: { search: true, multi: true } },
                             { field: "fdr", title: "FDR", filterable: { search: true, multi: true } },
                             { field: "cso", title: "CSO", filterable: { search: true, multi: true } },
                             { field: "wbs", title: "WBS", filterable: { search: true, multi: true } },
+                            { field: "contrato", title: "Contrato", filterable: { search: true, multi: true } },
+                            { field: "user", title: "Realizado por", filterable: { search: true, multi: true } },
 
                             { command: [{ text: "Historial", click: showDetails, iconClass: 'icon icon-chart-column' }], title: "Acciones" }],
                         editable: "popup"

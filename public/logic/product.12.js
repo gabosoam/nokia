@@ -444,7 +444,7 @@ $(document).ready(function () {
     dataSource = new kendo.data.DataSource({
         transport: {
             read: { url: "/bill/read/" + bill, dataType: "json" },
-            update: { url: "/product/update2", type: "POST", dataType: "json" },
+            update: { url: "/product/update3", type: "POST", dataType: "json" },
             destroy: { url: "/product/delete2", type: "POST", dataType: "json" },
             create: {
                 url: "/product/create2", type: "POST", dataType: "json", success: function (data) {
@@ -473,26 +473,33 @@ $(document).ready(function () {
                 id: "id",
                 fields: {
                     id: { editable: false },
+                    idproduct: { editable: false },
                     Producto: { editable: false },
-                    barcode: { validation: { required: true }, type: 'string', editable: true },
+                    code2: { editable: false },
+                    barcode: { validation: { required: true }, type: 'string', editable: false },
+                    cant: { validation: { required: true }, type: 'number', editable: true },
                     brand: { validation: { required: true }, type: 'string', editable: false },
                     category: { validation: { required: true }, type: 'string', editable: false },
                     description: { validation: { required: true, }, type: 'string', editable: false },
                     bill: { type: 'string', defaultValue: bill, editable: false, visible: false },
 
-                    code: { editable: true }
+                    code: { editable: false }
                 }
             }
         },
 
 
-        group: [ 
-            { field: "code", aggregates: [{ field: "cant", aggregate: "sum" }, { field: "cant", aggregate: "count" }] },
-            { field: "cant", aggregates: [{ field: "cant", aggregate: "sum" }, { field: "cant", aggregate: "count" }] } ], 
+        group: [{
+            field: "code2", dir: "asc", aggregates: [
+                { field: "code2", aggregate: "count" }, 
+                { field: "cant", aggregate: "sum" }
+            ]
+        }],
 
-        aggregate: [{ field: "barcode", aggregate: "count" }],
-        aggregate: [{ field: "code", aggregate: "count" }],
-        aggregate: [{ field: "cant", aggregate: "sum" }],
+        aggregate: [
+            { field: "cant", aggregate: "sum" },
+         
+        ],
         pageSize: 1000
     },
     );
@@ -506,7 +513,7 @@ $(document).ready(function () {
                 dataSource: dataSource,
                 height: 475,
                 filterable: true,
-                groupable: true,
+
                 resizable: true,
 
                 pageable: { refresh: true, pageSizes: true, },
@@ -535,20 +542,22 @@ $(document).ready(function () {
                             grid.showColumn(7);
                         });
                 },
+                
                 columns: [
-                    { field: "description", title: "Producto", filterable: { search: true, multi: true } },
+                    { field: "code2", title: "Código", filterable: { search: true, multi: true }, editor: comboCodigos,groupHeaderTemplate: "#= value# [#= count# ítem(s)]" },
+                    { field: "description", title: "Nombre", filterable: { search: true, multi: true } },
                     { field: "category", title: "Tipo", filterable: { search: true, multi: true } },
                     { field: "brand", title: "Marca", filterable: { search: true, multi: true } },
-                    { field: "code", title: "Código", filterable: { search: true, multi: true }, values: codes, editor: comboCodigos },
-                    { field: "barcode", aggregates: ["count"], title: "No. de serie", filterable: { search: true, multi: true } },
-                    { field: "cant", aggregates: ["sum"], title: "Cant.", filterable: { search: true, multi: true }, aggregates: ["sum"], groupHeaderTemplate: "Cantidad: #= sum #" },
+                    
+                    { field: "barcode", aggregates: ["count"], title: "Serie", filterable: { search: true, multi: true }, groupFooterTemplate: "Total:" },
+                    { field: "cant", aggregates: ["sum"], title: "Cant.", filterable: { search: true, multi: true }, aggregates: ["sum"],  groupFooterTemplate: "#=sum#" },
 
                     { field: "fdr", title: "FDR", filterable: { search: true, multi: true } },
                     { field: "cso", title: "CSO", filterable: { search: true, multi: true } },
                     { field: "wbs", title: "WBS", filterable: { search: true, multi: true } },
                     { field: "contrato", title: "Contrato", filterable: { search: true, multi: true } },
                     { field: "area", title: "Área", filterable: { search: true, multi: true } },
-                    { field: "comment", title: "Comentario" },
+                    { field: "comment", title: "Comentario", filterable: { search: true, multi: true }},
                     { field: "bill", title: "Factura", hidden: true },
                     { command: ["edit", "destroy"], title: "Acciones" }],
                 editable: "popup"

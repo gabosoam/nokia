@@ -219,6 +219,7 @@ function senData(i) {
         contrato  : $('#id' + i + '' + 7).text(),
         area  : $('#id' + i + '' + 8).text(),
         observation: $('#id' + i + '' + 9).text(),
+        cant: $('#id' + i + '' + 10).text(),
 
     }, function( data ) {
         $("#state"+i).text(JSON.stringify(data));

@@ -85,16 +85,16 @@ router.post('/updateprice',isLoggedInAdmin, function (req, res, next) {
 
 router.post('/create2', function(req, res, next) {
 
-  product.create2(req.body, function (error, result) {
-    res.send(true);  
+  product.create2(req.body, function ( result) {
+    res.send(result);  
   })
   
 })
 
 router.post('/createSalida', function(req, res, next) {
 
-  product.createSalida(req.body, function (error, result) {
-    res.send(true);  
+  product.createSalida(req.body, function (result) {
+    res.send(result);  
   })
   
 })
@@ -144,6 +144,24 @@ router.post('/update', isLoggedIn, function(req, res,next) {
 router.post('/update2', isLoggedIn, function(req, res,next) {
   var data = req.body;
   product.update2(data,function(err, result) {
+    if (err) {
+      res.sendStatus(500);
+    } else {
+      if (result.affectedRows>0) {
+        res.send(true);
+      }else{
+        res.sendStatus(500);
+      }
+    }
+  })
+
+  
+})
+
+router.post('/update3', isLoggedIn, function(req, res,next) {
+  var data = req.body;
+  product.update3(data,function(err, result) {
+    console.log(result)
     if (err) {
       res.sendStatus(500);
     } else {

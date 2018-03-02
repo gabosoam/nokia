@@ -40,6 +40,15 @@ router.get('/read/:bill', isLoggedIn, function (req, res, next) {
   })
 });
 
+router.get('/read2/:bill', isLoggedIn, function (req, res, next) {
+  var bill = req.params.bill;
+
+  product.readBill(bill, function (error, data) {
+    res.send(data);
+
+  })
+});
+
 router.get('/readprice/:bill', isLoggedInAdmin, function (req, res, next) {
   var bill = req.params.bill;
 
