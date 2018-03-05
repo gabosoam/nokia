@@ -182,6 +182,8 @@ module.exports = {
                         });
 
                     } else {
+
+                    //CODIGO PARA VALIDAR
                         connection.query({
                             sql: 'SELECT * FROM v_existencias WHERE idprod=?',
                             values: [results[0].id]

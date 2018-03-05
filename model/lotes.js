@@ -22,12 +22,12 @@ module.exports = {
 
     },
     insertBarcode: function (data, callback) {
-        if(data.fdr==''){data.fdr='N/A'};
-        if(data.cso==''){data.cso='N/A'};
-        if(data.contrato==''){data.contrato='N/A'};
-        if(data.wbs==''){data.wbs='N/A'};
-        if(data.area==''){data.area='N/A'};
-        if(data.observation==''){data.observation='N/A'};
+        if (data.fdr == '') { data.fdr = 'N/A' };
+        if (data.cso == '') { data.cso = 'N/A' };
+        if (data.contrato == '') { data.contrato = 'N/A' };
+        if (data.wbs == '') { data.wbs = 'N/A' };
+        if (data.area == '') { data.area = 'N/A' };
+        if (data.observation == '') { data.observation = 'N/A' };
 
 
         var variant, location, barcode, code;
@@ -65,32 +65,69 @@ module.exports = {
                                             code = results[0].id
 
                                             connection.query({
-                                                sql: 'SELECT * FROM billdetail INNER JOIN product ON billdetail.product = product.id WHERE bill=? AND product=? AND product.barcode!=? AND product.barcode!=?',
-                                                values: [data.bill, code, 'S/N', 'S/S']
+                                                sql: 'SELECT * FROM v_existencias WHERE idprod=?',
+                                                values: [code]
                                             }, function (err, results, fields) {
                                                 if (err) {
-                                                    callback(err);
+                                                    callback('Existió un error inesperado');
                                                 } else {
                                                     if (results[0]) {
-                                                        callback('El producto ya existe en el ingreso actual');
-                                                    } else {
-                                                        connection.query({
-                                                            sql: 'INSERT INTO `billdetail` (`bill`, `product`, `location`, `comment`, `fdr`, `cso`, `wbs`, area, contrato, cant) VALUES (?,?,?,?,?,?,?,?,?,?)',
-                                                            values: [data.bill, code, location, data.observation, data.fdr, data.cso, data.wbs, data.area, data.contrato, data.cant]
-                                                        }, function (err, results, fields) {
-                                                            if (err) {
-                                                                console.log(err)
-                                                                callback(err);
-                                                            } else {
-                                                                if (results.affectedRows > 0) {
-                                                                    callback('Guardado')
+
+                                                        if (results[0].barcode == 'S/N') {
+
+                                                            connection.query({
+                                                                sql: 'INSERT INTO `billdetail` (`bill`, `product`, `location`, `comment`, `fdr`, `cso`, `wbs`, area, contrato, cant) VALUES (?,?,?,?,?,?,?,?,?,?)',
+                                                                values: [data.bill, code, location, data.observation, data.fdr, data.cso, data.wbs, data.area, data.contrato, data.cant]
+                                                            }, function (err, results, fields) {
+                                                                if (err) {
+                                                                    console.log(err)
+                                                                    callback(err);
                                                                 } else {
-                                                                    callback('Existió un error inesperado 2');
+                                                                    if (results.affectedRows > 0) {
+                                                                        callback('Guardado')
+                                                                    } else {
+                                                                        callback('Existió un error inesperado 2');
+                                                                    }
                                                                 }
+                                                            })
+
+                                                        } else {
+
+                                                            if (results[0].enbodega == 0) {
+
+                                                                connection.query({
+                                                                    sql: 'INSERT INTO `billdetail` (`bill`, `product`, `location`, `comment`, `fdr`, `cso`, `wbs`, area, contrato, cant) VALUES (?,?,?,?,?,?,?,?,?,?)',
+                                                                    values: [data.bill, code, location, data.observation, data.fdr, data.cso, data.wbs, data.area, data.contrato, data.cant]
+                                                                }, function (err, results, fields) {
+                                                                    if (err) {
+                                                                        console.log(err)
+                                                                        callback(err);
+                                                                    } else {
+                                                                        if (results.affectedRows > 0) {
+                                                                            callback('Guardado')
+                                                                        } else {
+                                                                            callback('Existió un error inesperado 2');
+                                                                        }
+                                                                    }
+                                                                })
+
+
+                                                            } else {
+                                                                callback('El producto se encuentra en bodega');
                                                             }
-                                                        })
 
 
+                                                        }
+
+
+
+
+
+                                            
+                                                    } else {
+
+
+                                                        callback('Existió un error inesperado');
                                                     }
                                                 }
                                             })
