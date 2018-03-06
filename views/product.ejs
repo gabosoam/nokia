@@ -12,7 +12,7 @@
 
     </html>
 
-    <title>Sistema de inventario</title>
+    <title>Inventario Nokia</title>
 
     <link href="../inspinia/css/bootstrap.min.css" rel="stylesheet">
     <link href="../inspinia/font-awesome/css/font-awesome.css" rel="stylesheet">
@@ -145,11 +145,25 @@
 
                         </ul>
                     </li>
-                    <li class="active">
+                    <li>
                         <a href="/bill">
                             <i class="fa fa-arrow-right"></i>
                             <span class="nav-label">Ingresos</span>
+                            <span class="fa arrow"></span>
                         </a>
+                        <ul class="nav nav-second-level collapse">
+
+                            <li>
+                                <a href="/bill">Ingresos</a>
+                            </li>
+                            <li>
+                                <a href="/labels">Etiquetas</a>
+                            </li>
+
+
+
+                        </ul>
+                        
                     </li>
                     <li>
                         <a href="/vouchers">
@@ -236,6 +250,7 @@
                                 <button id="btnPrint" type="button" class="btn btn-default" onclick="print()">
                                     <span class="fa fa-print"></span> Imprimir</button>
                                 <hr>
+                 
 
                                 <form id="formIngreso">
 
@@ -376,29 +391,32 @@
                 </div>
                 <div class="modal-body">
                     <button onclick="print()" class="btn btn-primary">Imprimir</button>
-                    <div class="contenido" id="print" style="min-width: 210mm; font-family: 'Arial Narrow'">
+
+                    <div class="contenido" id="print" style="font-family: 'Arial Narrow'">
 
                         <div class="cuerporeporte">
                             <div>
 
-                                <div class="w3-display-container">
+                                <div class="w3-display-container" style="height:55px;">
 
-                                    <img id="auto" class="w3-display-middle" class="" src="../images/nokia.png" width="280px" />
+                                    <img id="auto" class="w3-display-middle" class="" src="../images/nokia.png" width="280px" height="55px" />
 
-                                    <script>
 
-                                    </script>
-                                    <p class="cuerpo w3-display-right">
+                                    <p class="w3-display-right cuerpo ">
 
                                         <%=data.codigo%>
 
+                                        
+
                                     </p>
+
+                                    
 
                                 </div>
 
 
-                                <div class="w3-display-container" style="height:50px;">
-                                    <h3 class="cuerpo w3-display-middle">ACTA DE INGRESO</h3>
+                                <div class="w3-display-container" style="height:25px;">
+                                        <h4 class="cuerpo w3-display-middle">ACTA DE INGRESO</h4>
                                 </div>
                                 <hr>
 
@@ -430,44 +448,40 @@
                                     </div>
                                 </div>
 
-
-
-
-
                                 <hr>
-                                <table id="Vouchers" class="w3-table w3-bordered">
+                                <table id="Vouchers" class="w3-table w3-bordered" style="width: 100%"  >
                                     <thead class="w3-border" style="font-size:13px;">
-                                        <tr class="cuerpo">
-                                            <th style="text-align: center">Código</th>
-                                            <th style="text-align: center">Nombre</th>
-                                            <th style="text-align: center">Serie</th>
-                                            <th style="text-align: center">Cant</th>
-                                            <th style="text-align: center">Tipo</th>
-                                            <th style="text-align: center">Marca</th>
-                                            <th style="text-align: center">FDR</th>
-                                            <th style="text-align: center">CSO</th>
-                                            <th style="text-align: center">WBS</th>
-                                            <th style="text-align: center">Ubicación</th>
-                                            <th style="text-align: center">Contrato</th>
-                                            <th style="text-align: center">Área</th>
-                                            <th style="text-align: center">Comentario</th>
+                                        <tr  class="cuerpo w3-border">
+                                            <th class="borde-celda" style="text-align: center">Código</th>
+                                            <th class="borde-celda" class="borde-celda" style="text-align: center">Nombre</th>
+                                            <th class="borde-celda" style="text-align: center">Serie</th>
+                                            <th class="borde-celda" style="text-align: center">Cant</th>
+                                            <th class="borde-celda" style="text-align: center">Tipo</th>
+                                            <th class="borde-celda" style="text-align: center">Marca</th>
+                                            <th class="borde-celda" style="text-align: center">FDR</th>
+                                            <th class="borde-celda" style="text-align: center">CSO</th>
+                                            <th class="borde-celda" style="text-align: center">WBS</th>
+                                            <th class="borde-celda" style="text-align: center">Ubicación</th>
+                                            <th class="borde-celda" style="text-align: center">Contrato</th>
+                                            <th class="borde-celda" style="text-align: center">Área</th>
+                                            <th class="borde-celda" style="text-align: center">Comentario</th>
                                         </tr>
                                     </thead>
                                     <tbody class="w3-border" style="font-size:11px;">
                                         <tr class="cuerpo" w3-repeat="voucherss">
-                                            <td style="text-align: center">{{code2}}</td>
-                                            <td style="text-align: center">{{description}}</td>
-                                            <td style="text-align: center">{{barcode}}</td>
-                                            <td style="text-align: center">{{cant}}</td>
-                                            <td style="text-align: center">{{category}}</td>
-                                            <td style="text-align: center">{{brand}}</td>
-                                            <td style="text-align: center">{{fdr}}</td>
-                                            <td style="text-align: center">{{cso}}</td>
-                                            <td style="text-align: center">{{wbs}}</td>
-                                            <td style="text-align: center">{{location2}}</td>
-                                            <td style="text-align: center">{{contrato}}</td>
-                                            <td style="text-align: center">{{area}}</td>
-                                            <td style="text-align: center">
+                                            <td class="borde-celda" style="text-align: center">{{code2}}</td>
+                                            <td class="borde-celda" style="text-align: center">{{description}}</td>
+                                            <td class="borde-celda" style="text-align: center">{{barcode}}</td>
+                                            <td class="borde-celda" style="text-align: center">{{cant}}</td>
+                                            <td class="borde-celda" style="text-align: center">{{category}}</td>
+                                            <td class="borde-celda" style="text-align: center">{{brand}}</td>
+                                            <td class="borde-celda" style="text-align: center">{{fdr}}</td>
+                                            <td class="borde-celda" style="text-align: center">{{cso}}</td>
+                                            <td class="borde-celda" style="text-align: center">{{wbs}}</td>
+                                            <td class="borde-celda" style="text-align: center">{{location2}}</td>
+                                            <td class="borde-celda" style="text-align: center">{{contrato}}</td>
+                                            <td class="borde-celda" style="text-align: center">{{area}}</td>
+                                            <td class="borde-celda" style="text-align: center">
                                                 {{comment}}
                                             </td>
                                         </tr>
@@ -484,7 +498,7 @@
 
 
 
-                        <div class="footer">
+                        <div class="footer2">
                             <table style="width: 100%; border: 1; font-size: 12px ">
                                 <tr>
                                     <td class="cuerpo">
@@ -708,7 +722,22 @@
         <script src="../js/pdf/printme2.js"></script>
 
         <script>
+
+            function getaltura() {
+               
+
+                var img = document.getElementById('auto2');
+                //or however you get a handle to the IMG
+                var width = img.clientWidth;
+                var height = img.clientHeight;
+
+                alert(height)
+            }
+
+
             $(document).ready(function () {
+
+
 
                 $("#formIngreso").validate({
                     rules: {
@@ -822,6 +851,13 @@
 
 
         <script>
+
+             jQuery(document).bind("keyup keydown", function (e) {
+                    if (e.ctrlKey && e.keyCode == 80) {
+                        print();
+                        return false;
+                    }
+                });
 
             actualizarReporte()
 

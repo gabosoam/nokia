@@ -23,6 +23,7 @@ var voucher = require('./routes/voucher');
 var price = require('./routes/price');
 var bill = require('./routes/bill');
 var history = require('./routes/history');
+var ticket = require('./routes/ticket');
 
 var child_process = require('child_process');
 
@@ -89,6 +90,7 @@ app.use('/voucher', voucher);
 app.use('/price', price);
 app.use('/bill', bill);
 app.use('/history', history);
+app.use('/labels', ticket);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

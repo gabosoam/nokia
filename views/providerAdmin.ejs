@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Sistema de inventario</title>
+    <title>Inventario Nokia</title>
 
     <link href="../inspinia/css/bootstrap.min.css" rel="stylesheet">
     <link href="../inspinia/font-awesome/css/font-awesome.css" rel="stylesheet">
@@ -38,28 +38,93 @@
                                             <%= user.name%>
                                         </strong>
                                     </span>
-                                   
+
                                 </span>
                             </a>
-                          
+
                         </div>
                         <div class="logo-element">
                             IN+
                         </div>
                     </li>
-                    <li><a href="/admin"><i class="fa fa-home"></i> <span class="nav-label">Detalle de existencia</span></a></li>
-                    <li><a href="/billAdmin"><i class="fa fa-home"></i> <span class="nav-label"> Detalle de ingresos</span></a></li>
-                    <li><a href="/voucherAdmin"><i class="fa fa-home"></i> <span class="nav-label">Detalles de egresos</span></a></li>
-                    <li><a href="/devolutionAdmin"><i class="fa fa-home"></i> <span class="nav-label">Detalle devoluciones</span></a></li>
-                    <li><a href="/product/price"><i class="fa fa-home"></i> <span class="nav-label">Costos</span></a></li>
-                    <li><a href="/brand"><i class="fa fa-home"></i> <span class="nav-label">Marcas</span></a></li>
-                    <li><a href="/category"><i class="fa fa-home"></i> <span class="nav-label">Categorías</span></a></li>
-                    <li><a href="/unit"><i class="fa fa-home"></i> <span class="nav-label">Unidades de medida</span></a></li>
-                    <li><a href="/location"><i class="fa fa-home"></i> <span class="nav-label">Almacenes</span></a></li>
-                    <li><a href="/user"><i class="fa fa-home"></i> <span class="nav-label">Usuarios</span></a></li>
-                    <li><a href="/client/Admin"><i class="fa fa-home"></i> <span class="nav-label">Clientes</span></a></li>
-                    <li class="active"><a href="/provider/Admin"><i class="fa fa-home"></i> <span class="nav-label">Proveedores</span></a></li>
-                    <li><a href="/events"><i class="fa fa-home"></i> <span class="nav-label">Eventos</span></a></li>
+                    <li>
+                        <a href="/admin">
+                            <i class="fa fa-home"></i>
+                            <span class="nav-label">Detalle de existencia</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/billAdmin">
+                            <i class="fa fa-home"></i>
+                            <span class="nav-label"> Detalle de ingresos</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/voucherAdmin">
+                            <i class="fa fa-home"></i>
+                            <span class="nav-label">Detalles de egresos</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/devolutionAdmin">
+                            <i class="fa fa-home"></i>
+                            <span class="nav-label">Detalle devoluciones</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/product/price">
+                            <i class="fa fa-home"></i>
+                            <span class="nav-label">Costos</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/brand">
+                            <i class="fa fa-home"></i>
+                            <span class="nav-label">Marcas</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/category">
+                            <i class="fa fa-home"></i>
+                            <span class="nav-label">Categorías</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/unit">
+                            <i class="fa fa-home"></i>
+                            <span class="nav-label">Unidades de medida</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/location">
+                            <i class="fa fa-home"></i>
+                            <span class="nav-label">Almacenes</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/user">
+                            <i class="fa fa-home"></i>
+                            <span class="nav-label">Usuarios</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/client/Admin">
+                            <i class="fa fa-home"></i>
+                            <span class="nav-label">Clientes</span>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="/provider/Admin">
+                            <i class="fa fa-home"></i>
+                            <span class="nav-label">Proveedores</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/events">
+                            <i class="fa fa-home"></i>
+                            <span class="nav-label">Eventos</span>
+                        </a>
+                    </li>
 
                 </ul>
 
@@ -70,7 +135,9 @@
             <div class="row border-bottom">
                 <nav class="navbar navbar-static-top  " role="navigation" style="margin-bottom: 0">
                     <div class="navbar-header">
-                        <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+                        <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#">
+                            <i class="fa fa-bars"></i>
+                        </a>
                         <form role="search" class="navbar-form-custom" action="search_results.html">
                             <div class="form-group">
 
@@ -84,8 +151,8 @@
 
                         <li>
                             <a href="/logout">
-                        <i class="fa fa-sign-out"></i> Log out
-                    </a>
+                                <i class="fa fa-sign-out"></i> Log out
+                            </a>
                         </li>
                     </ul>
 
@@ -99,17 +166,19 @@
                     <div class="col-md-12">
                         <div class="ibox float-e-margins">
                             <div class="ibox-title">
-                                <h5><span class="fa fa-truck"></span> Proveedores</h5>
+                                <h5>
+                                    <span class="fa fa-truck"></span> Proveedores</h5>
                                 <div class="ibox-tools">
                                     <a class="collapse-link">
-                                                                <i class="fa fa-chevron-up"></i>
-                                                            </a>
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
 
 
 
                                 </div>
                             </div>
                             <div class="ibox-content">
+                                
 
                                 <div id="grid"></div>
 
