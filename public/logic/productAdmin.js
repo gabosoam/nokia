@@ -228,14 +228,7 @@ $(document).ready(function () {
         }
     });
 
-    dataSourceUnit = new kendo.data.DataSource({
-        transport: {
-            read: {
-                url: "/unit/read",
-                dataType: "json"
-            }
-        }
-    });
+
 
 
     $("#nameProduct").kendoComboBox({
@@ -294,15 +287,7 @@ $(document).ready(function () {
 
     });
 
-    $("#unit").kendoDropDownList({
-        dataSource: dataSourceUnit,
-        editable: false,
-        dataTextField: "smallDescription",
-        dataValueField: "id",
-        title: "Seleccionar almacén",
-        minLength: 1
-
-    });
+   
     $('#formSaveModel')[0].reset();
 
     function userNameAutoCompleteEditor(container, options) {
@@ -328,13 +313,15 @@ $(document).ready(function () {
             });
     }
 
+
+
     dataSource = new kendo.data.DataSource({
         transport: {
             read: { url: "/bill/readprice/" + bill, dataType: "json" },
             update: { url: "/product/updateprice", type: "POST", dataType: "json" },
             destroy: { url: "/product/delete", type: "POST", dataType: "json" },
             create: {
-                url: "/product/create", type: "POST", dataType: "json", success: function (data) {
+                url: "/product/updateprice", type: "POST", dataType: "json", success: function (data) {
 
                 },
             },
@@ -349,12 +336,20 @@ $(document).ready(function () {
         batch: true,
         pageSize: 10,
         serverFiltering: false,
+        requestEnd: function (e) {
+            if (e.type != "read") {
+                // refresh the grid
+                e.sender.read();
+            }
+        },
         schema: {
             model: {
                 id: "id",
                 fields: {
                     id:{editable:false},
                     code: { editable: false },
+                    var: { editable: false },
+                    bill: { editable: false },
                     description: { validation: { required: true }, type: 'string', editable: false },
                     count:{type: 'number', editable: false},
                     total:{type: 'number', editable: false},
@@ -376,10 +371,10 @@ $(document).ready(function () {
         height: 400,
         resizable: true,
         scrollable: true,
-        columnMenu: true,
+        columnMenu: false,
         filterable: true,
         resizable: true,
-        groupable: true,
+        groupable: false,
 
         pageable: { refresh: true, pageSizes: true, },
         pdf: {
@@ -407,8 +402,8 @@ $(document).ready(function () {
         
         columns: [
             {field: 'count', title: 'Cantidad'},
-            { field: "code", title: "Código", filterable: { search: true } },
-            { field: "description", title: "Producto", filterable: { search: true } },
+            { field: "code", title: "Código", filterable: { search: true, multi:true } },
+            { field: "description", title: "Producto", filterable: { search: true,  multi:true } },
             { field: "price", title: "Costo Unitario", format:"{0:c2}" },
             {field: "total", title:"Costo Total", footerTemplate: "Total: #: kendo.toString(sum, 'C')  #", format:"{0:c2}"},
             { field: "bill", title: "Factura", width: '1px' },

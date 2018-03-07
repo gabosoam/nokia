@@ -47,91 +47,98 @@
                         </div>
                     </li>
                     <li class="active">
-                            <a href="/">
-                                <i class="fa fa-home"></i>
-                                <span class="nav-label">Inicio</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-cube"></i>
-                                <span class="nav-label">Productos</span>
-                                <span class="fa arrow"></span>
-                            </a>
-                            <ul class="nav nav-second-level collapse">
-    
-                                <li>
-                                    <a href="/category">Tipos</a>
-                                </li>
-                                <li>
-                                    <a href="/brand">Marcas</a>
-                                </li>
-    
-                                <li>
-                                    <a href="/model">Códigos</a>
-                                </li>
-    
-                                <li>
-                                    <a href="/product">Números de serie</a>
-                                </li>
-    
-    
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="/bill">
-                                <i class="fa fa-arrow-right"></i>
-                                <span class="nav-label">Ingresos</span>
-                                <span class="fa arrow"></span>
-                            </a>
-                            <ul class="nav nav-second-level collapse">
-    
-                                <li>
-                                    <a href="/bill">Ingresos</a>
-                                </li>
-                                <li>
-                                    <a href="/labels">Etiquetas</a>
-                                </li>
-    
-    
-    
-                            </ul>
-                            
-                        </li>
-                        <li>
-                            <a href="/vouchers">
-                                <i class="fa fa-arrow-left"></i>
-                                <span class="nav-label">Entregas</span>
-                            </a>
-                        </li>
-    
-    
-                        <li>
-                            <a href="/client">
-                                <i class="fa fa-address-book"></i>
-                                <span class="nav-label">Clientes</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/provider">
-                                <i class="fa fa-truck"></i>
-                                <span class="nav-label">Proveedores</span>
-                            </a>
-                        </li>
-    
-                        <li>
-                            <a href="/location">
-                                <i class="fa fa-map-marker"></i>
-                                <span class="nav-label">Ubicaciones</span>
-                            </a>
-                        </li>
-    
-                        <li>
-                            <a href="/logout">
-                                <i class="fa fa-sign-out"></i>
-                                <span class="nav-label">Cerrar sesión</span>
-                            </a>
-                        </li>
+                        <a href="/">
+                            <i class="fa fa-home"></i>
+                            <span class="nav-label">Inicio</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-cube"></i>
+                            <span class="nav-label">Productos</span>
+                            <span class="fa arrow"></span>
+                        </a>
+                        <ul class="nav nav-second-level collapse">
+
+                            <li>
+                                <a href="/category">Tipos</a>
+                            </li>
+                            <li>
+                                <a href="/brand">Marcas</a>
+                            </li>
+
+                            <li>
+                                <a href="/model">Códigos</a>
+                            </li>
+
+                            <li>
+                                <a href="/product">Números de serie</a>
+                            </li>
+
+
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="/bill">
+                            <i class="fa fa-arrow-right"></i>
+                            <span class="nav-label">Ingresos</span>
+                            <span class="fa arrow"></span>
+                        </a>
+                        <ul class="nav nav-second-level collapse">
+
+                            <li>
+                                <a href="/bill">Ingresos</a>
+                            </li>
+                            <li>
+                                <a href="/labels">Etiquetas</a>
+                            </li>
+
+
+
+                        </ul>
+
+                    </li>
+                    <li>
+                        <a href="/vouchers">
+                            <i class="fa fa-arrow-left"></i>
+                            <span class="nav-label">Entregas</span>
+                        </a>
+                    </li>
+
+
+                    <li>
+                        <a href="/client">
+                            <i class="fa fa-address-book"></i>
+                            <span class="nav-label">Clientes</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/provider">
+                            <i class="fa fa-truck"></i>
+                            <span class="nav-label">Proveedores</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/location">
+                            <i class="fa fa-map-marker"></i>
+                            <span class="nav-label">Ubicaciones</span>
+                        </a>
+                    </li>
+
+                    <li class="">
+                        <a href="/setting">
+                            <i class="fa fa-cog"></i>
+                            <span class="nav-label">Configuración</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/logout">
+                            <i class="fa fa-sign-out"></i>
+                            <span class="nav-label">Cerrar sesión</span>
+                        </a>
+                    </li>
 
                 </ul>
 
@@ -426,6 +433,6 @@
 </div>
 
 <script>
-    var codigonombre='<%= product.code %>'
-    var serienombre='<%= product.barcode %>'
+    var codigonombre = '<%= product.code %>'
+    var serienombre = '<%= product.barcode %>'
 </script>

@@ -194,12 +194,12 @@ $(document).ready(function () {
   $("#grid2").kendoGrid({
     dataSource: dataSourceEvent,
     toolbar: ['excel'],
-    height: 600,
+    height: 400,
     scrollable: true,
-    columnMenu: true,
+    columnMenu: false,
     filterable: true,
     resizable: true,
-    groupable: true,
+    groupable: false,
     pageable: { refresh: true },
     columns: [
       { field: "table", title: "Tabla afectada", filterable: { search: true, multi: true } },
@@ -214,8 +214,9 @@ $(document).ready(function () {
 
 
 
+
   $('#panel').on('DOMSubtreeModified', function (event) {
-    $("#grid3").data("kendoGrid").dataSource.read();
+    $("#grid2").data("kendoGrid").dataSource.read();
   });
 
 

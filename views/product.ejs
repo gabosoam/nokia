@@ -163,7 +163,7 @@
 
 
                         </ul>
-                        
+
                     </li>
                     <li>
                         <a href="/vouchers">
@@ -190,6 +190,13 @@
                         <a href="/location">
                             <i class="fa fa-map-marker"></i>
                             <span class="nav-label">Ubicaciones</span>
+                        </a>
+                    </li>
+
+                    <li class="">
+                        <a href="/setting">
+                            <i class="fa fa-cog"></i>
+                            <span class="nav-label">Configuración</span>
                         </a>
                     </li>
 
@@ -250,7 +257,7 @@
                                 <button id="btnPrint" type="button" class="btn btn-default" onclick="print()">
                                     <span class="fa fa-print"></span> Imprimir</button>
                                 <hr>
-                 
+
 
                                 <form id="formIngreso">
 
@@ -406,17 +413,17 @@
 
                                         <%=data.codigo%>
 
-                                        
+
 
                                     </p>
 
-                                    
+
 
                                 </div>
 
 
                                 <div class="w3-display-container" style="height:25px;">
-                                        <h4 class="cuerpo w3-display-middle">ACTA DE INGRESO</h4>
+                                    <h4 class="cuerpo w3-display-middle">ACTA DE INGRESO</h4>
                                 </div>
                                 <hr>
 
@@ -449,9 +456,9 @@
                                 </div>
 
                                 <hr>
-                                <table id="Vouchers" class="w3-table w3-bordered" style="width: 100%"  >
+                                <table id="Vouchers" class="w3-table w3-bordered" style="width: 100%">
                                     <thead class="w3-border" style="font-size:13px;">
-                                        <tr  class="cuerpo w3-border">
+                                        <tr class="cuerpo w3-border">
                                             <th class="borde-celda" style="text-align: center">Código</th>
                                             <th class="borde-celda" class="borde-celda" style="text-align: center">Nombre</th>
                                             <th class="borde-celda" style="text-align: center">Serie</th>
@@ -724,7 +731,7 @@
         <script>
 
             function getaltura() {
-               
+
 
                 var img = document.getElementById('auto2');
                 //or however you get a handle to the IMG
@@ -852,12 +859,12 @@
 
         <script>
 
-             jQuery(document).bind("keyup keydown", function (e) {
-                    if (e.ctrlKey && e.keyCode == 80) {
-                        print();
-                        return false;
-                    }
-                });
+            jQuery(document).bind("keyup keydown", function (e) {
+                if (e.ctrlKey && e.keyCode == 80) {
+                    print();
+                    return false;
+                }
+            });
 
             actualizarReporte()
 

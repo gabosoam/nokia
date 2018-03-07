@@ -105,8 +105,8 @@ $(document).ready(function () {
                     { field: "reference", title: "Referencia", filterable: { multi: true, search: true } },
                     { field: "user", values: users, title: "Creado por", filterable: { multi: true,search: true } },
                     { field: "state", values: states, title: "Estado",filterable: { multi: true,search: true } },
-                    { command: ["edit"], title: "Acciones" }],
-                  //  { command: ["", { text: "Ver detalles", click: showDetails, iconClass: 'icon icon-chart-column' } ], title: "Acciones" }],
+           
+                    { command: ["edit", { text: "Ver detalles", click: showDetails, iconClass: 'icon icon-chart-column' } ], title: "Acciones" }],
                 editable: "popup"
             });
 

@@ -101,6 +101,53 @@ module.exports = {
         });
     },
 
+    updateprice: function name(data, callback) {
+        
+        connection.query({
+            sql: 'SELECT billdetail.id,product.barcode,model.`code`,model.id as idcode FROM billdetail INNER JOIN product ON billdetail.product = product.id INNER JOIN model ON product.model = model.id WHERE bill=? AND model.id=?',
+            values: [data.bill, data.var]
+        }, function (err, results, fields) {
+            if (err) {
+                console.log(err)
+                callback(err, null);
+            } else {
+                if (results.length > 0) {
+                    for (var i = 0; i < results.length; i++) {
+                        editar(results[i].id)
+
+                        if (i == results.length - 1) {
+                            callback(null, results);
+                        }
+
+                    }
+                } else {
+                    callback('Existió un error', null);
+                }
+
+
+
+
+            }
+
+        })
+
+
+        function editar(id) {
+            console.log(id)
+            connection.query({
+                sql: 'UPDATE billdetail SET price=? WHERE id=?',
+                values: [data.price, id]
+            }, function (err, results, fields) {
+                if (err) {
+                 
+                } else {
+
+                }
+            })
+        }
+
+    },
+
 
     delete: function (datos, callback) {
         connection.query('DELETE FROM product WHERE id=?', [datos.id], function (error, results, fields) {//
@@ -183,7 +230,7 @@ module.exports = {
 
                     } else {
 
-                    //CODIGO PARA VALIDAR
+                        //CODIGO PARA VALIDAR
                         connection.query({
                             sql: 'SELECT * FROM v_existencias WHERE idprod=?',
                             values: [results[0].id]

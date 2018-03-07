@@ -70,6 +70,16 @@ router.get('/existencia', isLoggedIn, function (req, res, next) {
 	});
 });
 
+router.get('/existenciaAdmin', isLoggedInAdmin, function (req, res, next) {
+	index.existencia(function (err, result) {
+		if (err) {
+			res.send(err);
+		} else {
+			res.send(result);
+		}
+	});
+});
+
 router.get('/error', isLoggedInAdmin, function (req, res, next) {
 	event.readError(function (err, result) {
 		if (err) {

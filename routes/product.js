@@ -58,24 +58,27 @@ router.post('/updateprice',isLoggedInAdmin, function (req, res, next) {
       console.log(err);
       res.sendStatus(500);
     } else {
-      console.log(data);
-      if (data.affectedRows > 0) {
 
-        var changes = {
-          table: 'PRODUCT',
-          values: JSON.stringify(datos),
-          user: req.session.adminDatos.name,
-          ip: req.ip,
-          type: 'UPDATE'
-        };
+     
+      res.send(true);
 
-        event.create(changes, function (result) {
-          console.log(result);
-        });
-        res.send(true);
-      } else {
-        res.sendStatus(500);
-      }
+      // if (data.affectedRows > 0) {
+
+      //   var changes = {
+      //     table: 'PRODUCT',
+      //     values: JSON.stringify(datos),
+      //     user: req.session.adminDatos.name,
+      //     ip: req.ip,
+      //     type: 'UPDATE'
+      //   };
+
+      //   event.create(changes, function (result) {
+      //     console.log(result);
+      //   });
+      //   res.send(true);
+      // } else {
+      //   res.sendStatus(500);
+      // }
 
     }
   })

@@ -107,7 +107,7 @@ module.exports = {
 
 
                     } else {
-                        callback('Las contraseñá no coinciden', null);
+                        callback('Las contraseñas no coinciden', null);
 
                     }
 

@@ -50,8 +50,8 @@ $(document).ready(function () {
           dataSource: dataSource,
           height: 475,
           filterable: true,
-          columnMenu: true,
-          groupable: true,
+          columnMenu: false,
+          groupable: false,
           resizable: true,
           
           pageable: { refresh: true, pageSizes: true, },
