@@ -23,7 +23,7 @@ var states = [{
 }];
 
 
-kendo.culture("es-ES");
+
 $(document).ready(function () {
 
     dataSource = new kendo.data.DataSource({

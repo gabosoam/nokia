@@ -60,7 +60,12 @@ router.get('/event', isLoggedInAdmin, function (req, res, next) {
 	});
 });
 
-router.get('/existencia', isLoggedIn, function (req, res, next) {
+router.post('/existencia', isLoggedIn, function (req, res, next) {
+	 
+	console.log(req.body)
+
+
+
 	index.existencia(function (err, result) {
 		if (err) {
 			res.send(err);

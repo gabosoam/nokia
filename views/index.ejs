@@ -101,7 +101,7 @@
 
 
                         </ul>
-                        
+
                     </li>
                     <li>
                         <a href="/vouchers">
@@ -132,11 +132,11 @@
                     </li>
 
                     <li class="">
-                            <a href="/setting">
-                                <i class="fa fa-cog"></i>
-                                <span class="nav-label">Configuración</span>
-                            </a>
-                        </li>
+                        <a href="/setting">
+                            <i class="fa fa-cog"></i>
+                            <span class="nav-label">Configuración</span>
+                        </a>
+                    </li>
 
                     <li>
                         <a href="/logout">
@@ -180,7 +180,7 @@
                                         <li class="active">
                                             <a data-toggle="tab" style="color: black" href="#tab-1"> Existencias</a>
                                         </li>
-                                        <li class="" >
+                                        <li class="">
                                             <a data-toggle="tab" style="color: black" href="#tab-2">Historial</a>
                                         </li>
                                     </ul>
@@ -394,6 +394,7 @@
     <script src="../kendo/js/kendo.all.min.js"></script>
     <script src="../kendo/js/jszip.min.js"></script>
     <script src="../kendo/js/kendo.messages.es-MX.min.js"></script>
+    <script src="../kendo/js/kendo.culture.es-MX.min.js"></script>
     <script src="../logic/changePassword.js"></script>
 
     <!-- Jquery Validate -->
@@ -411,9 +412,12 @@
 
 
     <script>
+
+        kendo.culture("es-MX");
         dataSourceExistenias = new kendo.data.DataSource({
+
             transport: {
-                read: { url: "existencia", type: 'get', dataType: "json" },
+                read: { url: "existencia", type: 'POST', dataType: "json" },
                 update: { url: "/bill/update", type: "POST", dataType: "json" },
                 destroy: { url: "/bill/delete", type: "POST", dataType: "json" },
                 create: { url: "/bill/create", type: "POST", dataType: "json" },
@@ -422,11 +426,41 @@
                         var datos = options.models[0]
                         return datos;
                     }
+
+
+                    if (operation == "read") {
+                        if (options.filter) {
+
+
+                            sql = "SELECT * FROM v_existencias WHERE"
+                            sqlAll = "SELECT * FROM v_existencias";
+
+                        
+
+    
+
+                            for (let i = 0; i < options.filter.filters.length; i++) {
+
+                           
+                                if (i == 0) {
+                                    sql = sql + " " + options.filter.filters[i].field + " = '" + options.filter.filters[i].value + "' ";
+                                } else {
+                                    sql = sql + " OR " + options.filter.filters[i].field + " = '" + options.filter.filters[i].value + "'";
+                                }
+
+                            }
+
+                            alert(sql)
+
+
+                            return { sql: sql };
+                        }
+                    }
                 }
             },
             batch: true,
             pageSize: 1000,
-            serverFiltering: false,
+            serverFiltering: true,
             requestEnd: function (e) {
                 if (e.type != "read") {
                     // refresh the grid
@@ -467,7 +501,7 @@
             dataSource: dataSourceExistenias,
             height: 475,
             filterable: true,
-           
+
             toolbar: ['excel'],
             resizable: true,
             pageable: { refresh: true, pageSizes: true, },
@@ -623,17 +657,7 @@
                         toolbar: ['excel'],
                         resizable: true,
 
-                        // <td style="text-align: center">{{type2}}</td>
-                        //         <td style="text-align: center">{{date}}</td>
-                        //         <td style="text-align: center">{{fdr}}</td>
-                        //         <td style="text-align: center">{{cso}}</td>
-                        //         <td style="text-align: center">{{wbs}}</td>
-                        //         <td style="text-align: center">{{location}}</td>
-                        //         <td style="text-align: center">{{name}}</td>
-                        //         <td style="text-align: center">{{company}}</td>
-                        //         <td style="text-align: center">{{client}}</td>
-                        //         <td style="text-align: center">{{clientcompany}}</td>
-                        //         <td style="text-align: center">{{comment}}</td>
+                      
 
                         pageable: { refresh: true, pageSizes: true, },
 
