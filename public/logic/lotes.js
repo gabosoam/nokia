@@ -236,15 +236,17 @@ var codesnull = [];
 var contadorNuevos = 0;
 function search(code, product, tbody, table, i, length) {
 
+   
+
     var aux = 0;
 
 
 
     $.post("/lotes/codes", { data: code }, function (data) {
-
+     
         if (data == true) {
 
-
+          
             codesnull.push(code);
 
             for (var index = 0; index < codesnull.length; index++) {
@@ -310,10 +312,15 @@ function search(code, product, tbody, table, i, length) {
                 document.getElementById("output").appendChild(table);
             }
 
-            if (i == length - 2) {
-                change();
-            }
+            
+
+          
             aux = 0;
+        }
+
+        if (i == length - 2) {
+         
+            change();
         }
 
 

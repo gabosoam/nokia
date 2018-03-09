@@ -60,13 +60,21 @@ router.get('/event', isLoggedInAdmin, function (req, res, next) {
 	});
 });
 
-router.post('/existencia', isLoggedIn, function (req, res, next) {
+router.post('/existencia', function (req, res, next) {
 	 
-	console.log(req.body)
+	var sql = ''
+
+	
+
+	if (!req.body.sql) {
+		sql= 'SELECT * FROM v_existencias'
+	}else{
+		sql= req.body.sql
+	}
+	console.log('hola '+sql)
 
 
-
-	index.existencia(function (err, result) {
+	index.existencia(sql, function (err, result) {
 		if (err) {
 			res.send(err);
 		} else {

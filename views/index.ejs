@@ -270,6 +270,8 @@
                                                     </div>
 
                                                     <div class="col-md-12">
+
+                                                        
                                                         <div id="grid2"></div>
                                                         <div id="grid4"></div>
                                                     </div>
@@ -429,19 +431,22 @@
 
 
                     if (operation == "read") {
+
+
+
                         if (options.filter) {
 
 
                             sql = "SELECT * FROM v_existencias WHERE"
                             sqlAll = "SELECT * FROM v_existencias";
 
-                        
 
-    
+
+
 
                             for (let i = 0; i < options.filter.filters.length; i++) {
 
-                           
+
                                 if (i == 0) {
                                     sql = sql + " " + options.filter.filters[i].field + " = '" + options.filter.filters[i].value + "' ";
                                 } else {
@@ -450,9 +455,15 @@
 
                             }
 
-                            //alert(sql)
+                          //S  alert(sql)
 
-                            alert('en construcción')
+
+
+                            if (sql == '') {
+                                return { sql: sqlAll };
+                            }
+
+                            //alert('en construcción')
 
 
                             return { sql: sql };
@@ -464,9 +475,8 @@
             pageSize: 1000,
             serverFiltering: true,
             requestEnd: function (e) {
-                if (e.type != "read") {
-                    // refresh the grid
-                    e.sender.read();
+                if (e.type == "read") {
+
                 }
             },
             schema: {
@@ -498,11 +508,23 @@
         },
         );
 
+        function saltar() {
+            $('#gridexistencias').data('kendoGrid').columns[1].filterable.search = false;
+            $('#gridexistencias').data('kendoGrid').columns[1].filterable.search = false;
+
+            console.log($('#gridexistencias').data('kendoGrid').columns[1].filterable)
+
+
+
+
+        }
+
 
         $("#gridexistencias").kendoGrid({
             dataSource: dataSourceExistenias,
             height: 475,
             filterable: true,
+
 
             toolbar: ['excel'],
             resizable: true,
@@ -524,7 +546,7 @@
                 { command: [{ text: "Historial", click: showDetails, iconClass: 'icon icon-chart-column' }], title: "Acciones" }],
             dataBound: function (e) {
                 if (this.dataSource.group().length > 0) {
-                    console.log($(".k-grouping-row"));
+
 
                     for (var i = 0; i < $(".k-grouping-row").length; i++) {
                         this.collapseGroup($(".k-grouping-row")[i]);
@@ -657,9 +679,10 @@
                         height: 475,
                         filterable: true,
                         toolbar: ['excel'],
-                        resizable: true,
+                        scrollable: true,
+                        resizable: false,
 
-                      
+
 
                         pageable: { refresh: true, pageSizes: true, },
 
@@ -677,9 +700,20 @@
                             { field: "cso", title: "CSO", filterable: { search: true, multi: true } },
                             { field: "wbs", title: "WBS", filterable: { search: true, multi: true } },
                             { field: "contrato", title: "Contrato", filterable: { search: true, multi: true } },
-                            { field: "user", title: "Realizado por", filterable: { search: true, multi: true } },
+                            { field: "name", title: "Priveedor", filterable: { search: true, multi: true } },
+                            { field: "company", title: "Empresa", filterable: { search: true, multi: true } },
+                            { field: "client", title: "Cliente", filterable: { search: true, multi: true } },
+                            { field: "clientcompany", title: "Empresa", filterable: { search: true, multi: true } },
+                            { field: "user",hidden:true, title: "Realizado por", filterable: { search: true, multi: true } },
 
                             { command: [{ text: "Historial", click: showDetails, iconClass: 'icon icon-chart-column' }], title: "Acciones" }],
+
+                        dataBound: function () {
+                            // var grid = $("#grid2").data("kendoGrid");
+                            // for (var i = 0; i < grid.columns.length; i++) {
+                            //     grid.autoFitColumn(i);
+                            // }
+                        },
                         editable: "popup"
                     });
                 });
