@@ -400,6 +400,8 @@ module.exports = {
 
     update3: function (data, callback) {
 
+        console.log(data)
+
         if (data.fdr == '') { data.fdr = 'N/A' }
         if (data.wbs == '') { data.wbs = 'N/A' }
         if (data.cso == '') { data.cso = 'N/A' }
@@ -408,6 +410,8 @@ module.exports = {
         if (data.contrato == '') { data.contrato = 'N/A' }
 
         var contador = 0;
+
+        console.log(data)
 
         connection.query({
             sql: 'SELECT * from billdetail where id=?',
