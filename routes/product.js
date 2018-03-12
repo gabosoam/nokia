@@ -1,3 +1,4 @@
+
 var express = require('express');
 var router = express.Router();
 var product = require('../model/product');
@@ -10,8 +11,8 @@ router.get('/', isLoggedIn, function (req, res, next) {
 
 router.get('/price', isLoggedInAdmin, function (req, res, next) {
 
-    res.render('price', { user: sess.adminDatos });
- 
+  res.render('price', { user: sess.adminDatos });
+
 });
 
 router.get('/read', function (req, res, next) {
@@ -27,7 +28,7 @@ router.get('/read', function (req, res, next) {
 router.get('/searchBarcode/', function (req, res, next) {
 
 
-  product.searchBarcode(req.query.barcode,function (data) {
+  product.searchBarcode(req.query.barcode, function (data) {
     res.send(data);
   });
 })
@@ -35,13 +36,13 @@ router.get('/searchBarcode/', function (req, res, next) {
 router.get('/read/:id', function (req, res, next) {
 
 
-  product.searchBarcodes(req.params.id,function (data) {
+  product.searchBarcodes(req.params.id, function (data) {
     res.send(data);
   });
 })
 
 router.get('/readprice', function (req, res, next) {
- 
+
   product.readprice(function (error, data) {
     if (error) {
       res.send(error);
@@ -51,7 +52,7 @@ router.get('/readprice', function (req, res, next) {
   });
 })
 
-router.post('/updateprice',isLoggedInAdmin, function (req, res, next) {
+router.post('/updateprice', isLoggedInAdmin, function (req, res, next) {
   var datos = req.body;
   product.updateprice(datos, function (err, data) {
     if (err) {
@@ -59,7 +60,7 @@ router.post('/updateprice',isLoggedInAdmin, function (req, res, next) {
       res.sendStatus(500);
     } else {
 
-     
+
       res.send(true);
 
       // if (data.affectedRows > 0) {
@@ -86,20 +87,56 @@ router.post('/updateprice',isLoggedInAdmin, function (req, res, next) {
 
 })
 
-router.post('/create2', function(req, res, next) {
+router.post('/create2', isLoggedIn, function (req, res, next) {
 
-  product.create2(req.body, function ( result) {
-    res.send(result);  
+  product.create2(req.body, function (result) {
+
+    console.log(result)
+
+    if (result == 'El ingreso del producto se realizó correctamente') {
+      var changes = {
+        table: 'PRODUCT',
+        values: JSON.stringify(req.body),
+        user: req.session.usuarioDatos.name,
+        ip: req.ip,
+        type: 'CREATE'
+      };
+
+      event.create(changes, function (result) {
+
+      });
+
+    } else {
+
+    }
+    res.send(result);
   })
-  
+
 })
 
-router.post('/createSalida', function(req, res, next) {
+router.post('/createSalida', isLoggedIn, function (req, res, next) {
 
   product.createSalida(req.body, function (result) {
-    res.send(result);  
+    if (result == 'Entrega realizada correctamente') {
+
+      var changes = {
+        table: 'PRODUCT',
+        values: JSON.stringify(req.body),
+        user: req.session.usuarioDatos.name,
+        ip: req.ip,
+        type: 'INSERT'
+      };
+
+      event.create(changes, function (result) {
+        console.log(result);
+      });
+
+    } else {
+
+    }
+    res.send(result);
   })
-  
+
 })
 
 router.post('/create', isLoggedIn, function (req, res, next) {
@@ -121,62 +158,89 @@ router.post('/create', isLoggedIn, function (req, res, next) {
       event.create(changes, function (result) {
         console.log(result);
       });
-      
+
       res.send(data);
     }
   })
 });
 
-router.post('/update', isLoggedIn, function(req, res,next) {
+router.post('/update', isLoggedIn, function (req, res, next) {
   var data = req.body;
-  product.update(data,function(err, result) {
+  product.update(data, function (err, result) {
     if (err) {
       res.sendStatus(500);
     } else {
-      if (result.affectedRows>0) {
+      if (result.affectedRows > 0) {
         res.send(true);
-      }else{
+      } else {
         res.sendStatus(500);
       }
     }
   })
 
-  
+
 })
 
-router.post('/update2', isLoggedIn, function(req, res,next) {
+router.post('/update2', isLoggedIn, function (req, res, next) {
   var data = req.body;
-  product.update2(data,function(err, result) {
+  product.update2(data, function (err, result) {
     if (err) {
       res.sendStatus(500);
     } else {
-      if (result.affectedRows>0) {
+      if (result.affectedRows > 0) {
+
+        var changes = {
+          table: 'PRODUCT',
+          values: JSON.stringify(data),
+          user: req.session.usuarioDatos.name,
+          ip: req.ip,
+          type: 'UPDATE'
+        };
+
+        event.create(changes, function (result) {
+
+        });
         res.send(true);
-      }else{
+      } else {
         res.sendStatus(500);
       }
     }
   })
 
-  
+
 })
 
-router.post('/update3', isLoggedIn, function(req, res,next) {
+router.post('/update3', isLoggedIn, function (req, res, next) {
   var data = req.body;
-  product.update3(data,function(err, result) {
+  product.update3(data, function (err, result) {
     console.log(result)
     if (err) {
       res.sendStatus(500);
     } else {
-      if (result.affectedRows>0) {
+      if (result.affectedRows > 0) {
+        var changes = {
+          table: 'PRODUCT',
+          values: JSON.stringify(data),
+          user: req.session.usuarioDatos.name,
+          ip: req.ip,
+          type: 'UPDATE'
+        };
+
+        event.create(changes, function (result) {
+
+        });
+
+
+
+
         res.send(true);
-      }else{
+      } else {
         res.sendStatus(500);
       }
     }
   })
 
-  
+
 })
 
 
@@ -264,12 +328,12 @@ function isLoggedIn(req, res, next) {
 }
 
 function isLoggedInAdmin(req, res, next) {
-	sess = req.session;
+  sess = req.session;
 
-	if (sess.adminDatos)
-		return next();
-	sess.originalUrl = req.originalUrl;
-	res.redirect('/login');
+  if (sess.adminDatos)
+    return next();
+  sess.originalUrl = req.originalUrl;
+  res.redirect('/login');
 }
 
 
