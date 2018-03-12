@@ -429,11 +429,13 @@ module.exports = {
                         values: [data.idproduct]
                     }, function (err, results, fields) {
                         if (err) {
-                            console.log(error)
-                            console.log(error)
+                            console.log(err)
+                            console.log(err)
                             callback('existió un error 2', null);
 
                         } else {
+
+                            console.log(results)
 
                             if (results[0]) {
                                 console.log('en bodega ' + results[0].enbodega);
