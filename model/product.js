@@ -415,7 +415,8 @@ module.exports = {
         }, function (error, results, fileds) {
             if (error) {
                 console.log(error)
-                callback('existió un error', null);
+                console.log(error)
+                callback('existió un error 1', null);
             } else {
                 if (results[0]) {
                     contador = results[0].cant;
@@ -429,7 +430,8 @@ module.exports = {
                     }, function (err, results, fields) {
                         if (err) {
                             console.log(error)
-                            callback('existió un error', null);
+                            console.log(error)
+                            callback('existió un error 2', null);
 
                         } else {
 
@@ -457,18 +459,18 @@ module.exports = {
 
                                 } else {
                                     console.log('no hay stock')
-                                    callback('existió un error', null);
+                                    callback('existió un error 3 no hay stock', null);
                                 }
                             } else {
                                 console.log('no hay data')
-                                callback('existió un error', null);
+                                callback('existió un error no hay data', null);
                             }
                         }
                     })
 
 
                 } else {
-                    callback('existió un error', null);
+                    callback('existió un error no hay data 2', null);
                 }
             }
         })

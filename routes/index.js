@@ -156,7 +156,13 @@ router.post('/lotes/model', isLoggedIn, function (req, res, next) {
 router.post('/lotes/barcode', isLoggedIn, function (req, res, next) {
 	var data = req.body;
 	lotes.insertBarcode(data, function (message) {
+	
 
+		if (message=='Guardado') {
+			
+		} else {
+			
+		}
 		res.send(message);
 	})
 
@@ -168,6 +174,7 @@ router.post('/lotes/brand', isLoggedIn, function (req, res, next) {
 	var values = data['aux[]'];
 
 	lotes.insertBrands(values, function (mensaje) {
+	
 		res.send(mensaje);
 	})
 
