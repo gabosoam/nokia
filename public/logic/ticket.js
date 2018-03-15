@@ -84,7 +84,7 @@ $(document).ready(function () {
                     area: { validation: { required: true, }, type: 'string' },
                     contrato: { validation: { required: true, }, type: 'string' },
                     date: { validation: { required: true, }, type: 'date' },
-                    cant: { validation: { required: true, }, type: 'number' },
+                    enbodega: { validation: { required: true, }, type: 'number' },
                  
                 }
             }
@@ -111,6 +111,10 @@ $(document).ready(function () {
 
                 pageable: { refresh: true, pageSizes: true, },
                 toolbar: ['excel'],
+                excel: {
+                    allPages: true,
+                    fileName: "etiquetas.xlsx"
+                },
                 pdf: {
                     allPages: true,
                     avoidLinks: false,
@@ -132,12 +136,11 @@ $(document).ready(function () {
                 },
                 columns: [
                   
-                    { field: "code2", title: "Código", filterable: { search: true, multi: true } },
+                    { field: "code", title: "Código", filterable: { search: true, multi: true } },
                     { field: "description", title: "Nombre", filterable: { search: true, multi: true } },
                     { field: "barcode", title: "No. de Serie", filterable: { search: true, multi: true } },
                     { field: "location2", title: "Ubicación", filterable: { search: true, multi: true } },
-                    { field: "cant", title: "Cantidad", filterable: { search: true} },
-                    { field: "numero", title: "Acta", filterable: { search: true, multi: true } },],
+                    { field: "enbodega", title: "Cantidad", filterable: { search: true} }],
                 editable: "popup"
             });
 

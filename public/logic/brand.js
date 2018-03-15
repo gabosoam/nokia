@@ -51,10 +51,14 @@ $(document).ready(function () {
         resizable: true,
         pageable: { refresh: true, pageSizes: true, },
         toolbar: ['create','excel'],
+        excel: {
+            allPages: true,
+            fileName: "marcas.xlsx"
+        },
         columns: [
             { field: "name", title: "Marca", filterable: { search: true, multi:true } },
             { command: ["edit", "destroy"], title: "Acciones" }],
-        editable: "popup"
+        editable: "inline"
     });
 });
 function redirect(category) {

@@ -526,6 +526,10 @@ $(document).ready(function () {
             $("#grid2").kendoGrid({
                 dataSource: dataSource,
                 toolbar: ['excel'],
+                excel: {
+                    allPages: true,
+                    fileName: codigoacta+".xlsx"
+                },
 
                 height: 400,
                 resizable: true,

@@ -86,9 +86,14 @@ $(document).ready(function () {
                 dataSource: dataSource,
                 height: 475,
                 filterable: true,
+                sortable: true,
                 resizable: true,
                 pageable: { refresh: true, pageSizes: true, },
                 toolbar: ['create', 'excel'],
+                excel: {
+                    allPages: true,
+                    fileName: "actasEntrega.xlsx"
+                },
                 columns: [
                     {field: 'id', hidden:true, title: 'Código', filterable: { search: true, multi:true } },
                     {field: 'codigo', title: 'Código', filterable: { search: true, multi:true } },
@@ -98,7 +103,7 @@ $(document).ready(function () {
                     { field: "user", values: users, title: "Creado por", filterable: { search: true, multi:true } },
                     { field: "state", values: states, title: "Estado",filterable: { multi: true,search: true } },
                     { command: ["edit", "destroy", { text: "Ver detalles", click: showDetails, iconClass: 'icon icon-chart-column' }], title: "Acciones" }],
-                editable: "popup"
+                editable: "inline"
             });
 
         });

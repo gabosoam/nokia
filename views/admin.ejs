@@ -41,7 +41,7 @@
                                 </span>
                             </a>
                             <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                              
+
 
                             </ul>
                         </div>
@@ -225,6 +225,7 @@
                     e.sender.read();
                 }
             },
+
             schema: {
                 model: {
                     id: "idprod",
@@ -261,6 +262,10 @@
             filterable: true,
 
             toolbar: ['excel'],
+            excel: {
+                allPages: true,
+                fileName: "existencias.xlsx"
+            },
             resizable: true,
             pageable: { refresh: true, pageSizes: true, },
 
@@ -274,7 +279,8 @@
                 { field: "brand", title: "Marca", filterable: { search: true, multi: true }, groupFooterTemplate: " Total:" },
                 { field: "counting", title: "T. Ingresos", filterable: { search: true, multi: true }, aggregates: ["sum"], groupFooterTemplate: " #=sum#" },
                 { field: "countegs", title: "T. Entregas", filterable: { search: true, multi: true }, aggregates: ["sum"], groupFooterTemplate: " #=sum#" },
-                { field: "enbodega", title: "En bodega", filterable: { search: true, multi: true }, aggregates: ["sum"], groupFooterTemplate: " #=sum#" }],
+                { field: "enbodega", title: "En bodega", filterable: false, aggregates: ["sum"], groupFooterTemplate: " #=sum#" }
+            ],
             dataBound: function (e) {
                 if (this.dataSource.group().length > 0) {
                     console.log($(".k-grouping-row"));

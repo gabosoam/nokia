@@ -71,6 +71,8 @@ $(document).ready(function () {
     },
     );
 
+    
+
     $.get( "/model/readmodel", function( codes ) {
         $("#grid").kendoGrid({
             dataSource: dataSource,

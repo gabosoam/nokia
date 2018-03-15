@@ -56,6 +56,11 @@ $(document).ready(function () {
           
           pageable: { refresh: true, pageSizes: true, },
           toolbar: ['create','excel'],
+
+          excel: {
+            allPages: true,
+            fileName: "codigos.xlsx"
+        },
           
        
           columns: [
@@ -64,7 +69,7 @@ $(document).ready(function () {
               { field: "brand", values:brand, title: "Marca", filterable: {search: true, multi: true } },
               { field: "category", values:category, title: "Tipo", filterable: {search: true, multi: true } },
               { command: ["edit", "destroy"], title: "Acciones" }],
-          editable: "popup"
+          editable: "inline"
       });
 
 

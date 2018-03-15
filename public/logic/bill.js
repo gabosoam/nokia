@@ -105,9 +105,14 @@ $(document).ready(function () {
                 filterable: true,
                 groupable: true,
                 resizable: true,
+                sortable: true,
 
                 pageable: { refresh: true, pageSizes: true, },
                 toolbar: ['create', 'excel'],
+                excel: {
+                    allPages: true,
+                    fileName: "actasIngreso.xlsx"
+                },
                 pdf: {
                     allPages: true,
                     avoidLinks: false,
@@ -138,7 +143,7 @@ $(document).ready(function () {
                     { field: "state", values: states, title: "Estado",filterable: { multi: true,search: true } },
 
                     { command: ["edit", "destroy", { text: "Ver detalles", click: showDetails, iconClass: 'icon icon-chart-column' }], title: "Acciones" }],
-                editable: "popup"
+                editable: "inline"
             });
 
         });

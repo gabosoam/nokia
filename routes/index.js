@@ -28,9 +28,9 @@ router.post('/buscar', function (req, res, next) {
 			res.send(data);
 		}
 	})
-	
 
-	
+
+
 });
 
 
@@ -61,17 +61,17 @@ router.get('/event', isLoggedInAdmin, function (req, res, next) {
 });
 
 router.post('/existencia', function (req, res, next) {
-	 
+
 	var sql = ''
 
-	
+
 
 	if (!req.body.sql) {
-		sql= 'SELECT * FROM v_existencias'
-	}else{
-		sql= req.body.sql
+		sql = 'SELECT * FROM v_existencias'
+	} else {
+		sql = req.body.sql
 	}
-	console.log('hola '+sql)
+	console.log('hola ' + sql)
 
 
 	index.existencia(sql, function (err, result) {
@@ -84,7 +84,19 @@ router.post('/existencia', function (req, res, next) {
 });
 
 router.get('/existenciaAdmin', isLoggedInAdmin, function (req, res, next) {
-	index.existencia(function (err, result) {
+
+	var sql = ''
+
+
+
+	if (!req.body.sql) {
+		sql = 'SELECT * FROM v_existencias'
+	} else {
+		sql = req.body.sql
+	}
+	console.log('hola ' + sql)
+
+	index.existencia(sql,function (err, result) {
 		if (err) {
 			res.send(err);
 		} else {
@@ -156,12 +168,12 @@ router.post('/lotes/model', isLoggedIn, function (req, res, next) {
 router.post('/lotes/barcode', isLoggedIn, function (req, res, next) {
 	var data = req.body;
 	lotes.insertBarcode(data, function (message) {
-	
 
-		if (message=='Guardado') {
-			
+
+		if (message == 'Guardado') {
+
 		} else {
-			
+
 		}
 		res.send(message);
 	})
@@ -174,7 +186,7 @@ router.post('/lotes/brand', isLoggedIn, function (req, res, next) {
 	var values = data['aux[]'];
 
 	lotes.insertBrands(values, function (mensaje) {
-	
+
 		res.send(mensaje);
 	})
 

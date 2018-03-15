@@ -50,11 +50,15 @@ $(document).ready(function () {
         filterable: true,
         resizable: true,
         pageable: { refresh: true, pageSizes: true, },
-        toolbar: ['create','excel'],
+        toolbar: ['create', 'excel'],
+        excel: {
+            allPages: true,
+            fileName: "tipos.xlsx"
+        },
         columns: [
-            { field: "name", title: "Categoría", filterable: {  search: true, multi:true } },
-            { command: ["edit", "destroy"], title: "Acciones"}],
-        editable: "popup"
+            { field: "name", title: "Tipo", filterable: { search: true, multi: true } },
+            { command: ["edit", "destroy"], title: "Acciones" }],
+        editable: "inline"
     });
 });
 function redirect(category) {

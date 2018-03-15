@@ -192,15 +192,36 @@
 
 
                                     <button id="closeBill" class="btn btn-default">
-                                        <span class="fa fa-times-circle"></span> Cerrar salida</button>
+                                        <span class="fa fa-times-circle"></span> Cerrar entrega</button>
                                 </div>
-
 
                                 <button id="btnPrint" type="button" class="btn btn-default" onclick="print()">
                                     <span class="fa fa-print"></span> Imprimir</button>
-                                <hr>
+
+
+                                <p class="cuerpo">
+                                    <strong>Acta: </strong>
+                                    <%=data.codigo%>
+                                </p>
+                                <p class="cuerpo">
+                                    <strong>Cliente: </strong>
+                                    <%=data.client%>
+                                </p>
+                                <p class="cuerpo">
+                                    <strong>Empresa: </strong>
+                                    <%=data.clientcompany%>
+                                </p>
+                                <p class="cuerpo">
+                                    <strong>Fecha: </strong>
+                                    <%=data.date%>
+                                </p>
+
+
+
+
 
                                 <form id="formIngreso">
+                                    <hr>
 
                                     <input type="hidden" value="<%= bill %>" name="bill">
                                     <input type="hidden" value="1" id="txtCantidad" name="cant">
@@ -262,6 +283,7 @@
 
                                         </div>
                                     </div>
+                                    <hr>
 
                                 </form>
                                 <br>
@@ -875,6 +897,7 @@
             var user = '<%=data.user%>';
             var userid = '<%=user.id%>';
             var reference = '<%=data.reference%>';
+            var codigoacta= '<%=data.codigo%>'
 
             alert(userid + " " + userbill)
 

@@ -293,10 +293,12 @@ $(document).ready(function () {
         filter: "contains",
         dataTextField: "code",
         dataValueField: "id",
-        placeholder: "Buscar código...",
+        optionLabel   : "Buscar un código",
         minLength: 1,
         change: onChange
     });
+
+
 
     dataSourceLocation = new kendo.data.DataSource({
         transport: {
@@ -318,6 +320,7 @@ $(document).ready(function () {
     });
 
     $("#txtSerie").kendoComboBox();
+    
 
 
 
@@ -355,7 +358,8 @@ $(document).ready(function () {
 
 
     function onChange(e) {
-
+    
+    
 
 
         var code = this.value();
@@ -462,8 +466,11 @@ $(document).ready(function () {
                 }
             }
         },
-
         batch: true,
+
+       
+
+       
         pageSize: 10,
         serverFiltering: false,
         requestEnd: function (e) {
@@ -522,11 +529,16 @@ $(document).ready(function () {
                 dataSource: dataSource,
                 toolbar: [ 'excel'],
 
+                excel: {
+                    allPages: true,
+                    fileName: codigoacta+".xlsx"
+                },
+                sortable: true,
                 height: 400,
                 resizable: true,
                 scrollable: true,
                 
-              
+          
                 filterable: true,
                 resizable: true,
                 pageable: { refresh: true, pageSizes: true, },
@@ -547,11 +559,11 @@ $(document).ready(function () {
                     { field: "cso", title: "CSO", filterable: { search: true, multi: true } },
                     { field: "wbs", title: "WBS", filterable: { search: true, multi: true } },
                     { field: "contrato", title: "Contrato", filterable: { search: true, multi: true } },
-                    { field: "area", title: "Área", filterable: { search: true, multi: true } },
+                    { field: "area", title: "Área", filterable: { search: true, multi: true }, editor: zipCodesEditor },
                     { field: "comment", title: "Comentario", filterable: { search: true, multi: true } },
                     { field: "bill", title: "Comprobante", hidden: true },
-                    { command: ["edit", "destroy"], title: "Acciones" }],
-                editable: "popup"
+                    { command: [ "edit","destroy"], title: "Acciones" }],
+                editable: "inline"
             })
 
         })
@@ -559,6 +571,14 @@ $(document).ready(function () {
 
     });
 
+    var zipCodesEditor2 = function (container, options) {
+        $('<textarea data-bind="value: ' + options.field + '"></textarea>').appendTo(container);
+    };
+
+    function zipCodesEditor(container, options) {
+        $('<textarea class="form-control" data-bind="value: ' + options.field + '" rows="5"></textarea>')
+            .appendTo(container);
+    }
 
 
 

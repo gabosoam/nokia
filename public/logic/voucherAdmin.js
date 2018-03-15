@@ -62,6 +62,10 @@ $(document).ready(function () {
                 resizable: true,
                 pageable: { refresh: true, pageSizes: true, },
                 toolbar: ['excel'],
+                excel: {
+                    allPages: true,
+                    fileName: "actasEntrega.xlsx"
+                },
                 columns: [
                     {field: 'id', hidden:true, title: 'FOPN',filterable: { multi: true,search: true }},
                     {field: 'codigo', title: 'Número',filterable: { multi: true,search: true }},

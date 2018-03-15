@@ -234,6 +234,9 @@
             <script src="../js/jquery.PrintArea.js"></script>
             <script src="../logic/history.js"></script>
             <script src="../js/w3.js"></script>
+            <script src="../js/pdf/printme.js"></script>
+        <script src="../js/pdf/printThis.js"></script>
+        <script src="../js/pdf/printme2.js"></script>
 
             <script>
 
@@ -245,7 +248,7 @@
                 });
 
                 function print() {
-                    $('#print').printArea();
+                    $("#print").printMe({ "path": ["/css/reporte.css", "/css/w3.css"] });
                 }
             </script>
 
@@ -271,99 +274,83 @@
                     <span class="fa fa-print"></span> Imprimir</button>
                 <div id="print" style="min-width: 210mm; font-family: 'Arial Narrow'">
 
-                    <table style="width: 100%">
-                        <tr>
-                            <td></td>
-                            <td>
-                                <center>
-                                    <img class="" src="../images/nokia.png" width="280px" />
+                    <div class="w3-display-container" style="height:55px;">
 
+                        <img id="auto" class="w3-display-middle" class="" src="../images/nokia.png" width="280px" height="55px" />
 
+                    </div>
 
+                    <div class="w3-display-container" style="height:25px;">
+                        <h4 class="cuerpo w3-display-middle">Trazabilidad</h4>
+                    </div>
+                    <hr>
 
-                                </center>
-                            </td>
-                            <td style="text-align: right">
+                    <div class="w3-display-container" style="height:100px;">
 
-                            </td>
-                        </tr>
-                    </table>
+                        <div>
+                            <p class="cuerpo">
+                                <strong>Nombre: </strong>
+                                <%= product.description %>
+                            </p>
+                            <p class="cuerpo">
+                                <strong>Código: </strong>
+                                <%= product.code %>
+                            </p>
+                            <p class="cuerpo">
+                                <strong>Número de serie: </strong>
+                                <%= product.barcode %>
+                            </p>
+                        </div>
+                    </div>
 
+                    
 
                     <hr>
-                    <center>
-                        <strong style="font-size: 18px">Trazabilidad</strong>
-                    </center>
-                    <table style="width: 100%; font-size: 12px">
-                        <tr>
-                            <td>
 
-                                <address>
-                                    <p>
-                                        <strong>Nombre: </strong>
-                                        <%= product.description %>
-                                    </p>
-                                    <p>
-                                        <strong>Código: </strong>
-                                        <%= product.code %>
-                                    </p>
-
-                                    <p>
-                                        <strong>Número de serie: </strong>
-                                        <%= product.barcode %>
-                                    </p>
-                                </address>
-                            </td>
-                            <td style="text-align: right">
-
-                                <address>
-
-
-                                </address>
-                            </td>
-                        </tr>
-
-                    </table>
-                    <hr>
-                    <table id="Vouchers" class="table ">
-                        <thead style="font-size:13px;">
-                            <tr>
-                                <th style="text-align: center">Tipo</th>
-                                <th style="text-align: center">Fecha</th>
-                                <th style="text-align: center">FDR</th>
-                                <th style="text-align: center">CSO</th>
-                                <th style="text-align: center">WBS</th>
-                                <th style="text-align: center">Contrato</th>
-                                <th style="text-align: center">Ubicación</th>
-                                <th style="text-align: center">Proveedor</th>
-                                <th style="text-align: center">Empresa</th>
-                                <th style="text-align: center">Cliente</th>
-                                <th style="text-align: center">Empresa</th>
-                                <th style="text-align: center">Área</th>
+                    <table id="Vouchers" class="w3-table w3-bordered" style="width: 100%">
+                        <thead class="w3-border" style="font-size:13px;">
+                            <tr class="cuerpo w3-border">
+                                <th class="borde-celda" style="text-align: center">Tipo</th>
+                                <th class="borde-celda" class="borde-celda" style="text-align: center">Fecha</th>
+                                <th class="borde-celda" style="text-align: center">FDR</th>
+                                <th class="borde-celda" style="text-align: center">CSO</th>
+                                <th class="borde-celda" style="text-align: center">WBS</th>
+                                <th class="borde-celda" style="text-align: center">Contrato</th>
+                                <th class="borde-celda" style="text-align: center">Área</th>
+                                <th class="borde-celda" style="text-align: center">Ubicación</th>
+                                <th class="borde-celda" style="text-align: center">Cant.</th>
+                                <th class="borde-celda" style="text-align: center">Proveedor</th>
+                                <th class="borde-celda" style="text-align: center">Empresa</th>
+                                <th class="borde-celda" style="text-align: center">Cliente</th>
+                                <th class="borde-celda" style="text-align: center">Empresa</th>
+                                
                             </tr>
                         </thead>
-                        <tbody style="font-size:11px;">
-                            <tr w3-repeat="voucherss">
-                                <td style="text-align: center">{{type2}}</td>
-                                <td style="text-align: center">{{date}}</td>
-                                <td style="text-align: center">{{fdr}}</td>
-                                <td style="text-align: center">{{cso}}</td>
-                                <td style="text-align: center">{{wbs}}</td>
-                                <td style="text-align: center">{{contrato}}</td>
-                                <td style="text-align: center">{{location}}</td>
-                                <td style="text-align: center">{{name}}</td>
-                                <td style="text-align: center">{{company}}</td>
-                                <td style="text-align: center">{{client}}</td>
-                                <td style="text-align: center">{{clientcompany}}</td>
-                                <td style="text-align: center">{{area}}</td>
-
-
+                        <tbody class="w3-border" style="font-size:11px;">
+                            <tr class="cuerpo" w3-repeat="voucherss">
+                                <td class="borde-celda" style="text-align: center">{{type2}}</td>
+                                <td class="borde-celda" style="text-align: center">{{date}}</td>
+                                <td class="borde-celda" style="text-align: center">{{fdr}}</td>
+                                <td class="borde-celda" style="text-align: center">{{cso}}</td>
+                                <td class="borde-celda" style="text-align: center">{{wbs}}</td>
+                                <td class="borde-celda" style="text-align: center">{{contrato}}</td>
+                                <td class="borde-celda" style="text-align: center">{{area}}</td>
+                                <td class="borde-celda" style="text-align: center">{{location}}</td>
+                                <td class="borde-celda" style="text-align: center">{{cant}}</td>
+                                <td class="borde-celda" style="text-align: center">{{name}}</td>
+                                <td class="borde-celda" style="text-align: center">{{company}}</td>
+                                <td class="borde-celda" style="text-align: center">{{client}}</td>
+                                <td class="borde-celda" style="text-align: center">{{clientcompany}}</td>
+                                
                             </tr>
 
 
                         </tbody>
                     </table>
-                    <hr>
+
+
+
+               
 
 
 

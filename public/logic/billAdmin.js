@@ -47,10 +47,10 @@ $(document).ready(function () {
                 fields: {
                     id: {editable: false},
                     codigo: {editable: false},
-                    provider: { validation: { required: true, size: 13 }, type: 'string' },
-                    type: { validation: { required: true, size: 13 }, type: 'string' },
-                    date: { validation: { required: true, }, type: 'date' },
-                    reference: { validation: { required: true, }, type: 'string' },
+                    provider: { validation: { required: true, size: 13 }, type: 'string', editable: false },
+                    type: { validation: { required: true, size: 13 }, type: 'string', editable: false },
+                    date: { validation: { required: true, }, type: 'date', editable: false },
+                    reference: { validation: { required: true, }, type: 'string', editable: false },
                     user: { type: 'string', defaultValue: user, editable: false, visible: false },
                     state: { type: 'string', visible: false }
                 }
@@ -77,6 +77,10 @@ $(document).ready(function () {
                 resizable: true,
                 pageable: { refresh: true, pageSizes: true, },
                 toolbar: ['excel'],
+                excel: {
+                    allPages: true,
+                    fileName: "actasIngreso.xlsx"
+                },
                 pdf: {
                     allPages: true,
                     avoidLinks: false,

@@ -71,13 +71,14 @@ $(document).ready(function () {
             { field: "fdr", title: "FDR", filterable: {search: true,multi:true }, hidden: false,sortable: false },
             { field: "cso", title: "CSO", filterable: {search: true,multi:true }, hidden: false,sortable: false },
             { field: "wbs", title: "WBS", filterable: {search: true,multi:true }, hidden: false,sortable: false },
+            { field: "contrato", title: "Contrato", filterable: {search: true,multi:true }, hidden: false,sortable: false },
+            { field: "area", title: "Área", filterable: {search: true,multi:true }, hidden: false,sortable: false },
             { field: "location", title: "Ubicación", filterable: {search: true,multi:true }, hidden: false,sortable: false },
             { field: "name", title: "Proveedor", filterable: {search: true,multi:true }, hidden: false,sortable: false },
             { field: "company", title: "Empresa", filterable: {search: true,multi:true }, hidden: false,sortable: false },
             { field: "client", title: "Cliente", filterable: {search: true,multi:true }, hidden: false,sortable: false },
-            { field: "contrato", title: "Contrato", filterable: {search: true,multi:true }, hidden: false,sortable: false },
-            { field: "area", title: "Área", filterable: {search: true,multi:true }, hidden: false,sortable: false },
             { field: "clientcompany", title: "Empresa", filterable: {search: true,multi:true }, hidden: false,sortable: false },
+            
             { field: "user", title: "Realizado por", filterable: {search: true,multi:true }, hidden: false,sortable: false }],
           editable: "popup"
       });

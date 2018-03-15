@@ -31,7 +31,7 @@ var child_process = require('child_process');
 
 var CronJob = require('cron').CronJob;
 var job = new CronJob('59 59 20 * * 1-5', function() {
-child_process.exec('cmd /c start C:\INVENTARIO/inventario/bat/bat.bat', function(error,data){
+child_process.exec('cmd /c start C:\Nokia/nokia/bat/bat.bat', function(error,data){
 if (error) {
 
 } else {

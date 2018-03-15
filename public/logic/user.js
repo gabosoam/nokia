@@ -61,6 +61,10 @@ $(document).ready(function () {
         resizable: true,
         pageable: { refresh: true, pageSizes: true, },
         toolbar: ['create','excel'],
+        excel: {
+            allPages: true,
+            fileName: "usuarios.xlsx"
+        },
         columns: [
             { field: "name", title: "Nombre", filterable: { multi: true, search: true, search: true } },
             { field: "lastname", title: "Apellido", filterable: { multi: true, search: true, search: true } },
@@ -68,7 +72,7 @@ $(document).ready(function () {
             { field: "email", title: "Correo electronico", filterable: {search: true, multi:true } },
             {field: "status", title:"Estado", values:states,filterable: { search: true, multi:true }},
             { field: "rol", values: roles, title: "Rol", filterable: { multi: true, search: true, search: true } },
-            { command: ["edit", "destroy", { text: "Reest contraseñas", click: showDetails, iconClass: 'icon icon-chart-column' }], title: "Acciones" }],
+            { command: ["edit", "destroy", { text: "Reest contraseña", click: showDetails, iconClass: 'icon icon-chart-column' }], title: "Acciones" }],
         editable: "popup"
     })
 

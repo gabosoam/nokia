@@ -184,8 +184,7 @@ router.post('/update', isLoggedIn, function (req, res, next) {
 router.post('/update2', isLoggedIn, function (req, res, next) {
   var data = req.body;
 
-  console.log('datos por actualizar');
-  console.log(data)
+
   product.update2(data, function (err, result) {
     if (err) {
       res.sendStatus(500);
@@ -218,7 +217,6 @@ router.post('/update3', isLoggedIn, function (req, res, next) {
   product.update3(data, function (err, result) {
     console.log(result)
     if (err) {
-      console.log(err)
       res.sendStatus(500);
     } else {
       if (result.affectedRows > 0) {

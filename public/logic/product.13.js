@@ -518,7 +518,10 @@ $(document).ready(function () {
 
                 pageable: { refresh: true, pageSizes: true, },
                 toolbar: ['excel'],
-                toolbar: ['excel'],
+                excel: {
+                    allPages: true,
+                    fileName: codigoacta+".xlsx"
+                },
 
                 pageable: { refresh: true, pageSizes: true, },
                 pdf: {

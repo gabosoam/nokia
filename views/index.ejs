@@ -189,6 +189,9 @@
                                             <div class="panel-body">
 
                                                 <div id="gridexistencias"></div>
+
+
+
                                             </div>
                                         </div>
                                         <div id="tab-2" class="tab-pane">
@@ -271,7 +274,7 @@
 
                                                     <div class="col-md-12">
 
-                                                        
+
                                                         <div id="grid2"></div>
                                                         <div id="grid4"></div>
                                                     </div>
@@ -434,11 +437,23 @@
 
 
 
+
+
+
                         if (options.filter) {
+
+                            console.log(options)
 
 
                             sql = "SELECT * FROM v_existencias WHERE"
                             sqlAll = "SELECT * FROM v_existencias";
+
+
+                            for (let i = 0; i < options.filter.length; i++) {
+
+                                //  console.log(options.filter[i])
+
+                            }
 
 
 
@@ -455,11 +470,12 @@
 
                             }
 
-                          //S  alert(sql)
+                            alert(sql)
 
 
 
                             if (sql == '') {
+
                                 return { sql: sqlAll };
                             }
 
@@ -468,6 +484,9 @@
 
                             return { sql: sql };
                         }
+
+
+
                     }
                 }
             },
@@ -476,6 +495,16 @@
             serverFiltering: true,
             requestEnd: function (e) {
                 if (e.type == "read") {
+                    //   alert('hola')
+
+                    // console.log($('#gridexistencias').data('kendoGrid').dataSource)
+
+                    var data = $('#gridexistencias').data('kendoGrid').dataSource;
+
+                    var grid8 = $("#gridexistencias").data("kendoGrid");
+                    // grid8.setDataSource(data);
+
+
 
                 }
             },
@@ -509,10 +538,9 @@
         );
 
         function saltar() {
-            $('#gridexistencias').data('kendoGrid').columns[1].filterable.search = false;
-            $('#gridexistencias').data('kendoGrid').columns[1].filterable.search = false;
-
-            console.log($('#gridexistencias').data('kendoGrid').columns[1].filterable)
+            var grid = $("#gridexistencias").data("kendoGrid");
+            grid.setDataSource(grid.dataSource);
+            grid.dataSource.read();
 
 
 
@@ -525,8 +553,14 @@
             height: 475,
             filterable: true,
 
+            autoBind: true,
+
 
             toolbar: ['excel'],
+            excel: {
+                allPages: true,
+                fileName: "existencias.xlsx"
+            },
             resizable: true,
             pageable: { refresh: true, pageSizes: true, },
 
@@ -540,7 +574,7 @@
                 { field: "brand", title: "Marca", filterable: { search: true, multi: true }, groupFooterTemplate: " Total:" },
                 { field: "counting", title: "T. Ingresos", filterable: { search: true, multi: true }, aggregates: ["sum"], groupFooterTemplate: " #=sum#" },
                 { field: "countegs", title: "T. Entregas", filterable: { search: true, multi: true }, aggregates: ["sum"], groupFooterTemplate: " #=sum#" },
-                { field: "enbodega", title: "En bodega", filterable: { search: true, multi: true }, aggregates: ["sum"], groupFooterTemplate: " #=sum#" },
+                { field: "enbodega", title: "En bodega", filterable: false, aggregates: ["sum"], groupFooterTemplate: " #=sum#" },
 
 
                 { command: [{ text: "Historial", click: showDetails, iconClass: 'icon icon-chart-column' }], title: "Acciones" }],
@@ -673,13 +707,20 @@
 
                 );
 
+                var exportFlag = false;
+
                 $.get("/model/readmodel", function (codes) {
                     $("#grid2").kendoGrid({
                         dataSource: dataSource,
                         height: 475,
                         filterable: true,
                         toolbar: ['excel'],
+                        excel: {
+                            allPages: true,
+                            fileName: "historico.xlsx"
+                        },
                         scrollable: true,
+                        sortable: true,
                         resizable: true,
 
 
@@ -700,11 +741,11 @@
                             { field: "cso", title: "CSO", filterable: { search: true, multi: true } },
                             { field: "wbs", title: "WBS", filterable: { search: true, multi: true } },
                             { field: "contrato", title: "Contrato", filterable: { search: true, multi: true } },
-                            { field: "name", title: "Priveedor", filterable: { search: true, multi: true } },
+                            { field: "name", title: "Proveedor", filterable: { search: true, multi: true } },
                             { field: "company", title: "Empresa", filterable: { search: true, multi: true } },
                             { field: "client", title: "Cliente", filterable: { search: true, multi: true } },
                             { field: "clientcompany", title: "Empresa", filterable: { search: true, multi: true } },
-                            { field: "user",hidden:true, title: "Realizado por", filterable: { search: true, multi: true } },
+                            { field: "user", hidden: true, title: "Realizado por", filterable: { search: true, multi: true } },
 
                             { command: [{ text: "Historial", click: showDetails, iconClass: 'icon icon-chart-column' }], title: "Acciones" }],
 
@@ -714,9 +755,30 @@
                             //     grid.autoFitColumn(i);
                             // }
                         },
+
+
+
+                        excelExport: exportExcel,
                         editable: "popup"
                     });
                 });
+
+                var exportFlag = false;
+
+                function exportExcel(e) {
+
+                    if (!exportFlag) {
+                        e.sender.showColumn(17);
+                        e.preventDefault();
+                        exportFlag = true;
+                        setTimeout(function () {
+                            e.sender.saveAsExcel();
+                        });
+                    } else {
+                        e.sender.hideColumn(17);
+                        exportFlag = false;
+                    }
+                }
 
 
 
@@ -728,6 +790,9 @@
             });
         }
     </script>
+
+
+
 
 
 

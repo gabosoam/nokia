@@ -172,6 +172,10 @@ $(document).ready(function () {
   $("#grid3").kendoGrid({
     dataSource: dataSourceError,
     toolbar: ['excel'],
+    excel: {
+      allPages: true,
+      fileName: "errores.xlsx"
+  },
     height: 600,
     scrollable: true,
     columnMenu: true,
@@ -194,6 +198,10 @@ $(document).ready(function () {
   $("#grid2").kendoGrid({
     dataSource: dataSourceEvent,
     toolbar: ['excel'],
+    excel: {
+      allPages: true,
+      fileName: "eventos.xlsx"
+  },
     height: 400,
     scrollable: true,
     columnMenu: false,

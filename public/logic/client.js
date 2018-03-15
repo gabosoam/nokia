@@ -54,11 +54,15 @@ $(document).ready(function () {
         resizable: true,
         pageable: { refresh: true, pageSizes: true, },
         toolbar: ['create','excel'],
+        excel: {
+            allPages: true,
+            fileName: "clientes.xlsx"
+        },
         columns: [
             { field: "name", title: "Nombre", filterable: { multi: true, search: true, search: true } },
             { field: "company", title: "Empresa", filterable: { multi: true, search: true, search: true } },
             { command: ["edit", "destroy"], title: "Acciones" }],
-        editable: "popup"
+        editable: "inline"
     });
 });
 function redirect(location) {

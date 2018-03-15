@@ -25,7 +25,7 @@ $("#txtCodigo").kendoDropDownList({
     filter: "contains",
     dataTextField: "code",
     dataValueField: "id",
-    placeholder: "Buscar código...",
+    optionLabel   : "Buscar un código",
     minLength: 1,
     change: onChange
 });
@@ -518,7 +518,10 @@ $(document).ready(function () {
 
                 pageable: { refresh: true, pageSizes: true, },
                 toolbar: ['excel'],
-                toolbar: ['excel'],
+                excel: {
+                    allPages: true,
+                    fileName: codigoacta+".xlsx"
+                },
 
                 pageable: { refresh: true, pageSizes: true, },
                 pdf: {
