@@ -555,21 +555,26 @@ $(document).ready(function () {
                     { field: "barcode", aggregates: ["count"], title: "Serie", filterable: { search: true, multi: true }, groupFooterTemplate: "Total:" },
                     { field: "cant", aggregates: ["sum"], title: "Cant.", filterable: { search: true, multi: true }, aggregates: ["sum"],  groupFooterTemplate: "#=sum#" },
 
-                    { field: "fdr", title: "FDR", filterable: { search: true, multi: true } },
-                    { field: "cso", title: "CSO", filterable: { search: true, multi: true } },
-                    { field: "wbs", title: "WBS", filterable: { search: true, multi: true } },
-                    { field: "contrato", title: "Contrato", filterable: { search: true, multi: true } },
-                    { field: "area", title: "Área", filterable: { search: true, multi: true } },
-                    { field: "comment", title: "Comentario", filterable: { search: true, multi: true }},
+                    { field: "fdr", title: "FDR", filterable: { search: true, multi: true },  editor: zipCodesEditor },
+                    { field: "cso", title: "CSO", filterable: { search: true, multi: true },  editor: zipCodesEditor },
+                    { field: "wbs", title: "WBS", filterable: { search: true, multi: true },  editor: zipCodesEditor },
+                    { field: "contrato", title: "Contrato", filterable: { search: true, multi: true }, editor: zipCodesEditor },
+                    { field: "area", title: "Área", filterable: { search: true, multi: true },  editor: zipCodesEditor },
+                    { field: "comment", title: "Comentario", filterable: { search: true, multi: true },  editor: zipCodesEditor},
                     { field: "bill", title: "Factura", hidden: true },
                     { command: ["edit", "destroy"], title: "Acciones" }],
-                editable: "popup"
+                editable: "inline"
             })
 
         })
 
 
     });
+
+    function zipCodesEditor(container, options) {
+        $('<textarea class="form-control" data-bind="value: ' + options.field + '" rows="5"></textarea>')
+            .appendTo(container);
+    }
 
 
 

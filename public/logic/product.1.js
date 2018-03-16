@@ -555,12 +555,12 @@ $(document).ready(function () {
                     
                     { field: "cant", aggregates: ["sum"], title: "Cant.", filterable: { search: true, multi: true },aggregates: ["sum"],  groupFooterTemplate: "#=sum#" },
                     { field: "location", title: "Ubicación", values: data, filterable: { search: true, multi: true } },
-                    { field: "fdr", title: "FDR", filterable: { search: true, multi: true } },
-                    { field: "cso", title: "CSO", filterable: { search: true, multi: true } },
-                    { field: "wbs", title: "WBS", filterable: { search: true, multi: true } },
-                    { field: "contrato", title: "Contrato", filterable: { search: true, multi: true } },
+                    { field: "fdr", title: "FDR", filterable: { search: true, multi: true }, editor: zipCodesEditor },
+                    { field: "cso", title: "CSO", filterable: { search: true, multi: true }, editor: zipCodesEditor },
+                    { field: "wbs", title: "WBS", filterable: { search: true, multi: true }, editor: zipCodesEditor },
+                    { field: "contrato", title: "Contrato", filterable: { search: true, multi: true }, editor: zipCodesEditor },
                     { field: "area", title: "Área", filterable: { search: true, multi: true }, editor: zipCodesEditor },
-                    { field: "comment", title: "Comentario", filterable: { search: true, multi: true } },
+                    { field: "comment", title: "Comentario", filterable: { search: true, multi: true }, editor: zipCodesEditor },
                     { field: "bill", title: "Comprobante", hidden: true },
                     { command: [ "edit","destroy"], title: "Acciones" }],
                 editable: "inline"

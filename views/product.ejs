@@ -36,107 +36,108 @@
                 </div>
                 <div class="modal-body">
 
-                        <div class="panel-group" id="accordion">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <h5 class="panel-title">
-                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">1. Descargar la plantilla desde el siguiente enlace</a>
-                                        </h5>
-                                    </div>
-                                    <div id="collapseOne" class="panel-collapse collapse in">
-                                        <div class="panel-body">
-                                            <a href="../PLANTILLA.csv">Plantilla.csv</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title">
-                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">2. Abrir el archivo con una apliación de hojas de cálculo como por ejemplo
-                                                Microsoft Excel. (Ver imagen)</a>
-                                        </h4>
-                                    </div>
-                                    <div id="collapseTwo" class="panel-collapse collapse">
-                                        <div class="panel-body">
-                                            <img width="100%" src="../manual/plantilla.png" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title">
-                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">3. Ingresar los datos y guardar. (Ver imagen)</a>
-                                        </h4>
-                                    </div>
-                                    <div id="collapseThree" class="panel-collapse collapse">
-                                        <div class="panel-body">
-                                            <img src="../manual/ingreso.png" width="100%" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title">
-                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">4. Cargar el archivo al sistema desde el siguiente enlace.</a>
-                                        </h4>
-                                    </div>
-                                    <div id="collapse4" class="panel-collapse collapse">
-                                        <div class="panel-body">
-                                            <form class="form-horizontal ">
-
-                                                <fieldset>
-                                                    <label for="csvFileInput">
-                                                        <strong>Seleccionar archivo CSV:</strong>
-                                                    </label>
-                                                    <input type="file" class="" id="csvFileInput" onchange="handleFiles(this.files)" accept=".csv">
-                                                    <br>
-                                                    <!-- <i id="spinner" class="fa fa-spinner fa-spin fa-2x" aria-hidden="true"></i> -->
-
-                                                </fieldset>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title">
-                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse5">5. Comprobar si existen nuevos códigos</a>
-                                        </h4>
-                                    </div>
-                                    <div id="collapse5" class="panel-collapse collapse">
-                                        <div class="panel-body">
-
-                                            <p>En caso de que existan nuevos códigos se mostrará una lista en caso contrario puede continuar con el siguiente paso</p>
-                                            <div id="output" style="height: 150; background-color: white"></div>
-
-                                        </div>
-                                    </div>
-                                </div>
-
-
-
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title">
-                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse6">6. Iniciar ingreso</a>
-                                        </h4>
-                                    </div>
-                                    <div id="collapse6" class="panel-collapse collapse">
-                                        <div class="panel-body">
-
-                                            <button class="btn btn-success" onclick="iniciar()">Iniciar ingreso</button>
-                                            <div id="output2" style="height: 150; background-color: white"></div>
-
-
-
-                                        </div>
-                                    </div>
+                    <div class="panel-group" id="accordion">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h5 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">1. Descargar la plantilla desde el siguiente enlace</a>
+                                </h5>
+                            </div>
+                            <div id="collapseOne" class="panel-collapse collapse in">
+                                <div class="panel-body">
+                                    <a href="../PLANTILLA.csv">Plantilla.csv</a>
                                 </div>
                             </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">2. Abrir el archivo con una apliación de hojas de cálculo como por ejemplo Microsoft
+                                        Excel. (Ver imagen)</a>
+                                </h4>
+                            </div>
+                            <div id="collapseTwo" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <img width="100%" src="../manual/plantilla.png" alt="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">3. Ingresar los datos y guardar. (Ver imagen)</a>
+                                </h4>
+                            </div>
+                            <div id="collapseThree" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <img src="../manual/ingreso.png" width="100%" alt="">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">4. Cargar el archivo al sistema desde el siguiente enlace.</a>
+                                </h4>
+                            </div>
+                            <div id="collapse4" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <form class="form-horizontal ">
+
+                                        <fieldset>
+                                            <label for="csvFileInput">
+                                                <strong>Seleccionar archivo CSV:</strong>
+                                            </label>
+                                            <input type="file" class="" id="csvFileInput" onchange="handleFiles(this.files)" accept=".csv">
+                                            <br>
+                                            <!-- <i id="spinner" class="fa fa-spinner fa-spin fa-2x" aria-hidden="true"></i> -->
+
+                                        </fieldset>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse5">5. Comprobar si existen nuevos códigos</a>
+                                </h4>
+                            </div>
+                            <div id="collapse5" class="panel-collapse collapse">
+                                <div class="panel-body">
+
+                                    <p>En caso de que existan nuevos códigos se mostrará una lista en caso contrario puede continuar
+                                        con el siguiente paso</p>
+                                    <div id="output" style="height: 150; background-color: white"></div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse6">6. Iniciar ingreso</a>
+                                </h4>
+                            </div>
+                            <div id="collapse6" class="panel-collapse collapse">
+                                <div class="panel-body">
+
+                                    <button class="btn btn-success" onclick="iniciar()">Iniciar ingreso</button>
+                                    <div id="output2" style="height: 150; background-color: white"></div>
+
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
 
 
@@ -971,7 +972,7 @@
                 var userSession = '<%=user.id%>';
                 var user = '<%=data.user%>';
                 var reference = '<%=data.reference%>';
-                var codigoacta= '<%=data.codigo%>'
+                var codigoacta = '<%=data.codigo%>'
             </script>
             <% } %>
 
