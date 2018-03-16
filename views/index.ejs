@@ -574,7 +574,7 @@
                 { field: "brand", title: "Marca", filterable: { search: true, multi: true }, groupFooterTemplate: " Total:" },
                 { field: "counting", title: "T. Ingresos", filterable: { search: true, multi: true }, aggregates: ["sum"], groupFooterTemplate: " #=sum#" },
                 { field: "countegs", title: "T. Entregas", filterable: { search: true, multi: true }, aggregates: ["sum"], groupFooterTemplate: " #=sum#" },
-                { field: "enbodega", title: "En bodega", filterable: false, aggregates: ["sum"], groupFooterTemplate: " #=sum#" },
+                { field: "enbodega", title: "En bodega", filterable: { search: true, multi: false }, aggregates: ["sum"], groupFooterTemplate: " #=sum#" },
 
 
                 { command: [{ text: "Historial", click: showDetails, iconClass: 'icon icon-chart-column' }], title: "Acciones" }],
@@ -607,14 +607,6 @@
             $('#Etiquetas').printArea();
 
         }
-
-
-
-
-
-
-
-
 
     </script>
 
