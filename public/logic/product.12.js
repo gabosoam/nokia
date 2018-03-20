@@ -1,6 +1,7 @@
 
 
 $('#btnPrint').hide();
+$('#btnPrint2').hide();
 $("#txtSerie").kendoDropDownList();
 
 var validator = $("#formsave").kendoValidator().data("kendoValidator");
@@ -522,7 +523,7 @@ $(document).ready(function () {
                     allPages: true,
                     fileName: codigoacta+".xlsx"
                 },
-
+                sortable: true,
                 pageable: { refresh: true, pageSizes: true, },
                 pdf: {
                     allPages: true,

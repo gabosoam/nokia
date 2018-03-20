@@ -1,5 +1,6 @@
 
 $('#btnPrint').hide();
+$('#btnPrint2').hide();
 
 var validator = $("#formsave").kendoValidator().data("kendoValidator");
 var validatorModel = $("#formSaveModel").kendoValidator().data("kendoValidator");

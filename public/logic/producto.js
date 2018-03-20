@@ -81,6 +81,7 @@ $(document).ready(function () {
             columnMenu: false,
             groupable: false,
             resizable: true,
+            sortable: true,
             
             pageable: { refresh: true, pageSizes: true, },
             toolbar: ['create','excel'],

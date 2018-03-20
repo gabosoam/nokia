@@ -56,6 +56,7 @@ $(document).ready(function () {
           
           pageable: { refresh: true, pageSizes: true, },
           toolbar: ['create','excel'],
+          sortable: true,
 
           excel: {
             allPages: true,

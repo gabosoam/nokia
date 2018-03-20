@@ -52,6 +52,7 @@ $(document).ready(function () {
         height: 475,
         filterable: true,
         resizable: true,
+        sortable: true,
         pageable: { refresh: true, pageSizes: true, },
         toolbar: ['create','excel'],
         excel: {

@@ -200,6 +200,42 @@ router.post('/login', function (req, res, next) {
   });
 });
 
+router.post('/loginmobil', function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  var sess = req.session;
+  user.login(req.body, function (err, dates) {
+    if (err) {
+      res.render('login', { message: err })
+    } else {
+
+      var changes = {
+        table: 'LOGIN',
+        user: dates.name,
+        ip: req.ip,
+        type: 'LOGIN'
+      };
+
+      event.create(changes, function (result) {
+        console.log(result);
+      });
+
+      if (dates.rol == 1) {
+        sess.usuarioDatos = dates;
+        //res.redirect('/');
+        res.send('Usuario')
+      } else {
+        sess.adminDatos = dates;
+        res.send('Administrador')
+
+      }
+
+
+    }
+
+  });
+});
+
 function isLoggedIn(req, res, next) {
   sess = req.session;
 

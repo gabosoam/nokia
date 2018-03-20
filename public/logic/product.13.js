@@ -515,6 +515,7 @@ $(document).ready(function () {
                 filterable: true,
         
                 resizable: true,
+                sortable: true,
 
                 pageable: { refresh: true, pageSizes: true, },
                 toolbar: ['excel'],

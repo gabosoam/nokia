@@ -51,6 +51,7 @@ $(document).ready(function () {
         resizable: true,
         pageable: { refresh: true, pageSizes: true, },
         toolbar: ['create','excel'],
+        sortable: true,
         excel: {
             allPages: true,
             fileName: "marcas.xlsx"

@@ -513,7 +513,8 @@
                     id: "idprod",
                     fields: {
                         idprod: { editable: false },
-                        estado: { editable: false }
+                        estado: { editable: false },
+                        enbodega:{editable: false, type: 'number'}
 
                     }
                 }
@@ -563,6 +564,7 @@
             },
             resizable: true,
             pageable: { refresh: true, pageSizes: true, },
+            sortable: true,
 
             columns: [
 

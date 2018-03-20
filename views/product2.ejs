@@ -28,6 +28,7 @@
 <body class="skin-2">
 
     <div id="wrapper">
+        
 
         <nav class="navbar-default navbar-static-side" role="navigation">
             <div class="sidebar-collapse">
@@ -197,6 +198,9 @@
 
                                 <button id="btnPrint" type="button" class="btn btn-default" onclick="print()">
                                     <span class="fa fa-print"></span> Imprimir</button>
+
+                                <button id="btnPrint2" type="button" class="btn btn-default" onclick="print2()">
+                                    <span class="fa fa-print"></span> Imprimir AR's</button>
 
 
                                 <p class="cuerpo">
@@ -443,6 +447,168 @@
                                                     <td class="borde-celda" style="text-align: center">
                                                         {{comment}}
                                                     </td>
+                                                </tr>
+
+
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+
+                                </div>
+
+
+
+
+
+                                <div class="footer2">
+                                    <table style="width: 100%; border: 1; font-size: 12px ">
+                                        <tr>
+                                            <td class="cuerpo">
+                                                <center>
+                                                    <p>
+                                                        ENTREGADO POR
+                                                        <br>
+                                                        <br>
+                                                        <br>
+                                                        <br>
+                                                        <br> _______________________________
+                                                        <br>
+                                                        <br>
+
+                                                        <p>Nombre______________________</p>
+                                                        <p>C.I.__________________________</p>
+
+
+                                                    </p>
+                                                </center>
+
+
+                                            </td>
+
+                                            <!--    <td>
+                                                            <center>
+                                                                <p>
+                                                                    REPRESENTANTE NOKIA
+                                                                    <br>
+                                                                    <br>
+                                                                    <br>
+                                                                    <br>
+                                                                    <br> _______________________________
+                                                                    <br>
+                                                                    <br>
+                                                                    <%=data.user%>
+                                                                </p>
+                                                            </center>
+                        
+                        
+                                                        </td> -->
+
+                                            <td class="cuerpo">
+                                                <center>
+                                                    <p>
+                                                        RECIBIDO POR
+                                                        <br>
+                                                        <br>
+                                                        <br>
+                                                        <br>
+                                                        <br> _______________________________
+                                                        <br>
+                                                        <br>
+                                                        <p>Nombre______________________</p>
+                                                        <p>C.I.__________________________</p>
+
+
+                                                    </p>
+                                                </center>
+
+
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="contenido" id="print2" style="font-family: 'Arial Narrow'">
+
+                                <div class="cuerporeporte">
+                                    <div>
+
+                                        <div class="w3-display-container" style="height:55px;">
+
+                                            <img id="auto" class="w3-display-middle" class="" src="../images/nokia.png" width="280px" height="55px" />
+
+
+                                            <p class="w3-display-right cuerpo ">
+
+                                                <%=data.codigo%>
+
+
+
+                                            </p>
+
+
+
+                                        </div>
+
+
+                                        <div class="w3-display-container" style="height:25px;">
+                                            <h4 class="cuerpo w3-display-middle">ACTA DE ENTREGA</h4>
+                                        </div>
+                                        <hr>
+
+                                        <div class="w3-display-container" style="height:100px;">
+
+
+                                            <div>
+
+                                                <p class="cuerpo">
+                                                    <strong>Cliente: </strong>
+                                                    <%=data.client%>
+                                                </p>
+                                                <p class="cuerpo">
+                                                    <strong>Empresa: </strong>
+                                                    <%=data.clientcompany%>
+                                                </p>
+                                                <p class="cuerpo">
+                                                    <strong>Fecha: </strong>
+                                                    <%=data.date%>
+                                                </p>
+
+
+
+
+
+
+
+
+                                            </div>
+                                        </div>
+
+                                        <hr>
+                                        <table id="Vouchers2" class="w3-table w3-bordered" style="width: 100%">
+                                            <thead class="w3-border" style="font-size:13px;">
+                                                <tr class="cuerpo w3-border">
+                                                    <th class="borde-celda" style="text-align: center">Ítem</th>
+                                                    <th class="borde-celda" style="text-align: center">Código</th>
+                                                    <th class="borde-celda" class="borde-celda" style="text-align: center">Nombre</th>
+                                                    <th class="borde-celda" style="text-align: center">Serie</th>
+                                                    <th class="borde-celda" style="text-align: center">Cant</th>
+                                                    <th class="borde-celda" style="text-align: center">FDR</th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody class="w3-border" style="font-size:11px;">
+                                                <tr class="cuerpo" w3-repeat="voucherss2">
+                                                    <td class="borde-celda" style="text-align: center">{{item}}</td>
+                                                    <td class="borde-celda" style="text-align: center">{{code2}}</td>
+                                                    <td class="borde-celda" style="text-align: center">{{description}}</td>
+                                                    <td class="borde-celda" style="text-align: center">{{barcode}}</td>
+                                                    <td class="borde-celda" style="text-align: center">{{cant}}</td>
+
+                                                    <td class="borde-celda" style="text-align: center">{{fdr}}</td>
+
+
                                                 </tr>
 
 
@@ -863,23 +1029,30 @@
     <script>
 
 
-        actualizarReporte()
+        actualizarReporte();
 
         function actualizarReporte() {
             $.get("/bill/read/<%=bill%>", function (data2) {
-                console.log($('#Vouchers'))
 
+                for (let index = 0; index < data2.length; index++) {
+                    data2[index].item = index + 1;
+                }
                 w3.displayObject("Vouchers", { voucherss: data2 });
-
+                w3.displayObject("Vouchers2", { voucherss2: data2 });
             });
         }
 
 
 
-
         function print() {
-            //$('#print').printArea({ mode: 'iframe'});
+
+            
             $("#print").printMe({ "path": ["/css/w3.css"] });
+        }
+
+        function print2() {
+            
+            $("#print2").printMe({ "path": ["/css/w3.css"] });
         }
         function openLotes() {
 
@@ -887,6 +1060,7 @@
         }
 
     </script>
+
 
     <% if (bill) { %>
         <script>
@@ -897,7 +1071,7 @@
             var user = '<%=data.user%>';
             var userid = '<%=user.id%>';
             var reference = '<%=data.reference%>';
-            var codigoacta= '<%=data.codigo%>'
+            var codigoacta = '<%=data.codigo%>'
 
             alert(userid + " " + userbill)
 

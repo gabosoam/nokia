@@ -27,23 +27,20 @@ var ticket = require('./routes/ticket');
 var setting = require('./routes/setting');
 
 var child_process = require('child_process');
-
-
 var CronJob = require('cron').CronJob;
-var job = new CronJob('59 59 20 * * 1-5', function() {
-child_process.exec('cmd /c start C:\Nokia/nokia/bat/bat.bat', function(error,data){
-if (error) {
 
-} else {
-  
-}
-});
+//Función para programar 
+var job = new CronJob('59 59 20 * * 1-5', function () {
 
-    
-  
-  }, function () {
-   
-  },
+  child_process.exec('cmd /c start C:\Nokia/nokia/bat/bat.bat', function (error, data) {
+    if (error) {
+    } else {
+    }
+  });
+
+
+}, function () {
+},
   true
 );
 
@@ -96,7 +93,7 @@ app.use('/setting', setting);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
-  
+
   var err = new Error('Not Found');
   console.log(err)
   err.status = 404;

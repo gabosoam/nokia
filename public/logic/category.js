@@ -50,6 +50,7 @@ $(document).ready(function () {
         filterable: true,
         resizable: true,
         pageable: { refresh: true, pageSizes: true, },
+        sortable: true,
         toolbar: ['create', 'excel'],
         excel: {
             allPages: true,
