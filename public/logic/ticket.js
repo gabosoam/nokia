@@ -80,6 +80,7 @@ $(document).ready(function () {
                     description: { validation: { required: true, }, type: 'string' },
                     fdr: { validation: { required: true, }, type: 'string' },
                     cso: { validation: { required: true, }, type: 'string' },
+                    date: { validation: { required: true, }, type: 'date' },
                     wbs: { validation: { required: true, }, type: 'string' },
                     area: { validation: { required: true, }, type: 'string' },
                     contrato: { validation: { required: true, }, type: 'string' },
@@ -140,6 +141,7 @@ $(document).ready(function () {
                     { field: "description", title: "Nombre", filterable: { search: true, multi: true } },
                     { field: "barcode", title: "No. de Serie", filterable: { search: true, multi: true } },
                     { field: "location2", title: "Ubicación", filterable: { search: true, multi: true } },
+                    { field: "date", format: "{0:dd/MM/yyyy}", title: "F. Ingreso", filterable: { search: true, multi: false } },
                     { field: "enbodega", title: "Cantidad", filterable: { search: true} }],
                 editable: "popup"
             });

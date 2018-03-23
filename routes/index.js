@@ -61,19 +61,13 @@ router.get('/event', isLoggedInAdmin, function (req, res, next) {
 });
 
 router.post('/existencia', function (req, res, next) {
-
 	var sql = ''
-
-
-
 	if (!req.body.sql) {
-		sql = 'SELECT * FROM v_existencias'
+		sql = 'SELECT * FROM v_existenciascontrato'
 	} else {
 		sql = req.body.sql
 	}
-	console.log('hola ' + sql)
-
-
+	
 	index.existencia(sql, function (err, result) {
 		if (err) {
 			res.send(err);
@@ -82,6 +76,8 @@ router.post('/existencia', function (req, res, next) {
 		}
 	});
 });
+
+
 
 router.get('/existenciaAdmin', isLoggedInAdmin, function (req, res, next) {
 
@@ -124,7 +120,6 @@ router.get('/generateBarcode', isLoggedIn, function (req, res, next) {
 			res.send(data);
 		}
 	})
-
 });
 
 router.get('/vouchers', isLoggedIn, function (req, res, next) {

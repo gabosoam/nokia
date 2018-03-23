@@ -48,10 +48,19 @@
                     </li>
 
                     <li class="">
-                        <a href="/">
-                            <i class="fa fa-home"></i>
-                            <span class="nav-label">Inicio</span>
+                        <a href="#">
+                            <i class="fa fa-search"></i>
+                            <span class="nav-label">Consultas</span>
+                            <span class="fa arrow"></span>
                         </a>
+                        <ul class="nav nav-second-level collapse">
+                            <li class="">
+                                <a href="/">Existencias</a>
+                            </li>
+                            <li>
+                                <a href="/history">Historial</a>
+                            </li>
+                        </ul>
                     </li>
                     <li>
                         <a href="#">
@@ -280,6 +289,7 @@
             <script src="../kendo/js/kendo.all.min.js"></script>
             <script src="../kendo/js/jszip.min.js"></script>
             <script src="../kendo/js/kendo.messages.es-MX.min.js"></script>
+            <script src="../kendo/js/kendo.culture.es-MX.min.js"></script>
             <script src="../logic/changePassword.js"></script>
             <script src="../js/w3.js"></script>
             <script src="../logic/ticket.js"></script>
@@ -313,6 +323,9 @@
 
 
             </script>
+            <script>
+                kendo.culture("es-MX");
+               </script>
 
 
 

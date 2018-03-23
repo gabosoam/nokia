@@ -27,14 +27,23 @@
             <div class="sidebar-collapse">
                 <ul class="nav metismenu" id="side-menu">
                     <li class="nav-header">
-                        <div class="dropdown profile-element"> <span>
-                            <img alt="image" class="img-circle" src="../inspinia/img/user.png" style="max-width: 50px" />
-                             </span>
+                        <div class="dropdown profile-element">
+                            <span>
+                                <img alt="image" class="img-circle" src="../inspinia/img/user.png" style="max-width: 50px" />
+                            </span>
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold"><%= user.name%></strong>
-                             </span>  </span> </a>
+                                <span class="clear">
+                                    <span class="block m-t-xs">
+                                        <strong class="font-bold">
+                                            <%= user.name%>
+                                        </strong>
+                                    </span>
+                                </span>
+                            </a>
                             <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                                    <li><a data-toggle="modal" data-target="#myModal">Cambiar contraseña</a></li>
+                                <li>
+                                    <a data-toggle="modal" data-target="#myModal">Cambiar contraseña</a>
+                                </li>
                             </ul>
                         </div>
                         <div class="logo-element">
@@ -42,66 +51,85 @@
                         </div>
                     </li>
                     <li class="">
-                            <a href="/">
-                                <i class="fa fa-home"></i>
-                                <span class="nav-label">Inicio</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/bill">
-                                <i class="fa fa-arrow-right"></i>
-                                <span class="nav-label">Ingresos</span>
-                                <span class="fa arrow"></span>
-                            </a>
-                            <ul class="nav nav-second-level collapse">
-    
-                                <li>
-                                    <a href="/bill">Ingresos</a>
-                                </li>
-                                <li>
-                                    <a href="/labels">Etiquetas</a>
-                                </li>
-    
-    
-    
-                            </ul>
-                            
-                        </li>
-                        <li class="active">
-                            <a href="/vouchers">
-                                <i class="fa fa-arrow-left"></i>
-                                <span class="nav-label">Entregas</span>
-                            </a>
-                        </li>
-                    
-                        <li>
-                            <a href="/model">
-                                <i class="fa fa-cube"></i>
-                                <span class="nav-label">Productos</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/client">
-                                <i class="fa fa-address-book"></i>
-                                <span class="nav-label">Clientes</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/provider">
-                                <i class="fa fa-truck"></i>
-                                <span class="nav-label">Proveedores</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-cog"></i> <span class="nav-label">Configuración</span><span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level collapse">
-                                <li><a href="/location">Almacenes</a></li>
-                                <li><a href="/category">Tipos</a></li>
-                                <li><a href="/brand">Marcas</a></li>
-                            
-     
-                            </ul>
-                        </li>
+                        <a href="#">
+                            <i class="fa fa-search"></i>
+                            <span class="nav-label">Consultas</span>
+                            <span class="fa arrow"></span>
+                        </a>
+                        <ul class="nav nav-second-level collapse">
+                            <li class="">
+                                <a href="/">Existencias</a>
+                            </li>
+                            <li>
+                                <a href="/history">Historial</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="/bill">
+                            <i class="fa fa-arrow-right"></i>
+                            <span class="nav-label">Ingresos</span>
+                            <span class="fa arrow"></span>
+                        </a>
+                        <ul class="nav nav-second-level collapse">
+
+                            <li>
+                                <a href="/bill">Ingresos</a>
+                            </li>
+                            <li>
+                                <a href="/labels">Etiquetas</a>
+                            </li>
+
+
+
+                        </ul>
+
+                    </li>
+                    <li class="active">
+                        <a href="/vouchers">
+                            <i class="fa fa-arrow-left"></i>
+                            <span class="nav-label">Entregas</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/model">
+                            <i class="fa fa-cube"></i>
+                            <span class="nav-label">Productos</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/client">
+                            <i class="fa fa-address-book"></i>
+                            <span class="nav-label">Clientes</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/provider">
+                            <i class="fa fa-truck"></i>
+                            <span class="nav-label">Proveedores</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-cog"></i>
+                            <span class="nav-label">Configuración</span>
+                            <span class="fa arrow"></span>
+                        </a>
+                        <ul class="nav nav-second-level collapse">
+                            <li>
+                                <a href="/location">Almacenes</a>
+                            </li>
+                            <li>
+                                <a href="/category">Tipos</a>
+                            </li>
+                            <li>
+                                <a href="/brand">Marcas</a>
+                            </li>
+
+
+                        </ul>
+                    </li>
                 </ul>
 
             </div>
@@ -306,12 +334,12 @@
                                         </strong>
                                         <br>
                                         <%=data.dni%>
-                                        <br>
-                                        <%=data.address%>
                                             <br>
-                                            <%=data.email%>,
+                                            <%=data.address%>
                                                 <br>
-                                                <%=data.phone%>
+                                                <%=data.email%>,
+                                                    <br>
+                                                    <%=data.phone%>
                                     </address>
                                 </td>
                                 <td style="text-align: right">
@@ -332,7 +360,7 @@
                         <table id="Voucher" class="table ">
                             <thead style="font-size:13px;">
                                 <tr>
-                                    <th style="text-align: center" >Item</th>
+                                    <th style="text-align: center">Item</th>
                                     <th style="text-align: center">Descripción</th>
                                     <th style="text-align: center">Código</th>
                                     <th style="text-align: center">Serie</th>
@@ -340,7 +368,7 @@
                                     <th style="text-align: center">Observación</th>
                                 </tr>
                             </thead>
-                            <tbody  style="font-size:11px;">
+                            <tbody style="font-size:11px;">
                                 <tr w3-repeat="vouchers">
                                     <td style="text-align: center">{{num}}</td>
                                     <td style="text-align: left">{{description}}</td>
@@ -439,50 +467,50 @@
             <script src="../js/w3.js"></script>
             <script src="../js/jquery.PrintArea.js"></script>
             <script src="../js/jspdf.min.js"></script>
-            
+
 
             <% if (user) { %>
                 <script>
                     var user = '<%= user.id %>'
                 </script>
                 <% } %>
-                <div id="modal"></div>
+                    <div id="modal"></div>
 
-            <script>
-                $.get("/voucher/read/<%=bill%>", function (data) {
-
-
-                    w3.displayObject("Voucher", { vouchers: data });
-
-                });
-
-                function print() {
-                    $('#print').printArea();
-
-                }
-            </script>
-<script src="../logic/changePassword.js"></script>
+                    <script>
+                        $.get("/voucher/read/<%=bill%>", function (data) {
 
 
+                            w3.displayObject("Voucher", { vouchers: data });
+
+                        });
+
+                        function print() {
+                            $('#print').printArea();
+
+                        }
+                    </script>
+                    <script src="../logic/changePassword.js"></script>
 
 
 
-            <% if (bill) { %>
 
-                <script>
-                    var bill = '<%= bill %>';
-                    var userBill = '<%=data.iduser%>';
-                    var userSession = '<%=user.id%>';
-                    var user = '<%=data.user%>';
-                    var reference = '<%=data.reference%>';
-                </script>
-                <% } %>
 
-                    <% if (data.state == 0) { %>
-                        <script src="../logic/voucherDetail.js"></script>
-                        <% } else { %>
-                            <script src="../logic/voucherDetail2.js"></script>
-                            <% } %>
+                    <% if (bill) { %>
+
+                        <script>
+                            var bill = '<%= bill %>';
+                            var userBill = '<%=data.iduser%>';
+                            var userSession = '<%=user.id%>';
+                            var user = '<%=data.user%>';
+                            var reference = '<%=data.reference%>';
+                        </script>
+                        <% } %>
+
+                            <% if (data.state == 0) { %>
+                                <script src="../logic/voucherDetail.js"></script>
+                                <% } else { %>
+                                    <script src="../logic/voucherDetail2.js"></script>
+                                    <% } %>
 
 
 

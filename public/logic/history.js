@@ -66,6 +66,8 @@ $(document).ready(function () {
        
           columns: [
             { field: "type",values: types, title: "Transacción", filterable: {search: true,multi:true }, hidden: false,sortable: false },
+            { field: "code", title: "Código", filterable: {search: true,multi:true }, hidden: false,sortable: false },
+            { field: "barcode", title: "No. de serie", filterable: {search: true,multi:true }, hidden: false,sortable: false }, 
             { field: "date", title: "Fecha", filterable: {search: true,multi:false }, hidden: false, format: "{0:dd/MM/yyyy}",sortable: true },
             { field: "cant", title: "Cantidad", filterable: {search: true,multi:true }, hidden: false,sortable: false },
             { field: "fdr", title: "FDR", filterable: {search: true,multi:true }, hidden: false,sortable: false },
@@ -73,6 +75,7 @@ $(document).ready(function () {
             { field: "wbs", title: "WBS", filterable: {search: true,multi:true }, hidden: false,sortable: false },
             { field: "contrato", title: "Contrato", filterable: {search: true,multi:true }, hidden: false,sortable: false },
             { field: "area", title: "Área", filterable: {search: true,multi:true }, hidden: false,sortable: false },
+            { field: "comment", title: "Comentario", filterable: {search: true,multi:true }, hidden: false,sortable: false },
             { field: "location", title: "Ubicación", filterable: {search: true,multi:true }, hidden: false,sortable: false },
             { field: "name", title: "Proveedor", filterable: {search: true,multi:true }, hidden: false,sortable: false },
             { field: "company", title: "Empresa", filterable: {search: true,multi:true }, hidden: false,sortable: false },

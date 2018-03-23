@@ -3,6 +3,11 @@ var router = express.Router();
 var history = require('../model/history');
 var event = require('../model/event');
 
+router.get('/', isLoggedIn, function (req, res, next) {
+  res.render('historys', { user: sess.usuarioDatos });
+});
+
+
 /* GET home page. */
 router.get('/:id', isLoggedIn, function (req, res, next) {
 

@@ -46,11 +46,20 @@
                             IN+
                         </div>
                     </li>
-                    <li class="active">
-                        <a href="/">
-                            <i class="fa fa-home"></i>
-                            <span class="nav-label">Inicio</span>
+                    <li class="">
+                        <a href="#">
+                            <i class="fa fa-search"></i>
+                            <span class="nav-label">Consultas</span>
+                            <span class="fa arrow"></span>
                         </a>
+                        <ul class="nav nav-second-level collapse">
+                            <li class="">
+                                <a href="/">Existencias</a>
+                            </li>
+                            <li>
+                                <a href="/history">Historial</a>
+                            </li>
+                        </ul>
                     </li>
                     <li>
                         <a href="#">
@@ -311,6 +320,8 @@
                         <thead class="w3-border" style="font-size:13px;">
                             <tr class="cuerpo w3-border">
                                 <th class="borde-celda" style="text-align: center">Tipo</th>
+                                <th class="borde-celda" style="text-align: center">Código</th>
+                                <th class="borde-celda" style="text-align: center">No. de serie</th>
                                 <th class="borde-celda" class="borde-celda" style="text-align: center">Fecha</th>
                                 <th class="borde-celda" style="text-align: center">FDR</th>
                                 <th class="borde-celda" style="text-align: center">CSO</th>
@@ -329,6 +340,8 @@
                         <tbody class="w3-border" style="font-size:11px;">
                             <tr class="cuerpo" w3-repeat="voucherss">
                                 <td class="borde-celda" style="text-align: center">{{type2}}</td>
+                                <td class="borde-celda" style="text-align: center">{{code}}</td>
+                                <td class="borde-celda" style="text-align: center">{{barcode}}</td>
                                 <td class="borde-celda" style="text-align: center">{{date}}</td>
                                 <td class="borde-celda" style="text-align: center">{{fdr}}</td>
                                 <td class="borde-celda" style="text-align: center">{{cso}}</td>
