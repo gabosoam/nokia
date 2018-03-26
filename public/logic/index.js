@@ -111,7 +111,6 @@ $(document).ready(function () {
 });
 
 function buscar() {
-
     var code = { text: 'code', value: $('#codigo').val().trim() };
     var barcode = { text: 'barcode', value: $('#serie').val().trim() };
     var fdr = { text: 'fdr', value: $('#fdr').val().trim() };

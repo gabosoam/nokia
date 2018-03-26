@@ -47,7 +47,6 @@
                             IN+
                         </div>
                     </li>
-
                     <li class="active">
                         <a href="#">
                             <i class="fa fa-search"></i>
@@ -55,12 +54,19 @@
                             <span class="fa arrow"></span>
                         </a>
                         <ul class="nav nav-second-level collapse">
+
+
+
+
                             <li class="active">
-                                <a href="/">Existencias</a>
+                                <a href="/">Historial</a>
                             </li>
-                            <li>
-                                <a href="/history">Historial</a>
+
+                            <li class="">
+                                <a href="/existence">Existencias</a>
                             </li>
+
+
                         </ul>
                     </li>
 
@@ -187,23 +193,120 @@
 
                                 <div class="tabs-container">
                                     <ul id="panel2" class="nav nav-tabs">
-                                        <li class="active">
-                                            <a data-toggle="tab" style="color: black" href="#tab-1"> Existencias</a>
-                                        </li>
 
+                                        <li class="active">
+                                            <a data-toggle="tab" style="color: black" href="#tab-2">Historial</a>
+                                        </li>
                                     </ul>
                                     <div class="tab-content">
-                                        <div id="tab-1" class="tab-pane active">
-                                            <div class="panel-body">
 
-                                                <div id="gridexistencias"></div>
+                                        <div id="tab-2" class="tab-pane active">
+                                            <div class="panel-body">
+                                                <div class="row">
+
+                                                    <div class="col-md-3">
+
+                                                        <div class="form-group">
+
+                                                            <label for="codigo">Código:</label>
+                                                            <input placeholder="Código del producto" onchange="buscar()" type="codigo" class="form-control" id="codigo">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="serie">Número de serie:</label>
+                                                            <input placeholder="Número de serie" onchange="buscar()" type="text" class="form-control" id="serie">
+                                                        </div>
+                                                        <div class="form-group">
+                                                                <label for="serie">Comentario:</label>
+                                                                <input placeholder="Comentario" onchange="buscar()" type="text" class="form-control" id="comment">
+                                                            </div>
+
+
+
+                                                    </div>
+                                                    <div class="col-md-3">
+
+                                                        <div class="form-group">
+                                                            <label for="fdr">FDR:</label>
+                                                            <input placeholder="Ficha de reparación" onchange="buscar()" type="codigo" class="form-control" id="fdr">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="cso">CSO:</label>
+                                                            <input placeholder="CSO" type="text" onchange="buscar()" class="form-control" id="cso">
+                                                        </div>
+
+
+                                                    </div>
+
+                                                    <div class="col-md-3">
+
+
+                                                        <div class="form-group">
+                                                            <label for="categorias">Tipo:</label>
+                                                            <br>
+
+                                                            <select class="form-control" id="Cat" onchange="buscar()">
+                                                                <option value="">Todas las categorías</option>
+                                                                <option w3-repeat="cat" value="{{id}}">{{name}}</option>
+                                                            </select>
+
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="cso">WBS:</label>
+                                                            <input placeholder="WBS" onchange="buscar()" type="text" class="form-control" id="wbs">
+                                                        </div>
+
+
+
+
+
+
+                                                    </div>
+
+                                                    <div class="col-md-3">
+
+                                                        <div class="form-group">
+                                                            <label for="cso">Contrato:</label>
+                                                            <input autocomplete="true" onchange="buscar()" placeholder="Contrato" type="text" class="form-control" id="contrato">
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                                <label for="area">Área:</label>
+                                                                <input autocomplete="true" onchange="buscar()" placeholder="Área" type="text" class="form-control" id="area">
+                                                            </div>
+
+
+
+                                                    </div>
+
+                                                    <div class="col-md-3">
+
+                                                        <div class="form-group">
+                                                           <label for="serie">&nbsp</label><br>
+                                                            <button id="mibuton" onclick="buscar()" class="btn btn-success">Buscar</button>
+                                                        </div>
+
+                                                    </div>
+
+
+
+
+
+                                                    <div class="col-md-12">
+
+
+                                                        <div id="grid2"></div>
+
+                                                        <div id="grid4"></div>
+                                                    </div>
+
+                                                    <hr>
+                                                </div>
 
 
 
 
                                             </div>
                                         </div>
-
                                     </div>
 
 
@@ -332,11 +435,7 @@
 
 
     <script>
-
-
-
         kendo.culture("es-MX");
-
         dataSourceExistenias = new kendo.data.DataSource({
             transport: {
                 read: { url: "existencia", type: 'POST', dataType: "json" },
@@ -350,9 +449,8 @@
                     }
                     if (operation == "read") {
                         if (options.filter) {
-                            console.log(options)
-                            sql = "SELECT * FROM v_existencias WHERE"
-                            sqlAll = "SELECT * FROM v_existencias";
+                            sql = "SELECT * FROM v_existencias2 WHERE"
+                            sqlAll = "SELECT * FROM v_existencias2";
                             for (let i = 0; i < options.filter.length; i++) {
                                 //  console.log(options.filter[i])
                             }
@@ -391,37 +489,34 @@
                     fields: {
                         idprod: { editable: false },
                         estado: { editable: false },
-                        total: { editable: false, type: 'number' }
+                        enbodega: { editable: false, type: 'number' }
                     }
                 }
             },
-            group: [
-                
-            {field:'contrato' ,aggregates: [
-                    { field: "code", aggregate: "count" },
-                    { field: "total", aggregate: "sum" }] },
-            
-            {
+            group: [{
                 field: "code", dir: "asc", aggregates: [
                     { field: "code", aggregate: "count" },
-                    { field: "total", aggregate: "sum" }] 
-            },
-            {field:'type2',aggregates: [
-                    { field: "code", aggregate: "count" },
-                    { field: "total", aggregate: "sum" }] },],
-            
+                    { field: "enbodega", aggregate: "sum" },
+                    { field: "counting", aggregate: "sum" },
+                    { field: "countegs", aggregate: "sum" },
+                ]
+            }],
             aggregate: [
-                { field: "total", aggregate: "sum" },
-           
+                { field: "enbodega", aggregate: "sum" },
+                { field: "counting", aggregate: "sum" },
+                { field: "countegs", aggregate: "sum" },
             ],
         },
         );
-        
+        function saltar() {
+            var grid = $("#gridexistencias").data("kendoGrid");
+            grid.setDataSource(grid.dataSource);
+            grid.dataSource.read();
+        }
         $("#gridexistencias").kendoGrid({
             dataSource: dataSourceExistenias,
             height: 475,
             filterable: true,
-            groupable:false,
             autoBind: true,
             toolbar: ['excel'],
             excel: {
@@ -437,10 +532,10 @@
                 { field: "description", title: "Nombre", filterable: { search: true, multi: true } },
                 { field: "barcode", title: "No. de serie", filterable: { search: true, multi: true } },
                 { field: "category", title: "Categoría", filterable: { search: true, multi: true } },
-                { field: "contrato", title: "Contrato", filterable: { search: true, multi: true } },
-                { field: "type2", title: "Transacción",hidden:true, filterable: { search: true, multi: true } },
                 { field: "brand", title: "Marca", filterable: { search: true, multi: true }, groupFooterTemplate: " Total:" },
-                { field: "total", title: "Cantidad", filterable: { search: true, multi: false }, groupFooterTemplate: " #=sum#" },
+                { field: "counting", title: "T. Ingresos", filterable: { search: true, multi: true }, aggregates: ["sum"], groupFooterTemplate: " #=sum#" },
+                { field: "countegs", title: "T. Entregas", filterable: { search: true, multi: true }, aggregates: ["sum"], groupFooterTemplate: " #=sum#" },
+                { field: "enbodega", title: "En bodega", filterable: { search: true, multi: false }, aggregates: ["sum"], groupFooterTemplate: " #=sum#" },
                 { command: [{ text: "Historial", click: showDetails, iconClass: 'icon icon-chart-column' }], title: "Acciones" }],
             dataBound: function (e) {
                 if (this.dataSource.group().length > 0) {
@@ -456,7 +551,6 @@
             var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
             location.href = "/history/" + dataItem.idprod;
         }
-
     </script>
 
 
@@ -464,25 +558,116 @@
     <script type="text/javascript">
         function print(elem) {
             $('#Etiquetas').printArea();
-
         }
-
     </script>
 
     <script>
         $.get("/category/read", function (data2) {
-
-
             w3.displayObject("Cat", { cat: data2 });
-
         });
-
-
-
-
+        
     </script>
 
- 
+    <script>
+        $(function () {
+            var dataSource = new kendo.data.DataSource({
+                transport: {
+                    read: {
+                        url: "existencia",
+                        dataType: "json",
+                        type: "POST"
+                    },
+                    parameterMap: function (options, operation) {
+                        if (operation !== "read" && options.models) {
+                            return { models: kendo.stringify(options.models) };
+                        }
+                    }
+                },
+                batch: false,
+                schema: {
+                    model: {
+                        fields: {
+                            code: { title: "Código", type: "string" },
+                        }
+                    }
+                }
+            });
+            $("#spreadsheet").kendoSpreadsheet({
+                toolbar: {
+                    home: false,
+                    insert: false
+                },
+                columns: [
+                    { autoWidth: true },
+                    { autoWidth: true },
+                    { autoWidth: true },
+                    { autoWidth: true }
+                ],
+                sortable: true,
+                columns: [
+                    { sortable: false, field: "idprod" },
+                    { field: "idprod" }
+                ],
+                columns: 10,
+                rows: 4000,
+                sheetsbar: true,
+                sheets: [{
+                    name: "Existencias",
+                    dataSource: dataSource,
+                    rows: [{
+                        cells: [
+                            {
+                                bold: "true",
+                                background: "white",
+                                value: "ID"
+                            }, {
+                                bold: "true",
+                                background: "white",
+                                value: "ID"
+                            }, {
+                                bold: "true",
+                                background: "white",
+                            }, {
+                                bold: "true",
+                                background: "white",
+                                value: "ID"
+                            }, {
+                                bold: "true",
+                                background: "white",
+                                value: "ID"
+                            }, {
+                                bold: "true",
+                                background: "white",
+                            }, {
+                                bold: "true",
+                                background: "white",
+                            }, {
+                                bold: "true",
+                                background: "white",
+                            }, {
+                                bold: "true",
+                                background: "white",
+                            }, {
+                                bold: "true",
+                                background: "white",
+                            }]
+                    }],
+                    columns: [
+                        { width: 50 },
+                        { width: 150 },
+                        { width: 150 },
+                        { width: 150 },
+                        { width: 150 },
+                        { width: 150 },
+                        { width: 150 },
+                        { width: 150 },
+                        { width: 150 },
+                        { width: 150 }
+                    ]
+                }]
+            });
+        });
+    </script>
 
 
 
@@ -505,22 +690,17 @@
         width: 5.25cm;
         margin: 5px 5px 5px 5px
     }
-
     #rcorners1 {
         border: 1px solid black;
         border-style: dashed;
         padding: 10px
     }
-
     #Etiquetas {
-
         padding: 30px
     }
-
     .k-spreadsheet .k-tabstrip-wrapper .k-spreadsheet-quick-access-toolbar {
         display: none;
     }
-
     .k-spreadsheet .k-tabstrip-wrapper .k-tabstrip-items {
         padding-left: .3em !important;
     }

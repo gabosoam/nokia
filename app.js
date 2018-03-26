@@ -87,7 +87,7 @@ app.use('/variant', variant);
 app.use('/voucher', voucher);
 app.use('/price', price);
 app.use('/bill', bill);
-app.use('/history', history);
+app.use('/existence', history);
 app.use('/labels', ticket);
 app.use('/setting', setting);
 

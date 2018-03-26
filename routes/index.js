@@ -63,7 +63,7 @@ router.get('/event', isLoggedInAdmin, function (req, res, next) {
 router.post('/existencia', function (req, res, next) {
 	var sql = ''
 	if (!req.body.sql) {
-		sql = 'SELECT * FROM v_existenciascontrato'
+		sql = 'SELECT * FROM v_existencias WHERE enbodega<>0'
 	} else {
 		sql = req.body.sql
 	}

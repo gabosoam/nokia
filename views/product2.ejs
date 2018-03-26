@@ -65,10 +65,11 @@
                         </a>
                         <ul class="nav nav-second-level collapse">
                             <li class="">
-                                <a href="/">Existencias</a>
+                                <a href="/">Historial</a>
                             </li>
-                            <li>
-                                <a href="/history">Historial</a>
+
+                            <li class="">
+                                <a href="/existence">Existencias</a>
                             </li>
                         </ul>
                     </li>
@@ -542,35 +543,18 @@
 
                                 <div class="cuerporeporte">
                                     <div>
-
                                         <div class="w3-display-container" style="height:55px;">
-
                                             <img id="auto" class="w3-display-middle" class="" src="../images/nokia.png" width="280px" height="55px" />
-
-
                                             <p class="w3-display-right cuerpo ">
-
                                                 <%=data.codigo%>
-
-
-
                                             </p>
-
-
-
                                         </div>
-
-
                                         <div class="w3-display-container" style="height:25px;">
                                             <h4 class="cuerpo w3-display-middle">ACTA DE ENTREGA</h4>
                                         </div>
                                         <hr>
-
-                                        <div class="w3-display-container" style="height:100px;">
-
-
+                                        <div class="w3-display-container" style="height:150px;">
                                             <div>
-
                                                 <p class="cuerpo">
                                                     <strong>Cliente: </strong>
                                                     <%=data.client%>
@@ -583,13 +567,13 @@
                                                     <strong>Fecha: </strong>
                                                     <%=data.date%>
                                                 </p>
-
-
-
-
-
-
-
+                                                <p id="contratoreporte" class="cuerpo">
+                                                  
+                                                </p>
+                                                <p id="areareporte" class="cuerpo">
+                                                    
+                                                
+                                                </p>
 
                                             </div>
                                         </div>
@@ -632,7 +616,7 @@
 
 
 
-                                <div class="footer2">
+                                <div class="footer">
                                     <table style="width: 100%; border: 1; font-size: 12px ">
                                         <tr>
                                             <td class="cuerpo">
@@ -1048,6 +1032,14 @@
                 }
                 w3.displayObject("Vouchers", { voucherss: data2 });
                 w3.displayObject("Vouchers2", { voucherss2: data2 });
+
+                var areareporte=data2[0].area;
+                $('#areareporte').append('<strong>Estación: </strong>'+areareporte);
+                var contratoreporte=data2[0].contrato;
+                $('#contratoreporte').append('<strong>Contrato: </strong>'+contratoreporte);
+
+              
+       
             });
         }
 

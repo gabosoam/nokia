@@ -67,6 +67,7 @@ $(document).ready(function () {
           columns: [
             { field: "type",values: types, title: "Transacción", filterable: {search: true,multi:true }, hidden: false,sortable: false },
             { field: "code", title: "Código", filterable: {search: true,multi:true }, hidden: false,sortable: false },
+            { field: "description", title: "Nombre", filterable: {search: true,multi:true }, hidden: false,sortable: false },
             { field: "barcode", title: "No. de serie", filterable: {search: true,multi:true }, hidden: false,sortable: false }, 
             { field: "date", title: "Fecha", filterable: {search: true,multi:false }, hidden: false, format: "{0:dd/MM/yyyy}",sortable: true },
             { field: "cant", title: "Cantidad", filterable: {search: true,multi:true }, hidden: false,sortable: false },
