@@ -287,7 +287,7 @@ function buscar() {
         function showDetails(e) {
             e.preventDefault();
             var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
-            location.href = "/history/" + dataItem.product;
+            location.href = "/existence/" + dataItem.product;
         }
     });
 }

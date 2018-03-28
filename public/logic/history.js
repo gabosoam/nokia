@@ -13,7 +13,7 @@ $(document).ready(function () {
     socket.emit('getDates', function (category, brand) {
     dataSource = new kendo.data.DataSource({
         transport:{
-            read: {url:"/history/read/"+productId, dataType: "json"},
+            read: {url:"/existence/read/"+productId, dataType: "json"},
             create: {url:"/model/create",type:"POST", dataType: "json"},
             destroy: { url: "/model/delete", type: "POST", dataType: "json" },
             update: { url: "/model/update", type: "POST", dataType: "json" },

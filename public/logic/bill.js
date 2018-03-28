@@ -106,7 +106,6 @@ $(document).ready(function () {
                 groupable: true,
                 resizable: true,
                 sortable: true,
-
                 pageable: { refresh: true, pageSizes: true, },
                 toolbar: ['create', 'excel'],
                 excel: {
@@ -133,7 +132,6 @@ $(document).ready(function () {
                         });
                 },
                 columns: [
-                  
                     { field: "codigo", title: "Código", filterable: { search: true, multi: true } },
                     { field: "provider", values: providers, editor: userNameComboBoxEditor, title: "Proveedor", filterable: { multi: true, search: true } },
                     { field: "date", title: "Fecha", filterable: { search: true, search: true }, format: "{0:dd/MM/yyyy}" },

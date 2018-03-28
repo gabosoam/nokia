@@ -11,10 +11,15 @@ router.get('/', isLoggedIn, function (req, res, next) {
 /* GET home page. */
 router.get('/:id', isLoggedIn, function (req, res, next) {
 
+  
+
   history.readInfo(req.params.id, function(error, data) {
+    console.log('llegaste')
     if (error) {
+      console.log('existio un error'+ error)
       res.sendStatus(404);
     } else {
+      console.log(data)
       res.render('history', { user: sess.usuarioDatos, product: data });
     }
   })
