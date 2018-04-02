@@ -371,6 +371,7 @@ dataSourceExistenias = new kendo.data.DataSource({
              fields: {
                  idprod: { editable: false },
                  estado: { editable: false },
+                 date: { type: 'date' },
                  enbodega: { editable: false, type: 'number' },
 
              }
@@ -418,6 +419,7 @@ dataSourceExistenias = new kendo.data.DataSource({
          { field: "description", title: "Nombre", filterable: { search: true, multi: true } },
          { field: "barcode", title: "No. de serie", filterable: { search: true, multi: true } },
          { field: "category", title: "Categoría", filterable: { search: true, multi: true } },
+         { field: "date", title: "Fecha", filterable: { search: true, multi: false }, format: "{0:dd/MM/yyyy}"  },
          { field: "brand", title: "Marca", filterable: { search: true, multi: true }, groupFooterTemplate: " Total:" },
          { field: "counting", title: "T. Ingresos", filterable: { search: true, multi: false }, aggregates: ["sum"], groupFooterTemplate: " #=sum#" },
          { field: "countegs", title: "T. Entregas", filterable: { search: true, multi: false }, aggregates: ["sum"], groupFooterTemplate: " #=sum#" },
