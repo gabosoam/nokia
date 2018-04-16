@@ -322,6 +322,8 @@ module.exports = {
 
     createSalida: function (data, callback) {
 
+        console.log(data.barcode);
+
         if (!data.fdr) { data.fdr = 'N/A' }
         if (!data.wbs) { data.wbs = 'N/A' }
         if (!data.cso) { data.cso = 'N/A' }
@@ -334,7 +336,7 @@ module.exports = {
             values: [data.barcode]
         }, function (error, results, fields) {
             if (error) {
-                callback('Existió un error inesperado')
+                callback('Existió un error inesperado: '+JSON.stringify(error));
             } else {
                 if (results[0]) {
                     if (results[0].enbodega >= data.cant) {
@@ -359,7 +361,7 @@ module.exports = {
                     }
 
                 } else {
-                    callback('Existió un error inesperado', null)
+                    callback('Existió un error inesperado: no hay data en existencia ', null)
                 }
             }
         })
@@ -390,7 +392,7 @@ module.exports = {
                 console.log(error)
                 callback('existió un error', null);
             } else {
-                console.log(results)
+           
                 callback(null, results)
 
             }
@@ -402,7 +404,7 @@ module.exports = {
 
     update3: function (data, callback) {
 
-        console.log(data)
+      
 
         if (data.fdr == '') { data.fdr = 'N/A' }
         if (data.wbs == '') { data.wbs = 'N/A' }
@@ -413,15 +415,14 @@ module.exports = {
 
         var contador = 0;
 
-        console.log(data)
+      
 
         connection.query({
             sql: 'SELECT * from billdetail where id=?',
             values: [data.id]
         }, function (error, results, fileds) {
             if (error) {
-                console.log(error)
-                console.log(error)
+                console.log(error);
                 callback('existió un error 1', null);
             } else {
                 if (results[0]) {
