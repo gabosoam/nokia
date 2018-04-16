@@ -322,7 +322,10 @@ module.exports = {
 
     createSalida: function (data, callback) {
 
-        console.log(data.barcode);
+        console.log('datos recibidos')
+        console.log(data)
+
+       
 
         if (!data.fdr) { data.fdr = 'N/A' }
         if (!data.wbs) { data.wbs = 'N/A' }
