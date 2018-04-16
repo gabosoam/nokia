@@ -341,6 +341,7 @@ module.exports = {
             if (error) {
                 callback('Existió un error inesperado: '+JSON.stringify(error));
             } else {
+                console.log(results)
                 if (results[0]) {
                     if (results[0].enbodega >= data.cant) {
 
